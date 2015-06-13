@@ -1,0 +1,1462 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Promise John</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="promise john">
+    
+
+    
+    <meta name="description" content="A place for my writing about work, thoughts, and techs.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Promise John">
+<meta property="og:url" content="http://promisejohn.github.io/index.html">
+<meta property="og:site_name" content="Promise John">
+<meta property="og:description" content="A place for my writing about work, thoughts, and techs.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Promise John">
+<meta name="twitter:description" content="A place for my writing about work, thoughts, and techs.">
+<meta name="twitter:creator" content="@promisejohn19">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Promise John" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Promise John">Promise John</a></h1>
+				<h2 class="blog-motto">My Blog</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/tags">Tags</a></li>
+					
+						<li><a href="/categories">categories</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:promisejohn.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main">
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/06/13/HelloHexo/" title="Hello Hexo" itemprop="url">Hello Hexo</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://promisejohn.github.io/about" title="promise john" target="_blank" itemprop="author">promise john</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-13T07:06:01.239Z" itemprop="datePublished"> 发表于 2015-06-13</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate <span class="comment"># 'hexo g' for short</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy <span class="comment"># 'hexo d' for short</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+<h3 id="Useful_hexo_plugins">Useful hexo plugins</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-generator-feed --save</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-generator-sitemap --save</span><br></pre></td></tr></table></figure>
+<h3 id="Put_the_whole_source_folder_into_git">Put the whole source folder into git</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">...&#10;# Dependency directory&#10;node_modules&#10;# hexo generated files, deployed to github.io pages&#10;public&#10;.deploy_git&#10;...</span><br></pre></td></tr></table></figure>
+<h3 id="Some_notes_about_doc_syntax">Some notes about doc syntax</h3><ol>
+<li>use <code>&lt;!-- more --&gt;</code> to hide blog details below.</li>
+<li>use <code>toc: false</code> to hide the topic menu about the blog.</li>
+<li>use <code>mathjax: true</code> to enable LaTex math prents.</li>
+</ol>
+<h3 id="Awsome_markdown_editors:">Awsome markdown editors:</h3><ul>
+<li>vim, sublimetext, …</li>
+<li><a href="http://25.io/mou/" target="_blank" rel="external"><strong>Mou</strong></a></li>
+<li><a href="http://macdown.uranusjr.com/" target="_blank" rel="external"><strong>MacDown</strong></a></li>
+</ul>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Tech/">Tech</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/hexo/">hexo</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/06/13/HelloHexo/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/06/13/HelloHexo/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/30/HelloHadoop/" title="HelloHadoop" itemprop="url">HelloHadoop</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://promisejohn.github.io/about" title="promise john" target="_blank" itemprop="author">promise john</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-30T09:58:33.000Z" itemprop="datePublished"> 发表于 2015-05-30</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Hadoop系列">Hadoop系列</h1><p>大数据依旧在热炒，hadoop虽然不是唯一的代表，却也是各家必谈之资本，玩玩大数据。</p>
+<h2 id="通过ambari部署hadoop集群">通过ambari部署hadoop集群</h2><p>在cloudlab119-123上部署集群，其中119作为ambari server控制端。</p>
+<p>安装部署：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /etc/yum.repo.d</span><br><span class="line">$ wget http://public-repo-<span class="number">1</span>.hortonworks.com/ambari/centos6/<span class="number">2</span>.x/updates/<span class="number">2.0</span>.<span class="number">0</span>/ambari.repo</span><br><span class="line">$ yum install -y ambari-server</span><br><span class="line">$ ambari-server setup <span class="comment"># 按指示操作即可</span></span><br><span class="line">$ ambari-server start <span class="comment"># *:8080端口</span></span><br></pre></td></tr></table></figure>
+<p>配置，打开<a href="http://cloudlab119:8080，默认密码admin:admin。在cloudlab119上对所有节点做免密码认证：" target="_blank" rel="external">http://cloudlab119:8080，默认密码admin:admin。在cloudlab119上对所有节点做免密码认证：</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/hosts</span><br><span class="line">$ ssh-keygen -t rsa -P <span class="string">''</span> <span class="operator">-f</span> ~/.ssh/hadoop119</span><br><span class="line">$ <span class="keyword">for</span> i <span class="keyword">in</span> &#123;<span class="number">119</span>,<span class="number">120</span>,<span class="number">121</span>,<span class="number">122</span>,<span class="number">123</span>&#125;; <span class="keyword">do</span> ssh-copy-id -i ~/.ssh/hadoop119.pub root@cloudlab<span class="variable">$i</span>; <span class="keyword">done</span>;</span><br></pre></td></tr></table></figure>
+<p>按提示建议操作，如ntpd、iptables、关闭THP：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ chkconfig ntpd on</span><br><span class="line">$ service ntpd start</span><br><span class="line">$ service iptables stop <span class="comment"># 生产环境中参照文档把对应端口打开</span></span><br><span class="line">$ chkconfig iptables off</span><br><span class="line">$ <span class="built_in">echo</span> never &gt; /sys/kernel/mm/redhat_transparent_hugepage/enabled <span class="comment"># 关闭THP，如果提示文件系统readonly，重启机器再执行</span></span><br></pre></td></tr></table></figure>
+<p>按提示一步步操作即可，但中间如果出现下载包失败，则会导致整个安装失败，所以最好提前把官方源同步到本地，做镜像后安装。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ yum install -y yum-utils createrepo</span><br><span class="line">$ mkdir -p /var/www/html/ambari/centos6 &amp;&amp; <span class="built_in">cd</span> <span class="variable">$_</span></span><br><span class="line">$ reposync -r Updates-ambari-<span class="number">2.0</span>.<span class="number">0</span></span><br><span class="line">$ createrepo Updates-ambari-<span class="number">2.0</span>.<span class="number">0</span></span><br><span class="line">$ mkdir -p /var/www/html/hdp/centos6 &amp;&amp; <span class="built_in">cd</span> <span class="variable">$_</span></span><br><span class="line">$ reposync -r HDP-<span class="number">2.2</span></span><br><span class="line">$ reposync -r HDP-UTILS-<span class="number">1.1</span>.<span class="number">0.20</span></span><br><span class="line">$ createrepo HDP-<span class="number">2.2</span></span><br><span class="line">$ createrepo HDP-UTILS-<span class="number">1.1</span>.<span class="number">0.20</span></span><br><span class="line">$ vim /etc/yum.repo.d/ambari.repo <span class="comment"># 修改baseurl指向本地镜像</span></span><br></pre></td></tr></table></figure>
+<p>安装之后，发现某几台服务器内存占用率非常高，可以通过Ambari增加Host节点，然后迁移部分的组件到新的机器。</p>
+<h2 id="通过Docker部署集群">通过Docker部署集群</h2><p>可以自己做docker image，简单起见可以先用sequenceiq的image。</p>
+<p>单节点测试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull sequenceiq/hadoop-docker:<span class="number">2.7</span>.<span class="number">0</span></span><br><span class="line">$ docker run -it sequenceiq/hadoop-docker:<span class="number">2.7</span>.<span class="number">0</span> /etc/bootstrap.sh -bash</span><br><span class="line">$ <span class="built_in">cd</span> <span class="variable">$HADOOP_PREFIX</span> <span class="comment"># /usr/local/hadoop</span></span><br><span class="line">$ bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-<span class="number">2.7</span>.<span class="number">0</span>.jar grep input output <span class="string">'dfs[a-z.]+'</span> <span class="comment"># 统计key出现次数</span></span><br><span class="line">$ bin/hdfs dfs -cat output/* <span class="comment"># 在用户Home下的output下</span></span><br></pre></td></tr></table></figure>
+<p>多节点部署，可以用ambari镜像，准备好blueprint.json：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; &#34;host_groups&#34; : [&#10;    &#123; &#34;name&#34; : &#34;host_group_1&#34;,&#10;      &#34;components&#34; : [&#10;        &#123; &#34;name&#34; : &#34;ZOOKEEPER_SERVER&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;ZOOKEEPER_CLIENT&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;AMBARI_SERVER&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;HDFS_CLIENT&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;NODEMANAGER&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;MAPREDUCE2_CLIENT&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;APP_TIMELINE_SERVER&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;DATANODE&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;YARN_CLIENT&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;RESOURCEMANAGER&#34; &#125; ],&#10;      &#34;cardinality&#34; : &#34;1&#34; &#125;,&#10;    &#123; &#34;name&#34; : &#34;host_group_2&#34;,&#10;      &#34;components&#34; : [&#10;        &#123; &#34;name&#34; : &#34;ZOOKEEPER_SERVER&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;ZOOKEEPER_CLIENT&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;SECONDARY_NAMENODE&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;NODEMANAGER&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;YARN_CLIENT&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;DATANODE&#34; &#125;],&#10;      &#34;cardinality&#34; : &#34;1&#34; &#125;,&#10;    &#123; &#34;name&#34; : &#34;host_group_3&#34;,&#10;      &#34;components&#34; : [&#10;        &#123; &#34;name&#34; : &#34;ZOOKEEPER_SERVER&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;ZOOKEEPER_CLIENT&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;NAMENODE&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;NODEMANAGER&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;YARN_CLIENT&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;DATANODE&#34; &#125;],&#10;      &#34;cardinality&#34; : &#34;1&#34; &#125; ],&#10;  &#34;Blueprints&#34; : &#123;&#10;    &#34;blueprint_name&#34; : &#34;blueprint-c1&#34;,&#10;    &#34;stack_name&#34; : &#34;HDP&#34;,&#10;    &#34;stack_version&#34; : &#34;2.2&#34; &#125; &#125;</span><br></pre></td></tr></table></figure>
+<p>可以在ambari server上查找：<code>http://172.17.0.13:8080/api/v1/blueprints</code>。</p>
+<p>创建集群：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull sequenceiq/ambari:<span class="number">1.7</span>.<span class="number">0</span></span><br><span class="line">$ curl -Lo .amb https://github.com/sequenceiq/docker-ambari/raw/master/ambari-functions &amp;&amp; . .amb</span><br><span class="line">$ amb-start-cluster <span class="number">3</span> <span class="comment"># 注意默认使用的是sequenceiq/ambari:1.7.0-warmup，可以修改 .amb</span></span><br><span class="line">$ amb-shell <span class="comment"># 又启了个container</span></span><br><span class="line">ambshell &gt; host list</span><br><span class="line">ambshell &gt; blueprint add --url http://<span class="number">172.17</span>.<span class="number">42.1</span>/bp.json <span class="comment"># 准备好json保存到某个能访问的http服务器</span></span><br><span class="line">ambshell &gt; cluster build --blueprint blueprint-c1</span><br><span class="line">ambshell &gt; cluster assign --hostGroup host_group_1 --host amb0.mycorp.kom</span><br><span class="line">ambshell &gt; cluster assign --hostGroup host_group_2 --host amb1.mycorp.kom</span><br><span class="line">ambshell &gt; cluster assign --hostGroup host_group_3 --host amb2.mycorp.kom</span><br><span class="line">ambshell &gt; blueprint show --id blueprint-c1</span><br><span class="line">ambshell &gt; cluster preview</span><br><span class="line">ambshell &gt; cluster create</span><br></pre></td></tr></table></figure>
+<p>中间安装过程如果出现失败，可以到ambari-server上看详细情况，当然也可以直接向之前方式一样，通过GUI安装部署；或者开着浏览器看amb-shell执行过程。<br>如果实在VM上远程使用，可以在docker所在机器上做NAT映射直接访问：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ iptables -t nat -A PREROUTING <span class="operator">-d</span> <span class="number">10.101</span>.<span class="number">29.26</span> -p tcp --dport <span class="number">8000</span> -j DNAT --to-destination <span class="number">172.17</span>.<span class="number">0.20</span>:<span class="number">8080</span> <span class="comment"># 可以用端口转发直接远程浏览器访问</span></span><br></pre></td></tr></table></figure>
+<p>做个简单的测试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it <span class="number">9572938</span>bb253 /bin/bash <span class="comment"># 进入到容器内</span></span><br><span class="line">bash <span class="comment"># su hdfs # 切换到HDFS的超级用户</span></span><br><span class="line">bash <span class="comment"># hdfs dfsadmin -report</span></span><br><span class="line">bash <span class="comment"># hdfs dfs -ls /</span></span><br></pre></td></tr></table></figure>
+<h2 id="HDFS">HDFS</h2><p>HDFS由NameNode、SNameNode和DataNode组成，HA的时候还有另一个NameNode（StandBy）。SNameNode专门从NameNode获取FSImage和Edits，为NameNode合并生成新的FSImage。</p>
+<p>HDFS有个超级用户，就是启动NameNode的那个linux账号。</p>
+<h3 id="基本Shell操作">基本Shell操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ ps -elf | grep NameNode <span class="comment">#看看哪个账号启动了NameNode，那个账号就是超级用户</span></span><br><span class="line">$ su <span class="operator">-s</span> /bin/sh -c <span class="string">'hadoop fs -ls /'</span> hdfs <span class="comment">#使用超级账号执行命令</span></span><br><span class="line">$ su hdfs <span class="comment">#切换到超级账号</span></span><br><span class="line">$ useradd -G hdfs promise</span><br><span class="line">$ hdfs dfs -mkdir /user/promise</span><br><span class="line">$ hdfs dfs -chown promise:hdfs /user/promise</span><br><span class="line">$ hdfs dfs -ls /user/</span><br><span class="line">$ hdfs dfs -mkdir -p /user/promise/dev/hello</span><br><span class="line">$ hdfs dfs -chmod -R <span class="number">777</span> /user/promise/dev</span><br><span class="line">$ hdfs dfs -ls /user/promise/dev/</span><br><span class="line">$ <span class="built_in">echo</span> “helloworld” &gt; hello.txt</span><br><span class="line">$ hdfs dfs -put hello.txt /user/promise/helloworld.txt</span><br><span class="line">$ hdfs dfs -put - hdfs://<span class="number">192.168</span>.<span class="number">182.119</span>/user/promise/test.txt <span class="comment"># 从stdin输入，Ctrl-D结束</span></span><br><span class="line">$ hdfs dfs -cat hdfs://<span class="number">192.168</span>.<span class="number">182.119</span>/user/promise/test.txt</span><br><span class="line">$ hdfs dfs -cat /user/promise/helloworld.txt</span><br><span class="line">$ hdfs dfs -get /user/promise/helloworld.txt hello2.txt</span><br><span class="line">$ hdfs dfs -tail <span class="operator">-f</span> /user/promise/helloworld.txt <span class="comment"># 查看追加的文件写入</span></span><br><span class="line">$ hdfs dfs -appendToFile - /user/promise/helloworld.txt</span><br></pre></td></tr></table></figure>
+<h3 id="webhdfs操作">webhdfs操作</h3><p>启用了webhdfs之后（<code>hdfs-site</code>中<code>dfs.webhdfs.enabled=true</code>），可以通过HTTP方式访问HDFS：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ curl -i <span class="string">"http://192.168.182.119:50070/webhdfs/v1/user/promise/?op=LISTSTATUS"</span></span><br><span class="line">$ curl -i -L <span class="string">"http://192.168.182.119:50070/webhdfs/v1/user/promise/helloworld.txt?op=OPEN"</span> <span class="comment"># 通过重定向到DataNode获取文件</span></span><br><span class="line">$ curl -i -X PUT <span class="string">"http://192.168.182.119:50070/webhdfs/v1/user/promise/hello?user.name=promise&amp;op=MKDIRS"</span></span><br></pre></td></tr></table></figure>
+<p>通过HTTP方式创建和追加文件都需要通过2阶段实现：先在NameNode上创建，获得DataNode URI后再向URI上传文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -i -X PUT <span class="string">"http://192.168.182.119:50070/webhdfs/v1/user/promise/hello/hi.txt?op=CREATE"</span></span><br><span class="line">$ curl -i -X PUT -T hi.txt <span class="string">"http://192.168.182.119:50075/webhdfs/v1/user/promise/hello/hi.txt?user.name=promise&amp;op=CREATE&amp;namenoderpcaddress=192.168.182.119:8020&amp;overwrite=false"</span> <span class="comment"># 需要声明账号</span></span><br></pre></td></tr></table></figure>
+<h3 id="查看离线的FSImage和Edits：">查看离线的FSImage和Edits：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hdfs oiv -p XML -i /hadoop/hdfs/namenode/current/fsimage_0000000000000018887 -o fsimage.xml <span class="comment"># 生成XML格式</span></span><br><span class="line">$ hdfs oiv  -i /hadoop/hdfs/namenode/current/fsimage_0000000000000018887 <span class="comment"># 在线查看形式</span></span><br><span class="line">$ hdfs dfs -ls webhdfs://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">5978</span>/</span><br><span class="line">$ hdfs oev -i /hadoop/hdfs/namenode/current/edits_0000000000000000001-<span class="number">0000000000000005150</span> -o edits.xml <span class="comment"># 查看edits</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用Java_API">使用Java API</h3><p>Java在大型软件系统开发中有利于更清晰的架构设计和团队分工，而且有大量的第三方优质框架可用；可惜在命令里写HelloWorld很啰嗦，方便起见，直接用maven生成基本文件结构。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/opt/apache-maven-<span class="number">3.3</span>.<span class="number">3</span>/bin/</span><br><span class="line">$ <span class="built_in">export</span> JAVA_HOME=/usr/jdk64/jdk1.<span class="number">7.0</span>_67/</span><br><span class="line">$ <span class="built_in">export</span> MAVEN_OPTS=<span class="string">"-Xms256m -Xmx512m"</span></span><br><span class="line">$ mkdir ~/dev &amp;&amp; <span class="built_in">cd</span> <span class="variable">$_</span></span><br><span class="line">$ mvn archetype:generate -DgroupId=org.tecstack -DartifactId=hellohdfs -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=<span class="literal">false</span></span><br><span class="line">$ <span class="built_in">cd</span> hellohdfs &amp;&amp; mvn package</span><br><span class="line">$ vim ./src/main/java/org/tecstack/App.java</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.tecstack;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.fs.FileStatus;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.fs.FileSystem;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.fs.Path;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Hello HDFS</span><br><span class="line"> *</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String[] args )</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">                Configuration conf=<span class="keyword">new</span> Configuration();</span><br><span class="line">                FileSystem hdfs=FileSystem.get(conf);</span><br><span class="line">                Path dst =<span class="keyword">new</span> Path(<span class="string">"/user/promise/helloworld.txt"</span>);</span><br><span class="line">                FileStatus files[]=hdfs.listStatus(dst);</span><br><span class="line">                <span class="keyword">for</span>(FileStatus file:files) &#123;</span><br><span class="line">                    System.out.println(file.getPath());</span><br><span class="line">                &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在<code>pom.xml</code>增加hadoop依赖包:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">project</span> <span class="attribute">xmlns</span>=<span class="value">"http://maven.apache.org/POM/4.0.0"</span> <span class="attribute">xmlns:xsi</span>=<span class="value">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">  <span class="attribute">xsi:schemaLocation</span>=<span class="value">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="title">modelVersion</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.tecstack<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hellohdfs<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">packaging</span>&gt;</span>jar<span class="tag">&lt;/<span class="title">packaging</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hellohdfs<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">url</span>&gt;</span>http://maven.apache.org<span class="tag">&lt;/<span class="title">url</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hadoop-common<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">version</span>&gt;</span>2.6.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hadoop-hdfs<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">version</span>&gt;</span>2.6.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hadoop-client<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">version</span>&gt;</span>2.6.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">version</span>&gt;</span>3.8.1<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="title">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>打包运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ mvn package</span><br><span class="line">$ mkdir -p src/main/resources</span><br><span class="line">$ scp cloudlab119:/etc/hadoop/conf/core-site.xml src/main/resources</span><br><span class="line">$ mvn <span class="built_in">exec</span>:java -Dexec.mainClass=<span class="string">"org.tecstack.App"</span> -Dexec.cleanupDaemonThreads=<span class="literal">false</span></span><br><span class="line">$ mvn dependency:copy-dependencies <span class="comment"># 导出依赖的包</span></span><br><span class="line">$ mvn resources:resources <span class="comment"># 导出资源</span></span><br><span class="line">$ mvn eclipse:eclipse <span class="comment"># 生成eclipse工程文件，.project, .classpath</span></span><br></pre></td></tr></table></figure>
+<p>关于maven的exec插件，也可以通过配置<code>pom.xml</code>的plugin的参数简化执行：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">build</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">plugin</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.codehaus.mojo<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>exec-maven-plugin<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">version</span>&gt;</span>1.4.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">execution</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="title">goals</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="title">goal</span>&gt;</span>java<span class="tag">&lt;/<span class="title">goal</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="title">goals</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">execution</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="title">executions</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">mainClass</span>&gt;</span>org.tecstack.App<span class="tag">&lt;/<span class="title">mainClass</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">cleanupDaemonThreads</span>&gt;</span>false<span class="tag">&lt;/<span class="title">cleanupDaemonThreads</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="title">plugin</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="title">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>之后运行只需要<code>mvn exec:java</code>，如果需要定制更多参数，比如JVM内存，单独启动进程执行等，可以使用<code>exec:exec</code>插件，具体看[codehaus官网][<a href="http://mojo.codehaus.org/exec-maven-plugin/usage.html]。" target="_blank" rel="external">http://mojo.codehaus.org/exec-maven-plugin/usage.html]。</a></p>
+<h2 id="HUE交互界面">HUE交互界面</h2><p>Hue是一个基于Django开发的webapp，通过WebHDFS或HttpFS的一种访问HDFS的数据，在HDFS HA部署方式中只能使用HttpFS。<br>如通过WebHDFS方式访问，需要修改<code>hdfs-site.xml</code>：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>dfs.webhdfs.enabled<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>true<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>修改<code>core-site.xml</code>使Hue账号可以代理其他用户：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hadoop.proxyuser.hue.hosts<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>*<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hadoop.proxyuser.hue.groups<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>*<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>修改完参数需要重新启动HDFS，通过Ambari操作很方便。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ yum install -y hue hue-server</span><br><span class="line">$ vim /etc/hue/conf/hue.ini <span class="comment"># 修改各个服务的URI，可以通过Ambari看到服务所在的服务器位置；修改默认监听端口不与其它冲突</span></span><br><span class="line">$ service hue start</span><br></pre></td></tr></table></figure>
+<p>默认登陆账号为<code>admin:admin</code>，可以通过hdfs为该账号创建一个专用的文件夹<code>/user/hue</code>进行测试，正式环境中可以考虑与其他身份系统对接。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ su hdfs</span><br><span class="line">$ hdfs dfs -mkdir /user/hue</span><br><span class="line">$ hdfs dfs -chown -R admin:hadoop  /user/hue</span><br><span class="line">$ hdfs dfs -ls /user/</span><br></pre></td></tr></table></figure>
+<h2 id="导入数据到HBase">导入数据到HBase</h2><p>通过hcat建立数据库表结构，通过pig导入数据。</p>
+<p>建立数据文件<code>data.tsv</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">row1    c1    c2&#10;row2    c1    c2&#10;row3    c1    c2&#10;row4    c1    c2&#10;row5    c1    c2&#10;row6    c1    c2&#10;row7    c1    c2&#10;row8    c1    c2&#10;row9    c1    c2&#10;row10    c1    c2</span><br></pre></td></tr></table></figure>
+<p>准备建表DDL，<code>simple.ddl</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE simple_hcat_load_table (id STRING, c1 STRING, c2 STRING)&#10;STORED BY &#39;org.apache.hadoop.hive.hbase.HBaseStorageHandler&#39;&#10;WITH SERDEPROPERTIES ( &#39;hbase.columns.mapping&#39; = &#39;d:c1,d:c2&#39; )&#10;TBLPROPERTIES (&#10;&#39;hbase.table.name&#39; = &#39;simple_hcat_load_table&#39;&#10;);</span><br></pre></td></tr></table></figure>
+<p>准备导入脚本，<code>simple.bulkload.pig</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A = LOAD &#39;hdfs:///tmp/data.tsv&#39; USING PigStorage(&#39;\t&#39;) AS (id:chararray, c1:chararray, c2:chararray);&#10;-- DUMP A;&#10;STORE A INTO &#39;hbase://simple_hcat_load_table&#39; USING org.apache.hive.hcatalog.pig.HCatStorer();</span><br></pre></td></tr></table></figure>
+<p>把文件放到HDFS，建表，导入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ su - hdfs</span><br><span class="line">$ hdfs dfs -put data.tsv /tmp/</span><br><span class="line">$ hcat <span class="operator">-f</span> simple.ddl</span><br><span class="line">$ pig -useHCatalog simple.bulkload.pig</span><br></pre></td></tr></table></figure>
+<p>通过Hue的HCat可以查看数据库和表数据，也可以通过HBase Shell：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ su - hdfs</span><br><span class="line">$ hbase shell</span><br><span class="line">hbase &gt; list <span class="comment"># 查询所有表</span></span><br><span class="line">hbase &gt; scan <span class="string">'simple_hcat_load_table'</span> <span class="comment"># 查询所有数据</span></span><br><span class="line">hbase &gt; describe <span class="string">'simple_hcat_load_table'</span></span><br></pre></td></tr></table></figure>
+<p>也可以通过Hive Shell：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ su - hdfs</span><br><span class="line">$ hive</span><br><span class="line">hive &gt; show tables;</span><br><span class="line">hive &gt; select count(*) from simple_hcat_load_table;</span><br><span class="line">hive &gt; desc simple_hcat_load_table;</span><br></pre></td></tr></table></figure>
+<p>如果建表过程中出现类似<code>java.lang.NoClassDefFoundError: org/apache/hadoop/hbase/HBaseConfiguration</code>如下的找不到类情况，检查hcat的配置文件是否有HBase目录：<code>vim /usr/bin/hcat</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="built_in">export</span> HBASE_HOME=/usr/hdp/<span class="number">2.2</span>.<span class="number">4.2</span>-<span class="number">2</span>/hbase</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>此外，由于Hue集成的HCat调用的是Hive下的hcat，需要在<code>/etc/hive-hcatalog/conf/hcat-env.sh</code>中指定<code>HBASE_HOME</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">HBASE_HOME=<span class="variable">$&#123;HBASE_HOME:-/usr/hdp/current/hbase-client&#125;</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>pig在使用MapReduce模式执行时，可以根据log打开MR Job跟踪，如果也出现<code>java.lang.NoClassDefFoundError</code>类错误，说明mapreduce服务的classpath有缺漏，可以通过Ambari修改MapReduce服务<code>Advanced mapred-site</code>配置中的<code>mapreduce.application.classpath</code>，比如出现HBase相关类找不到，则添加HBase相关的库<code>/usr/hdp/2.2.4.2-2/hbase/lib/*</code>，然后重启MapReduce服务即可。</p>
+<p>如果出现执行权限错误，需要检查如下配置是否存在：<br><code>hive-site.xml</code>:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hive.security.metastore.authorization.manager<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>org.apache.hadoop.hive.ql.security.authorization.StorageBasedAuthorizationProvider</span><br><span class="line"><span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hive.security.metastore.authenticator.manager<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>org.apache.hadoop.hive.ql.security.HadoopDefaultMetastoreAuthenticator</span><br><span class="line"><span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hive.metastore.pre.event.listeners<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>org.apache.hadoop.hive.ql.security.authorization.AuthorizationPreEventListener</span><br><span class="line"><span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hive.metastore.execute.setugi<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>true<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>webhcat-site.xml</code>:<br>正式环境中可以明确具体使用的账号名称，最小化权限。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>webhcat.proxyuser.hue.hosts<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>*<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>webhcat.proxyuser.hue.groups<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>*<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>core-site.xml</code>:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hadoop.proxyuser.hcat.group<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>*<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hadoop.proxyuser.hcat.hosts<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>*<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="使用小结">使用小结</h2><p>Hadoop系架构经过引入YARN，真正实现了数据和应用的分离，在YARN架构上可以实现出了原来的MapReduce之外的更多App，比如流式处理、实时处理、图计算等，如此可以真正实现“把应用挪到数据旁边高效执行”，构建大数据平台。此外，做数据分析时可以发现周边工具很丰富，比如hue统一的综合管理界面、从数据文件识别结构并管理数据的hcat、数据处理高级语言pig、支持SQL的Hive，使得在Hadoop平台上做数据分析非常方便（可以参考<a href="http://zh.hortonworks.com/hadoop-tutorial/hello-world-an-introduction-to-hadoop-hcatalog-hive-and-pig/" title="hcat &amp; hive &amp; pig" target="_blank" rel="external">这里</a>）。<br>另外，对比YARN利用OS进程隔离分配资源之外，<a href="http://mesos.apache.org/" title="Apache Mesos" target="_blank" rel="external">Mesos</a>结合了Container技术实现容器隔离分配资源，以此实现更通用的框架（用各种语言写的各种计算框架）。当然YARN也进入了<a href="http://hadoop.apache.org/docs/r2.7.0/hadoop-yarn/hadoop-yarn-site/DockerContainerExecutor.html" title="YARN DCE" target="_blank" rel="external">DCE</a>，通过docker实现容器隔离。不过正式应用还是有待Linux kernel本身功能的成熟，以及docker之类管理工具的完善。<br>最后，数据处理优选python scikit-learn系工具，当大到一定程度，或需要多人同时工作时，hadoop系平台是个不错的选择。</p>
+<h2 id="参考">参考</h2><ol>
+<li><a href="http://docs.hortonworks.com/HDPDocuments/Ambari-2.0.0.0/Ambari_Doc_Suite/ADS_v200.html" title="Ambari Official Docs" target="_blank" rel="external">Ambari Official Docs</a></li>
+<li><a href="http://hadoop.apache.org/docs/stable2/hadoop-project-dist/hadoop-common/FileSystemShell.html" title="HDFS Official Doc" target="_blank" rel="external">HDFS Official Doc</a></li>
+<li><a href="https://github.com/sequenceiq/hadoop-docker" title="hadoop-docker ffrom sequenceiq" target="_blank" rel="external">Hadoop-docker from sequenceiq</a></li>
+<li><a href="https://cwiki.apache.org/confluence/display/AMBARI/Blueprints#Blueprints-Step1:CreateBlueprint" title="Ambari docs on apache" target="_blank" rel="external">Ambari Docs on Apache</a></li>
+<li><a href="https://blog.codecentric.de/en/2014/05/lambda-cluster-provisioning/" title="Sample Blueprint" target="_blank" rel="external">Sample BluePrint</a></li>
+<li><a href="http://ju.outofmemory.cn/entry/128881" title="安装配置Hue" target="_blank" rel="external">安装配置Hue</a></li>
+<li><a href="http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.2.4/HDP_Man_Install_v224/index.html" title="手动安装HDP" target="_blank" rel="external">手动安装HDP</a></li>
+<li><a href="https://cwiki.apache.org/confluence/display/AMBARI/Blueprints" title="Ambari Blueprint" target="_blank" rel="external">Ambari Blueprint</a></li>
+<li><a href="http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.2.4/Importing_Data_HBase_v224/index.html" title="导入数据到HBase" target="_blank" rel="external">导入数据到HBase</a></li>
+<li><a href="http://mesos.apache.org/" title="Apache Mesos" target="_blank" rel="external">Apache Mesos</a></li>
+<li><a href="http://hadoop.apache.org/docs/r2.7.0/hadoop-yarn/hadoop-yarn-site/DockerContainerExecutor.html" title="YARN DCE" target="_blank" rel="external">YARN DCE</a></li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Tech/">Tech</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ambari/">ambari</a><a href="/tags/hadoop/">hadoop</a><a href="/tags/hdfs/">hdfs</a><a href="/tags/hue/">hue</a><a href="/tags/java/">java</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/05/30/HelloHadoop/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/30/HelloHadoop/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/13/HelloDocker/" title="HelloDocker" itemprop="url">HelloDocker</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://promisejohn.github.io/about" title="promise john" target="_blank" itemprop="author">promise john</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-13T07:56:19.000Z" itemprop="datePublished"> 发表于 2015-05-13</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="Docker概述">Docker概述</h1><p>Docker是基于Go语言开发的容器管理工具，而且抽象级别比lxc这些管理工具高，目前官方默认通过libcontainer管理容器。lxc是一些kernel patch（namespaces）和userspace tool（cgroup）的集合，通过cgroup这个用户态管理工具实现对隔离资源的管理。Docker相比LXC增加了镜像服务（通过UnionFS和DeviceMapper），同时简化了操作复杂度，可以很方便实现应用分发部署，甚至是扩容。目前也有一些周边管理工具（Compose、Flocker、weaver）在创新，在docker基础上实现更多实用功能，如迁移，流程编排，网络管理等。跟openstack相比，docker更年轻，也更轻量级，但两者在某些场景下又可以很好结合起来，比如通过docker将openstack的管理节点实现高可用、可扩展。</p>
+<p>docker的部署在发行版上比较简单，但对内核版本有不同要求，比如在centos6.5上要求内核版本至少2.6.32-431。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ yum install -y docker-io</span><br><span class="line">$ chkconfig docker on</span><br><span class="line">$ service docker start</span><br><span class="line">$ docker run -it ubuntu /bin/bash</span><br><span class="line">$ docker info <span class="comment">#查看docker信息</span></span><br></pre></td></tr></table></figure>
+<h2 id="Docker基本用法">Docker基本用法</h2><h3 id="基本命令使用：">基本命令使用：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">$ docker run ubuntu:<span class="number">14.04</span> /bin/<span class="built_in">echo</span> <span class="string">'Hello world'</span></span><br><span class="line">$ docker run <span class="operator">-d</span> ubuntu:<span class="number">14.04</span> /bin/sh -c <span class="string">"while true; do echo hello world; sleep 1; done"</span> <span class="comment"># 后台运行</span></span><br><span class="line">$ docker ps <span class="operator">-a</span></span><br><span class="line">$ docker logs instance_name</span><br><span class="line">$ docker logs <span class="operator">-f</span> instance_name <span class="comment"># 持续输出</span></span><br><span class="line">$ docker stop/start/restart instance_name <span class="comment"># stop容器后还能启动，但网络信息会变</span></span><br><span class="line">$ docker ps -aq | xargs docker rm <span class="comment"># 删除所有容器，运行中的会保留</span></span><br><span class="line">$ docker images ＃ -tree参数可以看层级关系，最大<span class="number">128</span>层</span><br><span class="line">$ docker save -o ubuntu.tar ubuntu:<span class="number">14.04</span> <span class="comment"># 把镜像保存到本地</span></span><br><span class="line">$ tar -tf ubuntu.tar <span class="comment"># 可以看到image的结构，包含了多层FS</span></span><br><span class="line">$ docker rmi ubuntu</span><br><span class="line">$ docker run <span class="operator">-d</span> -P training/webapp python app.py <span class="comment"># 映射所有端口</span></span><br><span class="line">$ docker port instance_name <span class="number">5000</span> <span class="comment">#查看被映射的端口</span></span><br><span class="line">$ docker run <span class="operator">-d</span> -p <span class="number">5000</span>:<span class="number">5000</span> training/webapp python app.py <span class="comment"># 映射5000端口</span></span><br><span class="line">$ docker run <span class="operator">-d</span> -p <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">5000</span>:<span class="number">5000</span>/udp training/webapp python app.py <span class="comment"># 映射本机UDP端口</span></span><br><span class="line">$ docker top instance_name</span><br><span class="line">$ docker inspect instance_name <span class="comment"># 查看容器配置</span></span><br><span class="line">$ docker inspect <span class="operator">-f</span> <span class="string">'&#123;&#123; .NetworkSettings.IPAddress &#125;&#125;'</span> instance_name <span class="comment"># 查看具体的配置信息，如IP</span></span><br><span class="line">$ docker pull centos</span><br><span class="line">$ docker commit -m <span class="string">"some modify hints"</span> <span class="operator">-a</span> <span class="string">"author info"</span> </span><br><span class="line">contain_id repo_name/image_name:tags</span><br><span class="line">$ docker tag container_id repo_name/image_name:tags</span><br><span class="line">$ docker <span class="built_in">exec</span> -it CONTAINER_NAME /bin/bash <span class="comment"># 1.3开始支持在运行的容器内执行命令</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用Dockerfile创建image">使用Dockerfile创建image</h3><p><code>mkdir myimage &amp;&amp; cd $_ &amp;&amp; vim Dockerfile</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># This is a comment&#10;FROM ubuntu:14.04&#10;MAINTAINER Promise John &#60;promise.jon@gmail.com&#62;&#10;RUN apt-get update &#38;&#38; apt-get install -y nginx</span><br></pre></td></tr></table></figure>
+<h3 id="使用Linking">使用Linking</h3><p>Docker主要通过环境变量和<code>/etc/hosts</code>文件来提供访问途径：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ docker run <span class="operator">-d</span> --name db training/postgres</span><br><span class="line">$ docker run <span class="operator">-d</span> -P --name web --link db:db training/webapp python app.py</span><br><span class="line">$ docker inspect <span class="operator">-f</span> <span class="string">"&#123;&#123; .Name &#125;&#125;"</span> instance_id <span class="comment"># 查看容器名</span></span><br><span class="line">$ docker inspect <span class="operator">-f</span> <span class="string">"&#123;&#123; .HostConfig.Links &#125;&#125;"</span> web</span><br><span class="line">$ docker run --rm --name web2 --link db:db training/webapp env</span><br><span class="line">$ docker run --rm --name web2 --link db:db training/webapp cat /etc/hosts</span><br></pre></td></tr></table></figure>
+<h3 id="Storage">Storage</h3><p>主要包括独立的卷和共享本地文件系统：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker run <span class="operator">-d</span> -P --name web -v /webapp training/webapp python app.py <span class="comment"># volumn不会随容器消失，作为数据独立存在</span></span><br><span class="line">$ docker inspect web <span class="comment"># 查看/var/lib/docker/volumes和vfs</span></span><br><span class="line">$ docker run <span class="operator">-d</span> -P --name web -v /src/webapp:/opt/webapp training/webapp python app.py <span class="comment"># 挂载</span></span><br><span class="line">$ docker run <span class="operator">-d</span> -P --name web -v /src/webapp:/opt/webapp:ro training/webapp python app.py <span class="comment"># 只读挂载</span></span><br><span class="line">$ docker run --rm -it -v ~/.bash_<span class="built_in">history</span>:/.bash_<span class="built_in">history</span> ubuntu /bin/bash <span class="comment"># 只挂载某个文件</span></span><br></pre></td></tr></table></figure>
+<p>Container间共享数据：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker create -v /dbdata --name dbdata training/postgres /bin/<span class="literal">true</span></span><br><span class="line">$ docker run <span class="operator">-d</span> --volumes-from dbdata --name db1 training/postgres</span><br><span class="line">$ docker run <span class="operator">-d</span> --volumes-from dbdata --name db2 training/postgres</span><br><span class="line">$ docker run --volumes-from dbdata -v $(<span class="built_in">pwd</span>):/backup ubuntu tar cvf /backup/backup.tar /dbdata <span class="comment"># 备份容器数据</span></span><br><span class="line">$ docker run --volumes-from dbdata2 -v $(<span class="built_in">pwd</span>):/backup busybox tar xvf /backup/backup.tar <span class="comment"># 恢复数据</span></span><br></pre></td></tr></table></figure>
+<h2 id="Docker本地仓库">Docker本地仓库</h2><p>Docker Hub基本用法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker search ubuntu</span><br><span class="line">$ docker pull ubuntu:<span class="number">14.04</span></span><br><span class="line">$ docker login <span class="comment"># 配置文件在~/.dockercfg</span></span><br><span class="line">$ docker push yourname/newimage</span><br></pre></td></tr></table></figure>
+<p>配置本地的registry：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ docker run <span class="operator">-d</span> -p <span class="number">5000</span>:<span class="number">5000</span> registry</span><br><span class="line">$ docker tag ubuntu:<span class="number">14.04</span> localhost:<span class="number">5000</span>/ubuntu:<span class="number">14.04</span></span><br><span class="line">$ docker push localhost:<span class="number">5000</span>/ubuntu:<span class="number">14.04</span></span><br><span class="line">$ curl -v http://localhost:<span class="number">5000</span>/v1/repositories/ubuntu/tags/<span class="number">14.04</span> <span class="comment"># 查看image id</span></span><br><span class="line">$ docker run <span class="operator">-d</span> -p <span class="number">5000</span>:<span class="number">5000</span> \</span><br><span class="line">    <span class="operator">-e</span> STANDALONE=<span class="literal">false</span> \</span><br><span class="line">    <span class="operator">-e</span> MIRROR_SOURCE=https://registry-<span class="number">1</span>.docker.io \</span><br><span class="line">    <span class="operator">-e</span> MIRROR_SOURCE_INDEX=https://index.docker.io \</span><br><span class="line">    registry <span class="comment"># 作为官网镜像启动，代理模式</span></span><br></pre></td></tr></table></figure>
+<p>使用本地的registry：</p>
+<p>可以使用<code>--registry-mirror</code>参数启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker --registry-mirror=http://<span class="number">10.101</span>.<span class="number">29.26</span> <span class="operator">-d</span></span><br></pre></td></tr></table></figure>
+<h2 id="Docker_Compose">Docker Compose</h2><p>Docker Compose可以方便地实现应用的组合。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pip install docker-compose</span><br><span class="line">$ mkdir compose &amp;&amp; <span class="built_in">cd</span> <span class="variable">$_</span></span><br></pre></td></tr></table></figure>
+<p>增加<code>app.py</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"><span class="keyword">from</span> redis <span class="keyword">import</span> Redis</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line">app = Flask(__name__)</span><br><span class="line">redis = Redis(host=<span class="string">'redis'</span>, port=<span class="number">6379</span>)</span><br><span class="line"></span><br><span class="line"><span class="decorator">@app.route('/')</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">()</span>:</span></span><br><span class="line">    redis.incr(<span class="string">'hits'</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello World! I have been seen %s times.'</span> % redis.get(<span class="string">'hits'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    app.run(host=<span class="string">"0.0.0.0"</span>, debug=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<p>增加<code>requirements.txt</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flask&#10;redis</span><br></pre></td></tr></table></figure>
+<p>增加<code>Dockerfile</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FROM python:2.7&#10;ADD . /code&#10;WORKDIR /code&#10;RUN pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>增加<code>docker-compose.yml</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">web:&#10;  build: .&#10;  command: python app.py&#10;  ports:&#10;   - &#34;5000:5000&#34;&#10;  volumes:&#10;   - .:/code&#10;  links:&#10;   - redis&#10;redis:&#10;  image: redis</span><br></pre></td></tr></table></figure>
+<p>启动并管理服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker-compose up <span class="operator">-d</span></span><br><span class="line">$ docker-compose ps</span><br><span class="line">$ docker-compose run web env</span><br><span class="line">$ docker-compose stop</span><br></pre></td></tr></table></figure>
+<h2 id="小结">小结</h2><p>Docker在快速应用分发、扩展等方面有很高的自动化能力，但是跟主机虚拟化一样，网络也是需要重点考虑的难点。默认情况下都是通过本地的一个bridge提供容器之间的通信，通过NAT为应用提供地址，一般的应用部署足以应付，但如果要实现更复杂的网络场景，如多主机上container组成大规模的L3负载均衡集群、应用无缝迁移等，还是需要大量的定制，目前这方面的周边产品开发比较活跃。</p>
+<h2 id="参考">参考</h2><ol>
+<li><a href="https://docs.docker.com" title="Official Docs" target="_blank" rel="external">Official Docs</a></li>
+<li><a href="http://www.infoq.com/cn/articles/analysis-of-docker-file-system-aufs-and-devicemapper" title="Docker fs with aufs and devicemapper" target="_blank" rel="external">Docker with aufs and devicemapper</a></li>
+<li><a href="http://www.ibm.com/developerworks/cn/linux/l-lxc-containers/" title="LXC TOOL" target="_blank" rel="external">LXC Tools</a></li>
+<li><a href="https://docs.docker.com/compose" title="Docker Compose" target="_blank" rel="external">Docker Compose</a></li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Tech/">Tech</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/docker/">docker</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/05/13/HelloDocker/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/13/HelloDocker/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/11/BuildKVMImages/" title="BuildKVMImages" itemprop="url">BuildKVMImages</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://promisejohn.github.io/about" title="promise john" target="_blank" itemprop="author">promise john</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-11T07:33:37.000Z" itemprop="datePublished"> 发表于 2015-05-11</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="手动创建KVM虚拟机镜像">手动创建KVM虚拟机镜像</h2><p>通过libvirt系的本地命令行管理工具，也可以方便地创建虚拟机。</p>
+<ul>
+<li>qemu-img：生成虚拟机磁盘文件</li>
+<li>virsh：命令行虚拟机管理工具</li>
+</ul>
+<h3 id="生成Domain_XML文件">生成Domain XML文件</h3><p>如果要用X11远程到物理机使用GUI工具，需要配置sshd，安装<code>xauth</code>：</p>
+<p><code>/etc/ssh/sshd_config</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">...&#10;X11Forwarding yes&#10;X11UseLocalhost no&#10;...</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ /etc/init.d/sshd reload</span><br><span class="line">$ yum install -y xauth</span><br><span class="line">$ ssh -X user@host</span><br><span class="line">$ virt-manager&amp;</span><br></pre></td></tr></table></figure>
+<p>也可以直接用官方的example修改配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#60;domain type = &#39;kvm&#39;&#62;&#10;        &#60;name&#62;centos66&#60;/name&#62;&#10;        &#60;memory&#62;1048576&#60;/memory&#62;&#10;        &#60;vcpu&#62;1&#60;/vcpu&#62;&#10;        &#60;os&#62;&#10;                &#60;type arch = &#39;x86_64&#39;machine = &#39;pc&#39;&#62;hvm&#60;/type&#62;&#10;                &#60;boot dev = &#39;cdrom&#39;/&#62;&#10;                &#60;boot dev = &#39;hd&#39;/&#62;&#10;        &#60;/os&#62;&#10;        &#60;features&#62;&#10;                &#60;acpi/&#62;&#10;                &#60;apic/&#62;&#10;                &#60;pae/&#62;&#10;        &#60;/features&#62;&#10;        &#60;clock offset = &#39;utc&#39;/&#62;&#10;        &#60;on_poweroff&#62;destroy&#60;/on_poweroff&#62;&#10;        &#60;on_reboot&#62;restart&#60;/on_reboot&#62;&#10;        &#60;on_crash&#62;destroy&#60;/on_crash&#62;&#10;        &#60;devices&#62;&#10;                &#60;emulator&#62;/usr/libexec/qemu-kvm&#60;/emulator&#62;&#10;                &#60;disk type = &#39;file&#39; device = &#39;disk&#39;&#62;&#10;                        &#60;driver name = &#39;qemu&#39; type = &#39;raw&#39; cache=&#39;none&#39;/&#62;&#10;                        &#60;source file = &#39;/opt/vmdisks/centos66.raw&#39;/&#62;&#10;                        &#60;target dev=&#39;vda&#39; bus=&#39;virtio&#39;/&#62;&#10;                &#60;/disk&#62;&#10;                &#60;disk type = &#39;file&#39; device = &#39;cdrom&#39;&#62;&#10;                        &#60;source file = &#39;/opt/CentOS-6.6-x86_64-bin-DVD1.iso&#39;/&#62;&#10;                        &#60;target dev = &#39;hdb&#39; bus = &#39;ide&#39;/&#62;&#10;                &#60;/disk&#62;&#10;&#34;centos66.xml&#34; 48L, 1243C written                                                                     8,20-34       Top&#10;                        &#60;target dev = &#39;hdb&#39; bus = &#39;ide&#39;/&#62;&#10;                &#60;/disk&#62;&#10;                &#60;interface type=&#39;network&#39;&#62;&#10;                        &#60;source network=&#39;default&#39;/&#62;&#10;                        &#60;model type=&#39;virtio&#39;/&#62;&#10;                &#60;/interface&#62;&#10;                &#60;input type=&#39;tablet&#39; bus=&#39;usb&#39;/&#62;&#10;                &#60;input type=&#39;mouse&#39; bus=&#39;ps2&#39;/&#62;&#10;                &#60;graphics type=&#39;vnc&#39; port=&#39;-1&#39; autoport=&#39;yes&#39; listen=&#39;0.0.0.0&#39;&#62;&#10;                        &#60;listen type=&#39;address&#39; address=&#39;0.0.0.0&#39;/&#62;&#10;                &#60;/graphics&#62;&#10;        &#60;/devices&#62;&#10;&#60;/domain&#62;</span><br></pre></td></tr></table></figure>
+<h3 id="创建虚拟机">创建虚拟机</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p /opt/vmdisks</span><br><span class="line">$ qemu-img create <span class="operator">-f</span> raw /opt/vmdisks/centos66.raw <span class="number">8</span>G</span><br><span class="line">$ virsh create centos66.xml</span><br><span class="line">$ ip addr</span><br><span class="line">$ virsh vncdisplay centos66 <span class="comment">#获取ip和vnc端口登陆</span></span><br></pre></td></tr></table></figure>
+<p>接下来就进入安装操作系统的界面，一路按指印即可。</p>
+<h3 id="远程管理libvirt主机">远程管理libvirt主机</h3><p>可以用qemu+ssh，节点间互信后迁移；也可以用qemu+tcp，修改<code>/etc/libvirt/libvirtd.conf</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">listen_tls = 0&#10;listen_tcp = 1&#10;tcp_port = &#34;16509&#34;&#10;listen_addr = &#34;0.0.0.0&#34;&#10;auth_tcp = &#34;none&#34; # &#29983;&#20135;&#29615;&#22659;&#24314;&#35758;&#21152;&#19978;&#25480;&#26435;&#39564;&#35777;</span><br></pre></td></tr></table></figure>
+<p>修改<code>/etc/init.d/libvirtd</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIBVIRTD_CONFIG=/etc/libvirt/libvirtd.conf&#10;LIBVIRTD_ARGS=&#34;--listen&#34;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ service libvirtd restart</span><br><span class="line">$ ss -ln  | grep <span class="number">16509</span></span><br></pre></td></tr></table></figure>
+<p>在其他节点就可以连接（注意iptables）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ virsh -c qemu+tcp://<span class="number">192.168</span>.<span class="number">182.156</span>/system</span><br></pre></td></tr></table></figure>
+<p>克隆虚拟机：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ virsh define centos66.xml</span><br><span class="line">$ virt-clone --original=centos66 --name=centos66_01 <span class="operator">-f</span> centos66_01.raw</span><br><span class="line">$ virsh list --all</span><br></pre></td></tr></table></figure>
+<h3 id="参考">参考</h3><ol>
+<li><a href="http://libvirt.org/formatdomain.html" title="libvirt官方虚拟机规格XML格式说明" target="_blank" rel="external">libvirt官方虚拟机规格XML格式说明</a></li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Tech/">Tech</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/kvm/">kvm</a><a href="/tags/libvirt/">libvirt</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/05/11/BuildKVMImages/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/11/BuildKVMImages/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/07/HelloOpenstack/" title="Openstack安装部署" itemprop="url">Openstack安装部署</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://promisejohn.github.io/about" title="promise john" target="_blank" itemprop="author">promise john</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-07T07:12:56.000Z" itemprop="datePublished"> 发表于 2015-05-07</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="参考架构及部署规划">参考架构及部署规划</h2><p><img src="http://docs.openstack.org/icehouse/install-guide/install/yum/content/figures/1/a/common/figures/openstack_havana_conceptual_arch.png" alt="参考架构"></p>
+<ul>
+<li>操作系统：CentOS6.5</li>
+<li>第三方yum源：epel, rdo</li>
+</ul>
+<p>节点部署角色：</p>
+<table>
+<thead>
+<tr>
+<th>节点名</th>
+<th>internal ip</th>
+<th>public ip</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>oscontroller</td>
+<td>10.0.100.145</td>
+<td>192.168.182.150</td>
+<td>nova, glance, cinder, image, neutron, dashboard, heat</td>
+</tr>
+<tr>
+<td>osnetwork</td>
+<td>10.0.100.146</td>
+<td>192.168.182.151</td>
+<td>ML2, OVS, L2 Agent, L3 Agent, DHCP Agent</td>
+</tr>
+<tr>
+<td>oscompute1</td>
+<td>10.0.100.147</td>
+<td>192.168.182.152</td>
+<td>nova-compute</td>
+</tr>
+<tr>
+<td>oscompute2</td>
+<td>10.0.100.148</td>
+<td>192.168.182.153</td>
+<td>nova-compute</td>
+</tr>
+<tr>
+<td>oskeystone</td>
+<td>10.0.100.149</td>
+<td>192.168.182.154</td>
+<td>qpid/rabbitmq, keystone, mysql， memcached</td>
+</tr>
+<tr>
+<td>osmeter</td>
+<td>10.0.100.150</td>
+<td>192.168.182.155</td>
+<td>ceilometer, mongodb</td>
+</tr>
+<tr>
+<td>osswift0</td>
+<td>10.0.100.139</td>
+<td>192.168.182.144</td>
+<td>swift0, swift-proxy-server</td>
+</tr>
+<tr>
+<td>osswift1</td>
+<td>10.0.100.140</td>
+<td>192.168.182.145</td>
+<td>swift1</td>
+</tr>
+<tr>
+<td>osswift2</td>
+<td>10.0.100.141</td>
+<td>192.168.182.146</td>
+<td>swift2</td>
+</tr>
+<tr>
+<td>osceph0</td>
+<td>10.0.100.142</td>
+<td>192.168.182.147</td>
+<td>ceph0</td>
+</tr>
+<tr>
+<td>osceph1</td>
+<td>10.0.100.143</td>
+<td>192.168.182.148</td>
+<td>ceph1 # 暂时不用</td>
+</tr>
+<tr>
+<td>osceph2</td>
+<td>10.0.100.144</td>
+<td>192.168.182.149</td>
+<td>ceph2 # 暂时不用</td>
+</tr>
+</tbody>
+</table>
+<p><img src="http://docs.openstack.org/icehouse/install-guide/install/yum/content/figures/1/figures/installguide_arch-neutron.png" alt="参考部署架构"></p>
+        
+        
+        <p class="article-more-link">
+          
+            <a href="/2015/05/07/HelloOpenstack/#more">Read More</a>
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Tech/">Tech</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ceilometer/">ceilometer</a><a href="/tags/cinder/">cinder</a><a href="/tags/glance/">glance</a><a href="/tags/neutron/">neutron</a><a href="/tags/nova/">nova</a><a href="/tags/openstack/">openstack</a><a href="/tags/swift/">swift</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/05/07/HelloOpenstack/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/05/07/HelloOpenstack/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/17/RubyDevEnvSetting/" title="Ruby开发环境搭建" itemprop="url">Ruby开发环境搭建</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://promisejohn.github.io/about" title="promise john" target="_blank" itemprop="author">promise john</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-17T02:48:49.000Z" itemprop="datePublished"> 发表于 2015-04-17</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="Ruby开发环境搭建">Ruby开发环境搭建</h3><p>多版本管理<code>RVM</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ gpg --keyserver hkp://keys.gnupg.net --recv-keys <span class="number">409</span>B6B1796C275462A1703113804BB82D39DC0E3</span><br><span class="line">$ curl <span class="operator">-s</span>SL https://get.rvm.io | bash <span class="operator">-s</span> stable</span><br><span class="line">$ <span class="built_in">source</span> /etc/profile.d/rvm.sh</span><br><span class="line">$ sed -i <span class="string">'s!cache.ruby-lang.org/pub/ruby!ruby.taobao.org/mirrors/ruby!'</span> <span class="variable">$rvm_path</span>/config/db <span class="comment"># 使用taobao源下载ruby</span></span><br><span class="line">$ rvm list known</span><br><span class="line">$ rvm install <span class="number">2.1</span>.<span class="number">4</span></span><br><span class="line">$ rvm docs generate-ri <span class="comment"># 生成ruby文档</span></span><br><span class="line">$ rvm use <span class="number">2.1</span>.<span class="number">4</span> --default <span class="comment"># 设定默认ruby版本</span></span><br><span class="line">$ rvm list <span class="comment"># 查询已安装版本</span></span><br></pre></td></tr></table></figure>
+<p>用<code>gemset</code>建立独立环境：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ rvm use <span class="number">2.1</span>.<span class="number">4</span></span><br><span class="line">$ rvm gemset create rails42</span><br><span class="line">$ rvm use <span class="number">2.1</span>.<span class="number">4</span>@rails42</span><br><span class="line">$ rvm gemset list</span><br></pre></td></tr></table></figure>
+<p><code>Gem</code>管理ruby包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ gem sources --remove https://rubygems.org/</span><br><span class="line">$ gem sources <span class="operator">-a</span> https://ruby.taobao.org/</span><br><span class="line">$ gem sources <span class="operator">-l</span></span><br><span class="line">$ gem search rails <span class="comment"># search，install, etc</span></span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ol>
+<li><a href="https://rvm.io/" title="RVM official site" target="_blank" rel="external">RVM official site</a></li>
+<li><a href="https://ruby-china.org/wiki/rvm-guide" title="RVM Guide from ruby-china.org" target="_blank" rel="external">RVM Guide from ruby-china.org</a></li>
+<li><a href="http://guides.rubygems.org/rubygems-basics/" title="Gem Official Guide" target="_blank" rel="external">Gem Official Guide</a></li>
+<li><a href="http://ruby.taobao.org/" title="Ruby@Taobao.org" target="_blank" rel="external">Ruby@Taobao.org</a></li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Tech/">Tech</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/dev/">dev</a><a href="/tags/ruby/">ruby</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/17/RubyDevEnvSetting/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/17/RubyDevEnvSetting/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/17/HelloVagrant/" title="Hello Vagrant" itemprop="url">Hello Vagrant</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://promisejohn.github.io/about" title="promise john" target="_blank" itemprop="author">promise john</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-17T02:22:06.000Z" itemprop="datePublished"> 发表于 2015-04-17</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="Vagrant部署">Vagrant部署</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/dev</span><br><span class="line">$ wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.<span class="number">7.2</span>_x86_64.rpm</span><br><span class="line">$ rpm -ivh vagrant_1.<span class="number">7.2</span>_x86_64.rpm</span><br></pre></td></tr></table></figure>
+<h3 id="添加vagrant_boxes">添加vagrant boxes</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vagrant box add hashicorp/precise32 <span class="comment"># 支持virtualbox Hypervisor</span></span><br><span class="line">$ vagrant box add centos64 http://citozin.com/centos64.box ＃ 支持 libvirt KVM Hypervisor</span><br></pre></td></tr></table></figure>
+<h3 id="编辑Vagrantfile">编辑Vagrantfile</h3><p>默认使用的是virtualbox作为Hypervisor：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">Vagrant</span>.configure(<span class="string">"2"</span>) <span class="keyword">do</span> |config|</span><br><span class="line">  config.vm.box = <span class="string">"hashicorp/precise32"</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<h3 id="运行虚拟机">运行虚拟机</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ vagrant up</span><br></pre></td></tr></table></figure>
+<h3 id="Vagrant使用KVM_Hypervisor">Vagrant使用KVM Hypervisor</h3><p>安装vagrant-libvirt plugin：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ yum install libxslt-devel libxml2-devel libvirt-devel</span><br><span class="line">$ vagrant plugin install vagrant-libvirt --plugin-source https://ruby.taobao.org/</span><br></pre></td></tr></table></figure>
+<p>配置Vagrantfile：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">Vagrant</span>.configure(<span class="string">"2"</span>) <span class="keyword">do</span> |config|</span><br><span class="line">  config.vm.define <span class="symbol">:node1</span> <span class="keyword">do</span> |node1|</span><br><span class="line">    node1.vm.box = <span class="string">"centos64"</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>启动虚拟机：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vagrant up --provider=libvirt</span><br><span class="line">$ <span class="built_in">export</span> VAGRANT_DEFAULT_PROVIDER=libvirt <span class="comment"># Another way</span></span><br></pre></td></tr></table></figure>
+<h3 id="小结">小结</h3><p>Vagrant的box不是对所有hypervisor都通用，比如官方的<code>hashicorp/precise32</code>就不支持KVM，如果环境只有KVM，那么可能需要自己制作对应的box，可以参考<a href="https://github.com/pradels/vagrant-libvirt/" title="Vagrant-Libvirt" target="_blank" rel="external">Vagrant-Libvirt Plugin</a>，借助工具<code>create_box.sh</code>从qcow2 image制作。</p>
+<p>此外，需要注意的是，KVM和VirtualBox不能同时启动虚拟机，否则会报类似如下错误：</p>
+<p>先启动virtualbox虚拟机再启动KVM虚拟机：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">There was an error talking to Libvirt. The error message is shown&#10;below:&#10;&#10;Call to virDomainCreateWithFlags failed: internal error Process exited while reading console log output: char device redirected to /dev/pts/2&#10;kvm_create_vm: Device or resource busy&#10;failed to initialize KVM: Operation not permitted&#10;No accelerator found!</span><br></pre></td></tr></table></figure>
+<p>先启动KVM虚拟机再启动virtualbox虚拟机：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The guest machine entered an invalid state while waiting for it&#10;to boot. Valid states are &#39;starting, running&#39;. The machine is in the&#10;&#39;poweroff&#39; state. Please verify everything is configured&#10;properly and try again.&#10;&#10;If the provider you&#39;re using has a GUI that comes with it,&#10;it is often helpful to open that and watch the machine, since the&#10;GUI often has more helpful error messages than Vagrant can retrieve.&#10;For example, if you&#39;re using VirtualBox, run `vagrant up` while the&#10;VirtualBox GUI is open.</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ol>
+<li><a href="https://docs.vagrantup.com/v2/" title="Vagrant Official Site" target="_blank" rel="external">Vagrant Official Site</a></li>
+<li><a href="https://github.com/pradels/vagrant-libvirt/" title="Vagrant-Libvirt" target="_blank" rel="external">Vagrant-Libvirt Plugin</a></li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Tech/">Tech</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/vagrant/">vagrant</a><a href="/tags/虚拟化/">虚拟化</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/17/HelloVagrant/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/17/HelloVagrant/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/16/HelloFlocker/" title="Hello Flocker" itemprop="url">Hello Flocker</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://promisejohn.github.io/about" title="promise john" target="_blank" itemprop="author">promise john</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-16T15:56:04.000Z" itemprop="datePublished"> 发表于 2015-04-16</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="Flocker安装部署">Flocker安装部署</h3><p>安装flocker-deploy：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv virtualenv flocker</span><br><span class="line">$ pyenv activate flocker</span><br><span class="line">$ pip install https://storage.googleapis.com/archive.clusterhq.com/downloads/flocker/Flocker-<span class="number">0.3</span>.<span class="number">2</span>-py2-none-any.whl</span><br><span class="line">$ <span class="built_in">which</span> flocker-deploy <span class="comment"># 验证flocker-deploy安装在$(dirname `pyenv which python`)目录下</span></span><br></pre></td></tr></table></figure>
+<p>安装flocker-node，本地安装方式官方目前只支持fedora 20的linux，暂时选择用最简单的vagrant来测试。</p>
+<p>准备第三方库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /etc/yum.repos.d</span><br><span class="line">$ wget http://download.virtualbox.org/virtualbox/rpm/$ rhel/virtualbox.repo <span class="comment"># 导入virtualbox的yum库，修改默认不启用：enabled=0</span></span><br><span class="line">$ wget http://mirrors.zju.edu.cn/epel/<span class="number">6</span>/i386/epel-release-<span class="number">6</span>-<span class="number">8</span>.noarch.rpm</span><br><span class="line">$ rpm -ivh epel-release-<span class="number">6</span>-<span class="number">8</span>.noarch.rpm <span class="comment"># 导入EPEL库</span></span><br></pre></td></tr></table></figure>
+<p>安装VirtualBox：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> ~/dev <span class="comment"># 工作目录</span></span><br><span class="line">$ yum install dkms ＃ 从EPEL安装</span><br><span class="line">$ yum groupinstall <span class="string">"Development Tools"</span> </span><br><span class="line">$ yum install kernel-devel <span class="comment"># 确保当前运行的uname -r与kernel-devel版本一致</span></span><br><span class="line">$ yum --enablerepo virtualbox install VirtualBox-<span class="number">4.3</span></span><br><span class="line">$ /etc/init.d/vboxdrv setup</span><br><span class="line">$ wget http://dlc-cdn.sun.com/virtualbox/<span class="number">4.3</span>.<span class="number">26</span>/Oracle_VM_VirtualBox_Extension_Pack-<span class="number">4.3</span>.<span class="number">26</span>-<span class="number">98988</span>.vbox-extpack</span><br><span class="line">$ VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-<span class="number">4.3</span>.<span class="number">26</span>-<span class="number">98988</span>.vbox-extpack</span><br></pre></td></tr></table></figure>
+<p>安装Vagrant：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://dl.bintray.com/mitchellh/vagrant/vagrant_1.<span class="number">7.2</span>_x86_64.rpm</span><br><span class="line">$ rpm -ivh vagrant_1.<span class="number">7.2</span>_x86_64.rpm</span><br><span class="line">$ <span class="built_in">cd</span> ~/dev &amp;&amp; mkdir HelloFlocker &amp;&amp; <span class="built_in">cd</span> <span class="variable">$_</span></span><br><span class="line">$ wget http://flocker.readthedocs.org/en/latest/_downloads/Vagrantfile <span class="comment"># See Below</span></span><br><span class="line">$ vagrant up</span><br><span class="line">$ vagrant status</span><br></pre></td></tr></table></figure>
+<p>使用官方的flocker box：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">Vagrant</span>.require_version <span class="string">"&gt;= 1.6.2"</span></span><br><span class="line"><span class="constant">VAGRANTFILE_API_VERSION</span> = <span class="string">"2"</span></span><br><span class="line"><span class="constant">ENV</span>[<span class="string">'VAGRANT_DEFAULT_PROVIDER'</span>] = <span class="string">'virtualbox'</span></span><br><span class="line"><span class="constant">Vagrant</span>.configure(<span class="constant">VAGRANTFILE_API_VERSION</span>) <span class="keyword">do</span> |config|</span><br><span class="line">  config.vm.box = <span class="string">"clusterhq/flocker-tutorial"</span></span><br><span class="line">  config.vm.box_version = <span class="string">"= 0.3.2"</span></span><br><span class="line">  <span class="keyword">if</span> <span class="constant">Vagrant</span>.has_plugin?(<span class="string">"vagrant-cachier"</span>)</span><br><span class="line">    config.cache.scope = <span class="symbol">:box</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  config.vm.define <span class="string">"node1"</span> <span class="keyword">do</span> |node1|</span><br><span class="line">    node1.vm.network <span class="symbol">:private_network</span>, <span class="symbol">:ip</span> =&gt; <span class="string">"172.16.255.250"</span></span><br><span class="line">    node1.vm.hostname = <span class="string">"node1"</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line">  config.vm.define <span class="string">"node2"</span> <span class="keyword">do</span> |node2|</span><br><span class="line">    node2.vm.network <span class="symbol">:private_network</span>, <span class="symbol">:ip</span> =&gt; <span class="string">"172.16.255.251"</span></span><br><span class="line">    node2.vm.hostname = <span class="string">"node2"</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p>Flocker使用SSH通道：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">eval</span> $(ssh-agent) <span class="comment"># 启用一个SSH Agent，可以用ssh-add测试是否启用</span></span><br><span class="line">$ ssh-add ~/.vagrant.d/insecure_private_key</span><br><span class="line">$ ssh -t root@<span class="number">172.16</span>.<span class="number">255.250</span> flocker-reportstate --version <span class="comment"># 检查virtualbox中虚拟机内的flocker-node版本</span></span><br></pre></td></tr></table></figure>
+<p>在虚拟机中下载docker比如官方的MySQL案例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -t root@<span class="number">172.16</span>.<span class="number">255.250</span> docker pull mysql:<span class="number">5.6</span>.<span class="number">17</span></span><br><span class="line">$ ssh -t root@<span class="number">172.16</span>.<span class="number">255.251</span> docker pull mysql:<span class="number">5.6</span>.<span class="number">17</span></span><br></pre></td></tr></table></figure>
+<h3 id="Flocker部署MySQL:">Flocker部署MySQL:</h3><p>配置<code>mysql-application.yml</code>:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#34;version&#34;: 1&#10;&#34;applications&#34;:&#10;  &#34;mysql-volume-example&#34;:&#10;    &#34;image&#34;: &#34;mysql:5.6.17&#34;&#10;    &#34;environment&#34;:&#10;      &#34;MYSQL_ROOT_PASSWORD&#34;: &#34;clusterhq&#34;&#10;    &#34;ports&#34;:&#10;    - &#34;internal&#34;: 3306&#10;      &#34;external&#34;: 3306&#10;    &#34;volume&#34;:&#10;      &#34;mountpoint&#34;: &#34;/var/lib/mysql&#34;</span><br></pre></td></tr></table></figure>
+<p>配置<code>mysql-deployment.yml</code>:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#34;version&#34;: 1&#10;&#34;nodes&#34;:&#10;  &#34;172.16.255.250&#34;: [&#34;mysql-volume-example&#34;]&#10;  &#34;172.16.255.251&#34;: []</span><br></pre></td></tr></table></figure>
+<p>检查docker服务端镜像及容器启用情况：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -t root@<span class="number">172.16</span>.<span class="number">255.250</span> docker images</span><br><span class="line">$ ssh -t root@<span class="number">172.16</span>.<span class="number">255.250</span> docker ps</span><br><span class="line">$ ssh -t root@<span class="number">172.16</span>.<span class="number">255.251</span> docker images</span><br><span class="line">$ ssh -t root@<span class="number">172.16</span>.<span class="number">255.251</span> docker ps</span><br></pre></td></tr></table></figure>
+<p>通过Flocker-deploy部署应用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv activate flocker <span class="comment"># 确保进入隔离python环境，之前安装的flocker-cli在该环境内</span></span><br><span class="line">$ flocker-deploy mysql-deployment.yml mysql-application.yml</span><br><span class="line">$ ssh root@<span class="number">172.16</span>.<span class="number">255.250</span> docker ps <span class="comment"># 可以看到MySQL容器已启动</span></span><br><span class="line">$ ssh root@<span class="number">172.16</span>.<span class="number">255.251</span> docker ps</span><br></pre></td></tr></table></figure>
+<p>使用MySQL服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mysql -uroot -pclusterhq -h172.<span class="number">16.255</span>.<span class="number">250</span></span><br><span class="line">$ <span class="comment"># create some databases, tables and data.</span></span><br><span class="line">$ <span class="comment"># stay in the mysql client and keep connection.</span></span><br></pre></td></tr></table></figure>
+<h3 id="通过Flocker-deploy迁移应用：">通过Flocker-deploy迁移应用：</h3><p>新增<code>mysql-deployment-moved.yml</code>：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#34;version&#34;: 1&#10;&#34;nodes&#34;:&#10;  &#34;172.16.255.250&#34;: []&#10;  &#34;172.16.255.251&#34;: [&#34;mysql-volume-example&#34;]</span><br></pre></td></tr></table></figure>
+<p>执行迁移：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ flocker-deploy mysql-deployment-moved.yml mysql-application.yml</span><br><span class="line">$ ssh -t root@<span class="number">172.16</span>.<span class="number">255.250</span> docker ps <span class="comment"># 看到容器列表空</span></span><br><span class="line">$ ssh -t root@<span class="number">172.16</span>.<span class="number">255.251</span> docker ps <span class="comment"># 看到容器启动</span></span><br></pre></td></tr></table></figure>
+<p>迁移过程中可以发现，mysql客户端连接的172.16.255.250服务端并没有断开。通过登录虚拟机可以找到原因（有兴趣的可以用tcpdump、ss来追踪）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ssh root@<span class="number">172.16</span>.<span class="number">255.250</span></span><br><span class="line">$ root@<span class="number">250</span>: iptables -t nat -L</span><br></pre></td></tr></table></figure>
+<p>可以看到flocker是通过Linux Netfilter的NAT表进行了默认的转发：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Chain PREROUTING (policy ACCEPT)&#10;target     prot opt source               destination&#10;DOCKER     all  --  anywhere             anywhere             ADDRTYPE match dst-type LOCAL&#10;DNAT       tcp  --  anywhere             anywhere             tcp dpt:mysql ADDRTYPE match dst-type LOCAL /* flocker create_proxy_to */ to:172.16.255.251&#10;&#10;Chain INPUT (policy ACCEPT)&#10;target     prot opt source               destination&#10;&#10;Chain OUTPUT (policy ACCEPT)&#10;target     prot opt source               destination&#10;DOCKER     all  --  anywhere            !loopback/8           ADDRTYPE match dst-type LOCAL&#10;DNAT       tcp  --  anywhere             anywhere             tcp dpt:mysql ADDRTYPE match dst-type LOCAL to:172.16.255.251&#10;&#10;Chain POSTROUTING (policy ACCEPT)&#10;target     prot opt source               destination&#10;MASQUERADE  all  --  172.17.0.0/16        anywhere&#10;MASQUERADE  tcp  --  anywhere             anywhere             tcp dpt:mysql</span><br></pre></td></tr></table></figure>
+<p>由此实现了应用的无缝迁移。</p>
+<h3 id="小结">小结</h3><p>Flocker实现的功能很有诱惑力，让docker具备了自动化的应用迁移能力，他俩关系有点像openstack和hypervisor的关系。但是，它目前还非常不成熟（0.4版在开发中），经常会遇到一些bug，就连官方也不推荐在生产环境使用，继续观望。</p>
+<p>参考：</p>
+<ol>
+<li><a href="http://flocker.readthedocs.org/en/latest/gettingstarted/installation.html" title="Flocker doc on readthedoc.org" target="_blank" rel="external">Flocker Doc</a></li>
+<li><a href="http://promisejohn.github.io/2015/04/15/WebDevEnvSetting/" title="Web开发环境搭建">Web开发环境搭建</a></li>
+<li><a href="http://wiki.centos.org/zh/HowTos/Virtualization/VirtualBox" title="CentOS下安装VirtualBox" target="_blank" rel="external">CentOS下安装VirtualBox</a></li>
+<li><a href="http://www.cnblogs.com/fsjohnhuang/p/3976331.html" title="CentOS6.5菜鸟之旅：安装VirtualBox4.3" target="_blank" rel="external">CentOS6.5菜鸟之旅：安装VirtualBox4.3</a></li>
+<li>在验证应用无缝迁移过程中用到的工具：ss、tcpdump。</li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Tech/">Tech</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/docker/">docker</a><a href="/tags/flocker/">flocker</a><a href="/tags/vagrant/">vagrant</a><a href="/tags/虚拟化/">虚拟化</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/16/HelloFlocker/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/16/HelloFlocker/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/16/SaltStackDev/" title="SaltStack开发环境搭建" itemprop="url">SaltStack开发环境搭建</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://promisejohn.github.io/about" title="promise john" target="_blank" itemprop="author">promise john</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-16T03:08:18.000Z" itemprop="datePublished"> 发表于 2015-04-16</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="安装及准备">安装及准备</h3><p>切换到python独立环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv virtualenv salt-<span class="number">2.7</span>.<span class="number">8</span></span><br></pre></td></tr></table></figure>
+<p>获取代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/saltstack/salt</span><br><span class="line">$ git fetch --tags</span><br></pre></td></tr></table></figure>
+<p>安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ env SWIG_FEATURES=<span class="string">"-cpperraswarn -includeall -D__`uname -m`__ -I/usr/include/openssl"</span> pip install M2Crypto</span><br><span class="line">$ pip install pyzmq PyYAML pycrypto msgpack-python jinja2 psutil</span><br><span class="line">$ pip install <span class="operator">-e</span> ./salt</span><br></pre></td></tr></table></figure>
+<p>配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p $(dirname `pyenv which python`)/../etc/salt&#10;$ cp ./salt/conf/master ./salt/conf/minion $(dirname `pyenv which python`)/../etc/salt</span><br></pre></td></tr></table></figure>
+<p>master配置文件：</p>
+<ol>
+<li>user: root</li>
+<li>root_dir: $(dirname <code>pyenv which python</code>)/..</li>
+<li>pidfile: $(dirname <code>pyenv which python</code>)/../salt-master.pid</li>
+<li>publish_port: 14505</li>
+<li>ret_port: 14506</li>
+</ol>
+<p>minion配置文件：</p>
+<ol>
+<li>user: root</li>
+<li>root_dir: $(dirname <code>pyenv which python</code>)/..</li>
+<li>pidfile: $(dirname <code>pyenv which python</code>)/../salt-minion.pid</li>
+<li>master: localhost</li>
+<li>id: saltdev</li>
+<li>master_port: 14505</li>
+</ol>
+<p>运行启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> $(dirname `pyenv <span class="built_in">which</span> python`)/../</span><br><span class="line">$ salt-master -c ./etc/salt <span class="operator">-d</span></span><br><span class="line">$ salt-minion -c ./etc/salt <span class="operator">-d</span></span><br><span class="line">$ salt-key -c ./etc/salt -L</span><br><span class="line">$ salt-key -c ./etc/salt -A</span><br><span class="line">$ salt -c ./etc/salt <span class="string">'*'</span> test.ping</span><br></pre></td></tr></table></figure>
+<p>其他：</p>
+<ol>
+<li>通过<code>-l debug</code>开启debug模式，去掉<code>-d</code>直接输出到console。</li>
+<li>socket path在linux上最多107个字符，可以通过缩短sock_dir和root_dir字符。</li>
+<li><code>ulimit -n</code>检查File descriptor limites，至少2047：<code>ulimit -n 2048</code></li>
+</ol>
+<h3 id="文档生成">文档生成</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ pip install Sphinx==<span class="number">1.3</span>b2</span><br><span class="line">$ <span class="built_in">cd</span> doc; make html</span><br><span class="line">$ <span class="built_in">cd</span> _build/html; python -m SimpleHTTPServer</span><br></pre></td></tr></table></figure>
+<h3 id="Tests">Tests</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./setup.py <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<h4 id="参考：">参考：</h4><ol>
+<li><a href="http://docs.saltstack.com/en/latest/topics/development/hacking.html" title="saltstack官方文档" target="_blank" rel="external">saltstack官方文档</a></li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Tech/">Tech</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/dev/">dev</a><a href="/tags/saltstack/">saltstack</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/16/SaltStackDev/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/16/SaltStackDev/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/15/PythonDevEnvSetting/" title="Python开发环境搭建" itemprop="url">Python开发环境搭建</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://promisejohn.github.io/about" title="promise john" target="_blank" itemprop="author">promise john</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-15T08:03:04.000Z" itemprop="datePublished"> 发表于 2015-04-15</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="Python开发环境搭建">Python开发环境搭建</h3><p>用豆瓣的源给pip和easy_install加速，~/.bashrc：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias easy_install=&#39;easy_install -i http://pypi.douban.com/simple&#39;</span><br></pre></td></tr></table></figure>
+<p>安装pip：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ easy_install pip</span><br></pre></td></tr></table></figure>
+<p>~/.pip/pip.conf：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[global]&#10;index-url = http://pypi.douban.com/simple</span><br></pre></td></tr></table></figure>
+<p>安装pyenv</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone git://github.com/yyuu/pyenv.git ~/.pyenv&#10;$ echo &#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ echo &#39;export PATH=&#34;$PYENV_ROOT/bin:$PATH&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ echo &#39;eval &#34;$(pyenv init -)&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ exec $SHELL -l&#10;$ export PYTHON_BUILD_MIRROR_URL=&#34;http://pyenv.qiniudn.com/pythons/&#34; #&#21152;&#36895;, Official: http://yyuu.github.io/pythons/</span><br></pre></td></tr></table></figure>
+<p>安装pyenv-virtualenv plugin：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv&#10;$ echo &#39;eval &#34;$(pyenv virtualenv-init -)&#34;&#39; &#62;&#62; ~/.bash_profile&#10;$ exec &#34;$SHELL&#34;</span><br></pre></td></tr></table></figure>
+<p>安装centOS系统开发环境工具：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum groupinstall -y &#34;Development Tools&#34;&#10;$ yum install -y readline readline-devel readline-static openssl openssl-devel openssl-static sqlite-devel bzip2-devel bzip2-libs</span><br></pre></td></tr></table></figure>
+<p>安装隔离的python环境：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv install --list&#10;$ pyenv install 2.7.8&#10;$ pyenv rehash</span><br></pre></td></tr></table></figure>
+<p>查看切换版本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv versions&#10;$ pyenv global 2.7.8 #OR Use: pyenv local 2.7.8</span><br></pre></td></tr></table></figure>
+<p>新建环境，检查环境列表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv virtualenv 2.7.8 my-2.7.8 &#65283;OR from current version: pyenv virtualenv venv34&#10;$ pyenv virtualenvs</span><br></pre></td></tr></table></figure>
+<p>Activate环境：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv activate &#60;name&#62;&#10;pyenv deactivate</span><br></pre></td></tr></table></figure>
+<p>卸载环境，与卸载某个python版本相同：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv uninstall my-virtual-env</span><br></pre></td></tr></table></figure>
+<p>相关变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PYENV_VIRTUALENV_CACHE_PATH&#10;VIRTUALENV_VERSION&#10;EZ_SETUP/GET_PIP # use ez_setup.py and get_pip.py from the specified location.&#10;EZ_SETUP_URL/GET_PIP_URL # download ez_setup.py and get_pip.py from the specified URL.&#10;SETUPTOOLS_VERSION/PIP_VERSION # install the specified version of setuptools and pip.</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ol>
+<li><a href="http://seisman.info/python-pyenv.html" title="Python多版本共存之pyenv" target="_blank" rel="external">Python多版本共存之pyenv</a></li>
+<li><a href="http://www.cnblogs.com/npumenglei/p/3719412.html" title="用pyenv 和 virtualenv 搭建单机多版本python 虚拟开发环境" target="_blank" rel="external">用pyenv 和 virtualenv 搭建单机多版本python 虚拟开发环境</a></li>
+<li><a href="https://github.com/yyuu/pyenv-virtualenv" title="pyenv-virtualenv Official site" target="_blank" rel="external">pyenv-virtualenv Official site</a></li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Tech/">Tech</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/dev/">dev</a><a href="/tags/python/">python</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/15/PythonDevEnvSetting/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/15/PythonDevEnvSetting/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+
+  <nav id="page-nav" class="clearfix">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
+  </nav>
+
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Tech/" title="Tech">Tech<sup>11</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/dev/" title="dev">dev<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/vagrant/" title="vagrant">vagrant<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/虚拟化/" title="虚拟化">虚拟化<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/docker/" title="docker">docker<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/glance/" title="glance">glance<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hadoop/" title="hadoop">hadoop<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ruby/" title="ruby">ruby<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/openstack/" title="openstack">openstack<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nova/" title="nova">nova<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/neutron/" title="neutron">neutron<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/cinder/" title="cinder">cinder<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/saltstack/" title="saltstack">saltstack<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ceilometer/" title="ceilometer">ceilometer<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/swift/" title="swift">swift<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hdfs/" title="hdfs">hdfs<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ambari/" title="ambari">ambari<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hue/" title="hue">hue<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">6</span></li></ul>
+  </div>
+
+
+  
+
+<div class="doubanshow">
+<p class="asidetitle">豆瓣秀</p>
+<div>
+<script type="text/javascript" src="http://www.douban.com/service/badge/promisejohn/?show=collection&amp;n=12&amp;columns=3&amp;hidelogo=yes&amp;hideself=yes&amp;cat=book|movie" ></script>
+</div>
+</div>
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=1978495541&verifier=f272f916&dpc=1"></iframe>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.youxiuboke.com/" target="_blank" title=" 前端优秀案例">优秀博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://coding.net" target="_blank" title=" 一个代码托管PaaS平台">Coding</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://hexo.io/docs/" target="_blank" title=" Hexo官方文档">Hexo Docs</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Like it or not <br/>
+			This is my blog.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1978495541" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/promisejohn" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/promisejohn19" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		<a href="https://www.facebook.com/john.promise.98" target="_blank" class="icon-facebook" title="facebook"></a>
+		
+		
+		<a href="https://www.linkedin.com/in/promisejohn" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		<a href="https://www.douban.com/people/promisejohn" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		<a href="https://www.zhihu.com/people/john-promise" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:promise.john@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://promisejohn.github.io/about" target="_blank" title="promise john">promise john</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"promisejohn"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+ </html>

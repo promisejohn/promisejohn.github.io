@@ -1,0 +1,672 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>HelloHadoop | Promise John</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="promise john">
+    
+
+    
+    <meta name="description" content="Hadoop系列大数据依旧在热炒，hadoop虽然不是唯一的代表，却也是各家必谈之资本，玩玩大数据。
+通过ambari部署hadoop集群在cloudlab119-123上部署集群，其中119作为ambari server控制端。
+安装部署：
+12345$ cd /etc/yum.repo.d$ wget http://public-repo-1.hortonworks.com/ambari/ce">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HelloHadoop">
+<meta property="og:url" content="http://promisejohn.github.io/2015/05/30/HelloHadoop/index.html">
+<meta property="og:site_name" content="Promise John">
+<meta property="og:description" content="Hadoop系列大数据依旧在热炒，hadoop虽然不是唯一的代表，却也是各家必谈之资本，玩玩大数据。
+通过ambari部署hadoop集群在cloudlab119-123上部署集群，其中119作为ambari server控制端。
+安装部署：
+12345$ cd /etc/yum.repo.d$ wget http://public-repo-1.hortonworks.com/ambari/ce">
+<meta property="og:updated_time" content="2015-06-13T07:06:01.239Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HelloHadoop">
+<meta name="twitter:description" content="Hadoop系列大数据依旧在热炒，hadoop虽然不是唯一的代表，却也是各家必谈之资本，玩玩大数据。
+通过ambari部署hadoop集群在cloudlab119-123上部署集群，其中119作为ambari server控制端。
+安装部署：
+12345$ cd /etc/yum.repo.d$ wget http://public-repo-1.hortonworks.com/ambari/ce">
+<meta name="twitter:creator" content="@promisejohn19">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Promise John" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Promise John">Promise John</a></h1>
+				<h2 class="blog-motto">My Blog</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/tags">Tags</a></li>
+					
+						<li><a href="/categories">categories</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:promisejohn.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/05/30/HelloHadoop/" title="HelloHadoop" itemprop="url">HelloHadoop</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://promisejohn.github.io/about" title="promise john" target="_blank" itemprop="author">promise john</a>
+		
+  <p class="article-time">
+    <time datetime="2015-05-30T09:58:33.000Z" itemprop="datePublished"> 发表于 2015-05-30</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hadoop系列"><span class="toc-number">1.</span> <span class="toc-text">Hadoop系列</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#通过ambari部署hadoop集群"><span class="toc-number">1.1.</span> <span class="toc-text">通过ambari部署hadoop集群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过Docker部署集群"><span class="toc-number">1.2.</span> <span class="toc-text">通过Docker部署集群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HDFS"><span class="toc-number">1.3.</span> <span class="toc-text">HDFS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本Shell操作"><span class="toc-number">1.3.1.</span> <span class="toc-text">基本Shell操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webhdfs操作"><span class="toc-number">1.3.2.</span> <span class="toc-text">webhdfs操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看离线的FSImage和Edits："><span class="toc-number">1.3.3.</span> <span class="toc-text">查看离线的FSImage和Edits：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Java_API"><span class="toc-number">1.3.4.</span> <span class="toc-text">使用Java API</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HUE交互界面"><span class="toc-number">1.4.</span> <span class="toc-text">HUE交互界面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导入数据到HBase"><span class="toc-number">1.5.</span> <span class="toc-text">导入数据到HBase</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用小结"><span class="toc-number">1.6.</span> <span class="toc-text">使用小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">1.7.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="Hadoop系列">Hadoop系列</h1><p>大数据依旧在热炒，hadoop虽然不是唯一的代表，却也是各家必谈之资本，玩玩大数据。</p>
+<h2 id="通过ambari部署hadoop集群">通过ambari部署hadoop集群</h2><p>在cloudlab119-123上部署集群，其中119作为ambari server控制端。</p>
+<p>安装部署：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /etc/yum.repo.d</span><br><span class="line">$ wget http://public-repo-<span class="number">1</span>.hortonworks.com/ambari/centos6/<span class="number">2</span>.x/updates/<span class="number">2.0</span>.<span class="number">0</span>/ambari.repo</span><br><span class="line">$ yum install -y ambari-server</span><br><span class="line">$ ambari-server setup <span class="comment"># 按指示操作即可</span></span><br><span class="line">$ ambari-server start <span class="comment"># *:8080端口</span></span><br></pre></td></tr></table></figure>
+<p>配置，打开<a href="http://cloudlab119:8080，默认密码admin:admin。在cloudlab119上对所有节点做免密码认证：" target="_blank" rel="external">http://cloudlab119:8080，默认密码admin:admin。在cloudlab119上对所有节点做免密码认证：</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ vi /etc/hosts</span><br><span class="line">$ ssh-keygen -t rsa -P <span class="string">''</span> <span class="operator">-f</span> ~/.ssh/hadoop119</span><br><span class="line">$ <span class="keyword">for</span> i <span class="keyword">in</span> &#123;<span class="number">119</span>,<span class="number">120</span>,<span class="number">121</span>,<span class="number">122</span>,<span class="number">123</span>&#125;; <span class="keyword">do</span> ssh-copy-id -i ~/.ssh/hadoop119.pub root@cloudlab<span class="variable">$i</span>; <span class="keyword">done</span>;</span><br></pre></td></tr></table></figure>
+<p>按提示建议操作，如ntpd、iptables、关闭THP：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ chkconfig ntpd on</span><br><span class="line">$ service ntpd start</span><br><span class="line">$ service iptables stop <span class="comment"># 生产环境中参照文档把对应端口打开</span></span><br><span class="line">$ chkconfig iptables off</span><br><span class="line">$ <span class="built_in">echo</span> never &gt; /sys/kernel/mm/redhat_transparent_hugepage/enabled <span class="comment"># 关闭THP，如果提示文件系统readonly，重启机器再执行</span></span><br></pre></td></tr></table></figure>
+<p>按提示一步步操作即可，但中间如果出现下载包失败，则会导致整个安装失败，所以最好提前把官方源同步到本地，做镜像后安装。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ yum install -y yum-utils createrepo</span><br><span class="line">$ mkdir -p /var/www/html/ambari/centos6 &amp;&amp; <span class="built_in">cd</span> <span class="variable">$_</span></span><br><span class="line">$ reposync -r Updates-ambari-<span class="number">2.0</span>.<span class="number">0</span></span><br><span class="line">$ createrepo Updates-ambari-<span class="number">2.0</span>.<span class="number">0</span></span><br><span class="line">$ mkdir -p /var/www/html/hdp/centos6 &amp;&amp; <span class="built_in">cd</span> <span class="variable">$_</span></span><br><span class="line">$ reposync -r HDP-<span class="number">2.2</span></span><br><span class="line">$ reposync -r HDP-UTILS-<span class="number">1.1</span>.<span class="number">0.20</span></span><br><span class="line">$ createrepo HDP-<span class="number">2.2</span></span><br><span class="line">$ createrepo HDP-UTILS-<span class="number">1.1</span>.<span class="number">0.20</span></span><br><span class="line">$ vim /etc/yum.repo.d/ambari.repo <span class="comment"># 修改baseurl指向本地镜像</span></span><br></pre></td></tr></table></figure>
+<p>安装之后，发现某几台服务器内存占用率非常高，可以通过Ambari增加Host节点，然后迁移部分的组件到新的机器。</p>
+<h2 id="通过Docker部署集群">通过Docker部署集群</h2><p>可以自己做docker image，简单起见可以先用sequenceiq的image。</p>
+<p>单节点测试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull sequenceiq/hadoop-docker:<span class="number">2.7</span>.<span class="number">0</span></span><br><span class="line">$ docker run -it sequenceiq/hadoop-docker:<span class="number">2.7</span>.<span class="number">0</span> /etc/bootstrap.sh -bash</span><br><span class="line">$ <span class="built_in">cd</span> <span class="variable">$HADOOP_PREFIX</span> <span class="comment"># /usr/local/hadoop</span></span><br><span class="line">$ bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-<span class="number">2.7</span>.<span class="number">0</span>.jar grep input output <span class="string">'dfs[a-z.]+'</span> <span class="comment"># 统计key出现次数</span></span><br><span class="line">$ bin/hdfs dfs -cat output/* <span class="comment"># 在用户Home下的output下</span></span><br></pre></td></tr></table></figure>
+<p>多节点部署，可以用ambari镜像，准备好blueprint.json：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; &#34;host_groups&#34; : [&#10;    &#123; &#34;name&#34; : &#34;host_group_1&#34;,&#10;      &#34;components&#34; : [&#10;        &#123; &#34;name&#34; : &#34;ZOOKEEPER_SERVER&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;ZOOKEEPER_CLIENT&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;AMBARI_SERVER&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;HDFS_CLIENT&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;NODEMANAGER&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;MAPREDUCE2_CLIENT&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;APP_TIMELINE_SERVER&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;DATANODE&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;YARN_CLIENT&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;RESOURCEMANAGER&#34; &#125; ],&#10;      &#34;cardinality&#34; : &#34;1&#34; &#125;,&#10;    &#123; &#34;name&#34; : &#34;host_group_2&#34;,&#10;      &#34;components&#34; : [&#10;        &#123; &#34;name&#34; : &#34;ZOOKEEPER_SERVER&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;ZOOKEEPER_CLIENT&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;SECONDARY_NAMENODE&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;NODEMANAGER&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;YARN_CLIENT&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;DATANODE&#34; &#125;],&#10;      &#34;cardinality&#34; : &#34;1&#34; &#125;,&#10;    &#123; &#34;name&#34; : &#34;host_group_3&#34;,&#10;      &#34;components&#34; : [&#10;        &#123; &#34;name&#34; : &#34;ZOOKEEPER_SERVER&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;ZOOKEEPER_CLIENT&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;NAMENODE&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;NODEMANAGER&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;YARN_CLIENT&#34; &#125;,&#10;        &#123; &#34;name&#34; : &#34;DATANODE&#34; &#125;],&#10;      &#34;cardinality&#34; : &#34;1&#34; &#125; ],&#10;  &#34;Blueprints&#34; : &#123;&#10;    &#34;blueprint_name&#34; : &#34;blueprint-c1&#34;,&#10;    &#34;stack_name&#34; : &#34;HDP&#34;,&#10;    &#34;stack_version&#34; : &#34;2.2&#34; &#125; &#125;</span><br></pre></td></tr></table></figure>
+<p>可以在ambari server上查找：<code>http://172.17.0.13:8080/api/v1/blueprints</code>。</p>
+<p>创建集群：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ docker pull sequenceiq/ambari:<span class="number">1.7</span>.<span class="number">0</span></span><br><span class="line">$ curl -Lo .amb https://github.com/sequenceiq/docker-ambari/raw/master/ambari-functions &amp;&amp; . .amb</span><br><span class="line">$ amb-start-cluster <span class="number">3</span> <span class="comment"># 注意默认使用的是sequenceiq/ambari:1.7.0-warmup，可以修改 .amb</span></span><br><span class="line">$ amb-shell <span class="comment"># 又启了个container</span></span><br><span class="line">ambshell &gt; host list</span><br><span class="line">ambshell &gt; blueprint add --url http://<span class="number">172.17</span>.<span class="number">42.1</span>/bp.json <span class="comment"># 准备好json保存到某个能访问的http服务器</span></span><br><span class="line">ambshell &gt; cluster build --blueprint blueprint-c1</span><br><span class="line">ambshell &gt; cluster assign --hostGroup host_group_1 --host amb0.mycorp.kom</span><br><span class="line">ambshell &gt; cluster assign --hostGroup host_group_2 --host amb1.mycorp.kom</span><br><span class="line">ambshell &gt; cluster assign --hostGroup host_group_3 --host amb2.mycorp.kom</span><br><span class="line">ambshell &gt; blueprint show --id blueprint-c1</span><br><span class="line">ambshell &gt; cluster preview</span><br><span class="line">ambshell &gt; cluster create</span><br></pre></td></tr></table></figure>
+<p>中间安装过程如果出现失败，可以到ambari-server上看详细情况，当然也可以直接向之前方式一样，通过GUI安装部署；或者开着浏览器看amb-shell执行过程。<br>如果实在VM上远程使用，可以在docker所在机器上做NAT映射直接访问：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ iptables -t nat -A PREROUTING <span class="operator">-d</span> <span class="number">10.101</span>.<span class="number">29.26</span> -p tcp --dport <span class="number">8000</span> -j DNAT --to-destination <span class="number">172.17</span>.<span class="number">0.20</span>:<span class="number">8080</span> <span class="comment"># 可以用端口转发直接远程浏览器访问</span></span><br></pre></td></tr></table></figure>
+<p>做个简单的测试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it <span class="number">9572938</span>bb253 /bin/bash <span class="comment"># 进入到容器内</span></span><br><span class="line">bash <span class="comment"># su hdfs # 切换到HDFS的超级用户</span></span><br><span class="line">bash <span class="comment"># hdfs dfsadmin -report</span></span><br><span class="line">bash <span class="comment"># hdfs dfs -ls /</span></span><br></pre></td></tr></table></figure>
+<h2 id="HDFS">HDFS</h2><p>HDFS由NameNode、SNameNode和DataNode组成，HA的时候还有另一个NameNode（StandBy）。SNameNode专门从NameNode获取FSImage和Edits，为NameNode合并生成新的FSImage。</p>
+<p>HDFS有个超级用户，就是启动NameNode的那个linux账号。</p>
+<h3 id="基本Shell操作">基本Shell操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$ ps -elf | grep NameNode <span class="comment">#看看哪个账号启动了NameNode，那个账号就是超级用户</span></span><br><span class="line">$ su <span class="operator">-s</span> /bin/sh -c <span class="string">'hadoop fs -ls /'</span> hdfs <span class="comment">#使用超级账号执行命令</span></span><br><span class="line">$ su hdfs <span class="comment">#切换到超级账号</span></span><br><span class="line">$ useradd -G hdfs promise</span><br><span class="line">$ hdfs dfs -mkdir /user/promise</span><br><span class="line">$ hdfs dfs -chown promise:hdfs /user/promise</span><br><span class="line">$ hdfs dfs -ls /user/</span><br><span class="line">$ hdfs dfs -mkdir -p /user/promise/dev/hello</span><br><span class="line">$ hdfs dfs -chmod -R <span class="number">777</span> /user/promise/dev</span><br><span class="line">$ hdfs dfs -ls /user/promise/dev/</span><br><span class="line">$ <span class="built_in">echo</span> “helloworld” &gt; hello.txt</span><br><span class="line">$ hdfs dfs -put hello.txt /user/promise/helloworld.txt</span><br><span class="line">$ hdfs dfs -put - hdfs://<span class="number">192.168</span>.<span class="number">182.119</span>/user/promise/test.txt <span class="comment"># 从stdin输入，Ctrl-D结束</span></span><br><span class="line">$ hdfs dfs -cat hdfs://<span class="number">192.168</span>.<span class="number">182.119</span>/user/promise/test.txt</span><br><span class="line">$ hdfs dfs -cat /user/promise/helloworld.txt</span><br><span class="line">$ hdfs dfs -get /user/promise/helloworld.txt hello2.txt</span><br><span class="line">$ hdfs dfs -tail <span class="operator">-f</span> /user/promise/helloworld.txt <span class="comment"># 查看追加的文件写入</span></span><br><span class="line">$ hdfs dfs -appendToFile - /user/promise/helloworld.txt</span><br></pre></td></tr></table></figure>
+<h3 id="webhdfs操作">webhdfs操作</h3><p>启用了webhdfs之后（<code>hdfs-site</code>中<code>dfs.webhdfs.enabled=true</code>），可以通过HTTP方式访问HDFS：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ curl -i <span class="string">"http://192.168.182.119:50070/webhdfs/v1/user/promise/?op=LISTSTATUS"</span></span><br><span class="line">$ curl -i -L <span class="string">"http://192.168.182.119:50070/webhdfs/v1/user/promise/helloworld.txt?op=OPEN"</span> <span class="comment"># 通过重定向到DataNode获取文件</span></span><br><span class="line">$ curl -i -X PUT <span class="string">"http://192.168.182.119:50070/webhdfs/v1/user/promise/hello?user.name=promise&amp;op=MKDIRS"</span></span><br></pre></td></tr></table></figure>
+<p>通过HTTP方式创建和追加文件都需要通过2阶段实现：先在NameNode上创建，获得DataNode URI后再向URI上传文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ curl -i -X PUT <span class="string">"http://192.168.182.119:50070/webhdfs/v1/user/promise/hello/hi.txt?op=CREATE"</span></span><br><span class="line">$ curl -i -X PUT -T hi.txt <span class="string">"http://192.168.182.119:50075/webhdfs/v1/user/promise/hello/hi.txt?user.name=promise&amp;op=CREATE&amp;namenoderpcaddress=192.168.182.119:8020&amp;overwrite=false"</span> <span class="comment"># 需要声明账号</span></span><br></pre></td></tr></table></figure>
+<h3 id="查看离线的FSImage和Edits：">查看离线的FSImage和Edits：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hdfs oiv -p XML -i /hadoop/hdfs/namenode/current/fsimage_0000000000000018887 -o fsimage.xml <span class="comment"># 生成XML格式</span></span><br><span class="line">$ hdfs oiv  -i /hadoop/hdfs/namenode/current/fsimage_0000000000000018887 <span class="comment"># 在线查看形式</span></span><br><span class="line">$ hdfs dfs -ls webhdfs://<span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">5978</span>/</span><br><span class="line">$ hdfs oev -i /hadoop/hdfs/namenode/current/edits_0000000000000000001-<span class="number">0000000000000005150</span> -o edits.xml <span class="comment"># 查看edits</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用Java_API">使用Java API</h3><p>Java在大型软件系统开发中有利于更清晰的架构设计和团队分工，而且有大量的第三方优质框架可用；可惜在命令里写HelloWorld很啰嗦，方便起见，直接用maven生成基本文件结构。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/opt/apache-maven-<span class="number">3.3</span>.<span class="number">3</span>/bin/</span><br><span class="line">$ <span class="built_in">export</span> JAVA_HOME=/usr/jdk64/jdk1.<span class="number">7.0</span>_67/</span><br><span class="line">$ <span class="built_in">export</span> MAVEN_OPTS=<span class="string">"-Xms256m -Xmx512m"</span></span><br><span class="line">$ mkdir ~/dev &amp;&amp; <span class="built_in">cd</span> <span class="variable">$_</span></span><br><span class="line">$ mvn archetype:generate -DgroupId=org.tecstack -DartifactId=hellohdfs -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=<span class="literal">false</span></span><br><span class="line">$ <span class="built_in">cd</span> hellohdfs &amp;&amp; mvn package</span><br><span class="line">$ vim ./src/main/java/org/tecstack/App.java</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.tecstack;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.conf.Configuration;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.fs.FileStatus;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.fs.FileSystem;</span><br><span class="line"><span class="keyword">import</span> org.apache.hadoop.fs.Path;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Hello HDFS</span><br><span class="line"> *</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">App</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">( String[] args )</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">                Configuration conf=<span class="keyword">new</span> Configuration();</span><br><span class="line">                FileSystem hdfs=FileSystem.get(conf);</span><br><span class="line">                Path dst =<span class="keyword">new</span> Path(<span class="string">"/user/promise/helloworld.txt"</span>);</span><br><span class="line">                FileStatus files[]=hdfs.listStatus(dst);</span><br><span class="line">                <span class="keyword">for</span>(FileStatus file:files) &#123;</span><br><span class="line">                    System.out.println(file.getPath());</span><br><span class="line">                &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在<code>pom.xml</code>增加hadoop依赖包:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">project</span> <span class="attribute">xmlns</span>=<span class="value">"http://maven.apache.org/POM/4.0.0"</span> <span class="attribute">xmlns:xsi</span>=<span class="value">"http://www.w3.org/2001/XMLSchema-instance"</span></span><br><span class="line">  <span class="attribute">xsi:schemaLocation</span>=<span class="value">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="title">modelVersion</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.tecstack<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hellohdfs<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">packaging</span>&gt;</span>jar<span class="tag">&lt;/<span class="title">packaging</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hellohdfs<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">url</span>&gt;</span>http://maven.apache.org<span class="tag">&lt;/<span class="title">url</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">dependencies</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hadoop-common<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">version</span>&gt;</span>2.6.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hadoop-hdfs<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">version</span>&gt;</span>2.6.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.apache.hadoop<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>hadoop-client<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">version</span>&gt;</span>2.6.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>junit<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>junit<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">version</span>&gt;</span>3.8.1<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">scope</span>&gt;</span>test<span class="tag">&lt;/<span class="title">scope</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="title">dependencies</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">project</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>打包运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ mvn package</span><br><span class="line">$ mkdir -p src/main/resources</span><br><span class="line">$ scp cloudlab119:/etc/hadoop/conf/core-site.xml src/main/resources</span><br><span class="line">$ mvn <span class="built_in">exec</span>:java -Dexec.mainClass=<span class="string">"org.tecstack.App"</span> -Dexec.cleanupDaemonThreads=<span class="literal">false</span></span><br><span class="line">$ mvn dependency:copy-dependencies <span class="comment"># 导出依赖的包</span></span><br><span class="line">$ mvn resources:resources <span class="comment"># 导出资源</span></span><br><span class="line">$ mvn eclipse:eclipse <span class="comment"># 生成eclipse工程文件，.project, .classpath</span></span><br></pre></td></tr></table></figure>
+<p>关于maven的exec插件，也可以通过配置<code>pom.xml</code>的plugin的参数简化执行：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">build</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">plugin</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">groupId</span>&gt;</span>org.codehaus.mojo<span class="tag">&lt;/<span class="title">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">artifactId</span>&gt;</span>exec-maven-plugin<span class="tag">&lt;/<span class="title">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">version</span>&gt;</span>1.4.0<span class="tag">&lt;/<span class="title">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">executions</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">execution</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="title">goals</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="title">goal</span>&gt;</span>java<span class="tag">&lt;/<span class="title">goal</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="title">goals</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="title">execution</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="title">executions</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="title">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">mainClass</span>&gt;</span>org.tecstack.App<span class="tag">&lt;/<span class="title">mainClass</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">cleanupDaemonThreads</span>&gt;</span>false<span class="tag">&lt;/<span class="title">cleanupDaemonThreads</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="title">configuration</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="title">plugin</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="title">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>之后运行只需要<code>mvn exec:java</code>，如果需要定制更多参数，比如JVM内存，单独启动进程执行等，可以使用<code>exec:exec</code>插件，具体看[codehaus官网][<a href="http://mojo.codehaus.org/exec-maven-plugin/usage.html]。" target="_blank" rel="external">http://mojo.codehaus.org/exec-maven-plugin/usage.html]。</a></p>
+<h2 id="HUE交互界面">HUE交互界面</h2><p>Hue是一个基于Django开发的webapp，通过WebHDFS或HttpFS的一种访问HDFS的数据，在HDFS HA部署方式中只能使用HttpFS。<br>如通过WebHDFS方式访问，需要修改<code>hdfs-site.xml</code>：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>dfs.webhdfs.enabled<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>true<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>修改<code>core-site.xml</code>使Hue账号可以代理其他用户：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hadoop.proxyuser.hue.hosts<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>*<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hadoop.proxyuser.hue.groups<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>*<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>修改完参数需要重新启动HDFS，通过Ambari操作很方便。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ yum install -y hue hue-server</span><br><span class="line">$ vim /etc/hue/conf/hue.ini <span class="comment"># 修改各个服务的URI，可以通过Ambari看到服务所在的服务器位置；修改默认监听端口不与其它冲突</span></span><br><span class="line">$ service hue start</span><br></pre></td></tr></table></figure>
+<p>默认登陆账号为<code>admin:admin</code>，可以通过hdfs为该账号创建一个专用的文件夹<code>/user/hue</code>进行测试，正式环境中可以考虑与其他身份系统对接。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ su hdfs</span><br><span class="line">$ hdfs dfs -mkdir /user/hue</span><br><span class="line">$ hdfs dfs -chown -R admin:hadoop  /user/hue</span><br><span class="line">$ hdfs dfs -ls /user/</span><br></pre></td></tr></table></figure>
+<h2 id="导入数据到HBase">导入数据到HBase</h2><p>通过hcat建立数据库表结构，通过pig导入数据。</p>
+<p>建立数据文件<code>data.tsv</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">row1    c1    c2&#10;row2    c1    c2&#10;row3    c1    c2&#10;row4    c1    c2&#10;row5    c1    c2&#10;row6    c1    c2&#10;row7    c1    c2&#10;row8    c1    c2&#10;row9    c1    c2&#10;row10    c1    c2</span><br></pre></td></tr></table></figure>
+<p>准备建表DDL，<code>simple.ddl</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE simple_hcat_load_table (id STRING, c1 STRING, c2 STRING)&#10;STORED BY &#39;org.apache.hadoop.hive.hbase.HBaseStorageHandler&#39;&#10;WITH SERDEPROPERTIES ( &#39;hbase.columns.mapping&#39; = &#39;d:c1,d:c2&#39; )&#10;TBLPROPERTIES (&#10;&#39;hbase.table.name&#39; = &#39;simple_hcat_load_table&#39;&#10;);</span><br></pre></td></tr></table></figure>
+<p>准备导入脚本，<code>simple.bulkload.pig</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A = LOAD &#39;hdfs:///tmp/data.tsv&#39; USING PigStorage(&#39;\t&#39;) AS (id:chararray, c1:chararray, c2:chararray);&#10;-- DUMP A;&#10;STORE A INTO &#39;hbase://simple_hcat_load_table&#39; USING org.apache.hive.hcatalog.pig.HCatStorer();</span><br></pre></td></tr></table></figure>
+<p>把文件放到HDFS，建表，导入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ su - hdfs</span><br><span class="line">$ hdfs dfs -put data.tsv /tmp/</span><br><span class="line">$ hcat <span class="operator">-f</span> simple.ddl</span><br><span class="line">$ pig -useHCatalog simple.bulkload.pig</span><br></pre></td></tr></table></figure>
+<p>通过Hue的HCat可以查看数据库和表数据，也可以通过HBase Shell：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ su - hdfs</span><br><span class="line">$ hbase shell</span><br><span class="line">hbase &gt; list <span class="comment"># 查询所有表</span></span><br><span class="line">hbase &gt; scan <span class="string">'simple_hcat_load_table'</span> <span class="comment"># 查询所有数据</span></span><br><span class="line">hbase &gt; describe <span class="string">'simple_hcat_load_table'</span></span><br></pre></td></tr></table></figure>
+<p>也可以通过Hive Shell：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ su - hdfs</span><br><span class="line">$ hive</span><br><span class="line">hive &gt; show tables;</span><br><span class="line">hive &gt; select count(*) from simple_hcat_load_table;</span><br><span class="line">hive &gt; desc simple_hcat_load_table;</span><br></pre></td></tr></table></figure>
+<p>如果建表过程中出现类似<code>java.lang.NoClassDefFoundError: org/apache/hadoop/hbase/HBaseConfiguration</code>如下的找不到类情况，检查hcat的配置文件是否有HBase目录：<code>vim /usr/bin/hcat</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="built_in">export</span> HBASE_HOME=/usr/hdp/<span class="number">2.2</span>.<span class="number">4.2</span>-<span class="number">2</span>/hbase</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>此外，由于Hue集成的HCat调用的是Hive下的hcat，需要在<code>/etc/hive-hcatalog/conf/hcat-env.sh</code>中指定<code>HBASE_HOME</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">HBASE_HOME=<span class="variable">$&#123;HBASE_HOME:-/usr/hdp/current/hbase-client&#125;</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>pig在使用MapReduce模式执行时，可以根据log打开MR Job跟踪，如果也出现<code>java.lang.NoClassDefFoundError</code>类错误，说明mapreduce服务的classpath有缺漏，可以通过Ambari修改MapReduce服务<code>Advanced mapred-site</code>配置中的<code>mapreduce.application.classpath</code>，比如出现HBase相关类找不到，则添加HBase相关的库<code>/usr/hdp/2.2.4.2-2/hbase/lib/*</code>，然后重启MapReduce服务即可。</p>
+<p>如果出现执行权限错误，需要检查如下配置是否存在：<br><code>hive-site.xml</code>:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hive.security.metastore.authorization.manager<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>org.apache.hadoop.hive.ql.security.authorization.StorageBasedAuthorizationProvider</span><br><span class="line"><span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hive.security.metastore.authenticator.manager<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>org.apache.hadoop.hive.ql.security.HadoopDefaultMetastoreAuthenticator</span><br><span class="line"><span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hive.metastore.pre.event.listeners<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>org.apache.hadoop.hive.ql.security.authorization.AuthorizationPreEventListener</span><br><span class="line"><span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hive.metastore.execute.setugi<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>true<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>webhcat-site.xml</code>:<br>正式环境中可以明确具体使用的账号名称，最小化权限。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>webhcat.proxyuser.hue.hosts<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>*<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>webhcat.proxyuser.hue.groups<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>*<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>core-site.xml</code>:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hadoop.proxyuser.hcat.group<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>*<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">property</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">name</span>&gt;</span>hadoop.proxyuser.hcat.hosts<span class="tag">&lt;/<span class="title">name</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="title">value</span>&gt;</span>*<span class="tag">&lt;/<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">property</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="使用小结">使用小结</h2><p>Hadoop系架构经过引入YARN，真正实现了数据和应用的分离，在YARN架构上可以实现出了原来的MapReduce之外的更多App，比如流式处理、实时处理、图计算等，如此可以真正实现“把应用挪到数据旁边高效执行”，构建大数据平台。此外，做数据分析时可以发现周边工具很丰富，比如hue统一的综合管理界面、从数据文件识别结构并管理数据的hcat、数据处理高级语言pig、支持SQL的Hive，使得在Hadoop平台上做数据分析非常方便（可以参考<a href="http://zh.hortonworks.com/hadoop-tutorial/hello-world-an-introduction-to-hadoop-hcatalog-hive-and-pig/" title="hcat &amp; hive &amp; pig" target="_blank" rel="external">这里</a>）。<br>另外，对比YARN利用OS进程隔离分配资源之外，<a href="http://mesos.apache.org/" title="Apache Mesos" target="_blank" rel="external">Mesos</a>结合了Container技术实现容器隔离分配资源，以此实现更通用的框架（用各种语言写的各种计算框架）。当然YARN也进入了<a href="http://hadoop.apache.org/docs/r2.7.0/hadoop-yarn/hadoop-yarn-site/DockerContainerExecutor.html" title="YARN DCE" target="_blank" rel="external">DCE</a>，通过docker实现容器隔离。不过正式应用还是有待Linux kernel本身功能的成熟，以及docker之类管理工具的完善。<br>最后，数据处理优选python scikit-learn系工具，当大到一定程度，或需要多人同时工作时，hadoop系平台是个不错的选择。</p>
+<h2 id="参考">参考</h2><ol>
+<li><a href="http://docs.hortonworks.com/HDPDocuments/Ambari-2.0.0.0/Ambari_Doc_Suite/ADS_v200.html" title="Ambari Official Docs" target="_blank" rel="external">Ambari Official Docs</a></li>
+<li><a href="http://hadoop.apache.org/docs/stable2/hadoop-project-dist/hadoop-common/FileSystemShell.html" title="HDFS Official Doc" target="_blank" rel="external">HDFS Official Doc</a></li>
+<li><a href="https://github.com/sequenceiq/hadoop-docker" title="hadoop-docker ffrom sequenceiq" target="_blank" rel="external">Hadoop-docker from sequenceiq</a></li>
+<li><a href="https://cwiki.apache.org/confluence/display/AMBARI/Blueprints#Blueprints-Step1:CreateBlueprint" title="Ambari docs on apache" target="_blank" rel="external">Ambari Docs on Apache</a></li>
+<li><a href="https://blog.codecentric.de/en/2014/05/lambda-cluster-provisioning/" title="Sample Blueprint" target="_blank" rel="external">Sample BluePrint</a></li>
+<li><a href="http://ju.outofmemory.cn/entry/128881" title="安装配置Hue" target="_blank" rel="external">安装配置Hue</a></li>
+<li><a href="http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.2.4/HDP_Man_Install_v224/index.html" title="手动安装HDP" target="_blank" rel="external">手动安装HDP</a></li>
+<li><a href="https://cwiki.apache.org/confluence/display/AMBARI/Blueprints" title="Ambari Blueprint" target="_blank" rel="external">Ambari Blueprint</a></li>
+<li><a href="http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.2.4/Importing_Data_HBase_v224/index.html" title="导入数据到HBase" target="_blank" rel="external">导入数据到HBase</a></li>
+<li><a href="http://mesos.apache.org/" title="Apache Mesos" target="_blank" rel="external">Apache Mesos</a></li>
+<li><a href="http://hadoop.apache.org/docs/r2.7.0/hadoop-yarn/hadoop-yarn-site/DockerContainerExecutor.html" title="YARN DCE" target="_blank" rel="external">YARN DCE</a></li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Tech/">Tech</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ambari/">ambari</a><a href="/tags/hadoop/">hadoop</a><a href="/tags/hdfs/">hdfs</a><a href="/tags/hue/">hue</a><a href="/tags/java/">java</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://promisejohn.github.io/2015/05/30/HelloHadoop/" data-title="HelloHadoop | Promise John" data-tsina="1978495541" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/06/13/HelloHexo/" title="Hello Hexo">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Hello Hexo</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/05/13/HelloDocker/"  title="HelloDocker">
+ <strong>下一篇：</strong><br/> 
+ <span>HelloDocker
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/05/30/HelloHadoop/" data-title="HelloHadoop" data-url="http://promisejohn.github.io/2015/05/30/HelloHadoop/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hadoop系列"><span class="toc-number">1.</span> <span class="toc-text">Hadoop系列</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#通过ambari部署hadoop集群"><span class="toc-number">1.1.</span> <span class="toc-text">通过ambari部署hadoop集群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#通过Docker部署集群"><span class="toc-number">1.2.</span> <span class="toc-text">通过Docker部署集群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HDFS"><span class="toc-number">1.3.</span> <span class="toc-text">HDFS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本Shell操作"><span class="toc-number">1.3.1.</span> <span class="toc-text">基本Shell操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webhdfs操作"><span class="toc-number">1.3.2.</span> <span class="toc-text">webhdfs操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看离线的FSImage和Edits："><span class="toc-number">1.3.3.</span> <span class="toc-text">查看离线的FSImage和Edits：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用Java_API"><span class="toc-number">1.3.4.</span> <span class="toc-text">使用Java API</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HUE交互界面"><span class="toc-number">1.4.</span> <span class="toc-text">HUE交互界面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导入数据到HBase"><span class="toc-number">1.5.</span> <span class="toc-text">导入数据到HBase</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用小结"><span class="toc-number">1.6.</span> <span class="toc-text">使用小结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">1.7.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Tech/" title="Tech">Tech<sup>11</sup></a></li>
+		  
+		
+		  
+		
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/dev/" title="dev">dev<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/vagrant/" title="vagrant">vagrant<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/虚拟化/" title="虚拟化">虚拟化<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/docker/" title="docker">docker<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/glance/" title="glance">glance<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hadoop/" title="hadoop">hadoop<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ruby/" title="ruby">ruby<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/openstack/" title="openstack">openstack<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nova/" title="nova">nova<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/neutron/" title="neutron">neutron<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/cinder/" title="cinder">cinder<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/saltstack/" title="saltstack">saltstack<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ceilometer/" title="ceilometer">ceilometer<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/swift/" title="swift">swift<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hexo/" title="hexo">hexo<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hdfs/" title="hdfs">hdfs<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ambari/" title="ambari">ambari<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/hue/" title="hue">hue<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">6</span></li></ul>
+  </div>
+
+
+  
+
+<div class="doubanshow">
+<p class="asidetitle">豆瓣秀</p>
+<div>
+<script type="text/javascript" src="http://www.douban.com/service/badge/promisejohn/?show=collection&amp;n=12&amp;columns=3&amp;hidelogo=yes&amp;hideself=yes&amp;cat=book|movie" ></script>
+</div>
+</div>
+
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=1978495541&verifier=f272f916&dpc=1"></iframe>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.youxiuboke.com/" target="_blank" title=" 前端优秀案例">优秀博客</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://coding.net" target="_blank" title=" 一个代码托管PaaS平台">Coding</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://hexo.io/docs/" target="_blank" title=" Hexo官方文档">Hexo Docs</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Like it or not <br/>
+			This is my blog.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/1978495541" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/promisejohn" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		<a href="https://twitter.com/promisejohn19" target="_blank" class="icon-twitter" title="twitter"></a>
+		
+		
+		<a href="https://www.facebook.com/john.promise.98" target="_blank" class="icon-facebook" title="facebook"></a>
+		
+		
+		<a href="https://www.linkedin.com/in/promisejohn" target="_blank" class="icon-linkedin" title="linkedin"></a>
+		
+		
+		<a href="https://www.douban.com/people/promisejohn" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		<a href="https://www.zhihu.com/people/john-promise" target="_blank" class="icon-zhihu" title="知乎"></a>
+		
+		
+		
+		<a href="mailto:promise.john@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="http://promisejohn.github.io/about" target="_blank" title="promise john">promise john</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#nothing"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"promisejohn"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
