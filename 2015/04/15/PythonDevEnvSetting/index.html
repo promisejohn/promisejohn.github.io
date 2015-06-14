@@ -11,31 +11,31 @@
     
 
     
-    <meta name="description" content="Python开发环境搭建用豆瓣的源给pip和easy_install加速，~/.bashrc：
-1alias easy_install=&amp;#39;easy_install -i http://pypi.douban.com/simple&amp;#39;
+    <meta name="description" content="Python开发环境搭建用阿里Yun的源给pip和easy_install加速~/.bashrc：
+1alias easy_install=&amp;#39;easy_install -i http://mirrors.aliyun.com/pypi/simple/&amp;#39;
 安装pip：
 1$ easy_install pip
 ~/.pip/pip.conf：
-1[global]&amp;#10;index-url = http:/">
+1[global]&amp;#10;index-u">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python开发环境搭建">
 <meta property="og:url" content="http://promisejohn.github.io/2015/04/15/PythonDevEnvSetting/index.html">
 <meta property="og:site_name" content="Promise John">
-<meta property="og:description" content="Python开发环境搭建用豆瓣的源给pip和easy_install加速，~/.bashrc：
-1alias easy_install=&amp;#39;easy_install -i http://pypi.douban.com/simple&amp;#39;
+<meta property="og:description" content="Python开发环境搭建用阿里Yun的源给pip和easy_install加速~/.bashrc：
+1alias easy_install=&amp;#39;easy_install -i http://mirrors.aliyun.com/pypi/simple/&amp;#39;
 安装pip：
 1$ easy_install pip
 ~/.pip/pip.conf：
-1[global]&amp;#10;index-url = http:/">
-<meta property="og:updated_time" content="2015-06-13T07:06:01.243Z">
+1[global]&amp;#10;index-u">
+<meta property="og:updated_time" content="2015-06-14T13:57:29.366Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python开发环境搭建">
-<meta name="twitter:description" content="Python开发环境搭建用豆瓣的源给pip和easy_install加速，~/.bashrc：
-1alias easy_install=&amp;#39;easy_install -i http://pypi.douban.com/simple&amp;#39;
+<meta name="twitter:description" content="Python开发环境搭建用阿里Yun的源给pip和easy_install加速~/.bashrc：
+1alias easy_install=&amp;#39;easy_install -i http://mirrors.aliyun.com/pypi/simple/&amp;#39;
 安装pip：
 1$ easy_install pip
 ~/.pip/pip.conf：
-1[global]&amp;#10;index-url = http:/">
+1[global]&amp;#10;index-u">
 <meta name="twitter:creator" content="@promisejohn19">
 
     
@@ -112,18 +112,17 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Python开发环境搭建"><span class="toc-number">1.</span> <span class="toc-text">Python开发环境搭建</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python开发环境搭建"><span class="toc-number">1.</span> <span class="toc-text">Python开发环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用阿里Yun的源给pip和easy_install加速"><span class="toc-number">1.1.</span> <span class="toc-text">用阿里Yun的源给pip和easy_install加速</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多版本管理pyenv,_virtualenv"><span class="toc-number">1.2.</span> <span class="toc-text">多版本管理pyenv, virtualenv</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建立自己的PyPi服务器"><span class="toc-number">1.3.</span> <span class="toc-text">建立自己的PyPi服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考："><span class="toc-number">1.4.</span> <span class="toc-text">参考：</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h3 id="Python开发环境搭建">Python开发环境搭建</h3><p>用豆瓣的源给pip和easy_install加速，~/.bashrc：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias easy_install=&#39;easy_install -i http://pypi.douban.com/simple&#39;</span><br></pre></td></tr></table></figure>
+		<h1 id="Python开发环境搭建">Python开发环境搭建</h1><h2 id="用阿里Yun的源给pip和easy_install加速">用阿里Yun的源给pip和easy_install加速</h2><p>~/.bashrc：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias easy_install=&#39;easy_install -i http://mirrors.aliyun.com/pypi/simple/&#39;</span><br></pre></td></tr></table></figure>
 <p>安装pip：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ easy_install pip</span><br></pre></td></tr></table></figure>
 <p>~/.pip/pip.conf：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[global]&#10;index-url = http://pypi.douban.com/simple</span><br></pre></td></tr></table></figure>
-<p>安装pyenv</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone git://github.com/yyuu/pyenv.git ~/.pyenv&#10;$ echo &#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ echo &#39;export PATH=&#34;$PYENV_ROOT/bin:$PATH&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ echo &#39;eval &#34;$(pyenv init -)&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ exec $SHELL -l&#10;$ export PYTHON_BUILD_MIRROR_URL=&#34;http://pyenv.qiniudn.com/pythons/&#34; #&#21152;&#36895;, Official: http://yyuu.github.io/pythons/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[global]&#10;index-url = http://mirrors.aliyun.com/pypi/simple/&#10;[install]&#10;trusted-host=mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
+<h2 id="多版本管理pyenv,_virtualenv">多版本管理pyenv, virtualenv</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone git://github.com/yyuu/pyenv.git ~/.pyenv&#10;$ echo &#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ echo &#39;export PATH=&#34;$PYENV_ROOT/bin:$PATH&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ echo &#39;eval &#34;$(pyenv init -)&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ exec $SHELL -l&#10;$ export PYTHON_BUILD_MIRROR_URL=&#34;http://pyenv.qiniudn.com/pythons/&#34; #&#21152;&#36895;, Official: http://yyuu.github.io/pythons/</span><br></pre></td></tr></table></figure>
 <p>安装pyenv-virtualenv plugin：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv&#10;$ echo &#39;eval &#34;$(pyenv virtualenv-init -)&#34;&#39; &#62;&#62; ~/.bash_profile&#10;$ exec &#34;$SHELL&#34;</span><br></pre></td></tr></table></figure>
 <p>安装centOS系统开发环境工具：</p>
@@ -140,11 +139,17 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv uninstall my-virtual-env</span><br></pre></td></tr></table></figure>
 <p>相关变量：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PYENV_VIRTUALENV_CACHE_PATH&#10;VIRTUALENV_VERSION&#10;EZ_SETUP/GET_PIP # use ez_setup.py and get_pip.py from the specified location.&#10;EZ_SETUP_URL/GET_PIP_URL # download ez_setup.py and get_pip.py from the specified URL.&#10;SETUPTOOLS_VERSION/PIP_VERSION # install the specified version of setuptools and pip.</span><br></pre></td></tr></table></figure>
-<p>参考：</p>
-<ol>
+<h2 id="建立自己的PyPi服务器">建立自己的PyPi服务器</h2><p>目前可以用Artifactory, Sonatype Nexus等作为Java的私有仓库和Mirros，虽然Artifactory Pro版也支持PyPi，甚至yum、npm等其他仓库，但目前看要$1000+，期望后续Sonatype Nexus有免费的套餐～<br>稍微麻烦点可以自己架设一个devpi：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ pip install devpi-server</span><br><span class="line">$ devpi-server --version <span class="comment"># 查看版本</span></span><br><span class="line">$ devpi-server --start</span><br><span class="line">$ pip install -i http://localhost:<span class="number">3141</span>/root/pypi/ simplejson <span class="comment">#简单测试</span></span><br><span class="line">$ devpi-server --status</span><br><span class="line">$ devpi-server --stop</span><br><span class="line">$ devpi-server --log</span><br></pre></td></tr></table></figure>
+<p>正式部署及其他方案可以参考下面。</p>
+<h2 id="参考：">参考：</h2><ol>
 <li><a href="http://seisman.info/python-pyenv.html" title="Python多版本共存之pyenv" target="_blank" rel="external">Python多版本共存之pyenv</a></li>
 <li><a href="http://www.cnblogs.com/npumenglei/p/3719412.html" title="用pyenv 和 virtualenv 搭建单机多版本python 虚拟开发环境" target="_blank" rel="external">用pyenv 和 virtualenv 搭建单机多版本python 虚拟开发环境</a></li>
 <li><a href="https://github.com/yyuu/pyenv-virtualenv" title="pyenv-virtualenv Official site" target="_blank" rel="external">pyenv-virtualenv Official site</a></li>
+<li><a href="http://doc.devpi.net/latest/quickstart-pypimirror.html" title="Quickstart: running a pypi mirror on your laptop" target="_blank" rel="external">Quickstart: running a pypi mirror on your laptop</a></li>
+<li><a href="http://doc.devpi.net/latest/quickstart-server.html" title="Quickstart: permanent install on server/laptop" target="_blank" rel="external">Quickstart: permanent install on server/laptop</a></li>
+<li><a href="http://doc.devpi.net/latest/quickstart-releaseprocess.html" title="Quickstart: uploading, testing, pushing releases" target="_blank" rel="external">Quickstart: uploading, testing, pushing releases</a></li>
+<li><a href="https://github.com/teamfruit/defend_against_fruit/wiki/Survey-of-Existing-PyPI-Implementations" title="Survey of Existing PyPI Implementations" target="_blank" rel="external">Survey of Existing PyPI Implementations</a></li>
 </ol>
   
 	</div>
@@ -212,7 +217,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Python开发环境搭建"><span class="toc-number">1.</span> <span class="toc-text">Python开发环境搭建</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Python开发环境搭建"><span class="toc-number">1.</span> <span class="toc-text">Python开发环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#用阿里Yun的源给pip和easy_install加速"><span class="toc-number">1.1.</span> <span class="toc-text">用阿里Yun的源给pip和easy_install加速</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多版本管理pyenv,_virtualenv"><span class="toc-number">1.2.</span> <span class="toc-text">多版本管理pyenv, virtualenv</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建立自己的PyPi服务器"><span class="toc-number">1.3.</span> <span class="toc-text">建立自己的PyPi服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考："><span class="toc-number">1.4.</span> <span class="toc-text">参考：</span></a></li></ol></li></ol>
  
   </div>
 
@@ -319,7 +324,7 @@
 			
 		
 			
-				<li><a href="/tags/hdfs/" title="hdfs">hdfs<sup>1</sup></a></li>
+				<li><a href="/tags/ambari/" title="ambari">ambari<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -329,7 +334,7 @@
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">6</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">6</span></li></ul>
   </div>
 
 

@@ -5,7 +5,7 @@
   <subtitle><![CDATA[My Blog]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://promisejohn.github.io//"/>
-  <updated>2015-06-14T07:48:29.722Z</updated>
+  <updated>2015-06-14T07:49:56.278Z</updated>
   <id>http://promisejohn.github.io//</id>
   
   <author>
@@ -14,108 +14,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title><![CDATA[使用Linux的tgtd提供iscsi服务]]></title>
-    <link href="http://promisejohn.github.io/2015/06/14/iSCSIwithTgtd/"/>
-    <id>http://promisejohn.github.io/2015/06/14/iSCSIwithTgtd/</id>
-    <published>2015-06-14T07:20:05.000Z</published>
-    <updated>2015-06-14T07:48:29.722Z</updated>
-    <content type="html"><![CDATA[<h2 id="安装部署">安装部署</h2><table>
-<thead>
-<tr>
-<th>IP</th>
-<th>角色</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>192.168.182.156</td>
-<td>tgtd</td>
-</tr>
-<tr>
-<td>192.168.182.157</td>
-<td>client1</td>
-</tr>
-<tr>
-<td>192.168.182.158</td>
-<td>client2</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ yum install -y scsi-target-utils</span><br><span class="line">$ chkconfig tgtd on</span><br><span class="line">$ service tgtd start</span><br></pre></td></tr></table></figure>
-<p>配置方法2种：</p>
-<ol>
-<li>tgtadm，在线修改</li>
-<li>conf配置文件</li>
-</ol>
-<h2 id="在服务端增加一个Target">在服务端增加一个Target</h2><p>主要流程：</p>
-<ol>
-<li>建立target</li>
-<li>为target增加backstorage</li>
-<li>配置客户端访问target的控制策略</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ tgtadm --lld iscsi --op new --mode target --tid <span class="number">1</span> --targetname iqn.<span class="number">2015</span>-<span class="number">05</span>-<span class="number">04</span>.org.tecstack.storage.tg1 <span class="comment"># add target</span></span><br><span class="line"><span class="comment"># 用losetup映射块设备作为backstorage</span></span><br><span class="line">$ mkdir /opt/tgtstorage</span><br><span class="line">$ dd <span class="keyword">if</span>=/dev/zero of=/opt/tgtstorage/disk0.img bs=<span class="number">1</span>M count=<span class="number">5120</span></span><br><span class="line">$ losetup <span class="operator">-f</span> /opt/tgtstorage/disk0.img <span class="comment"># 映射为设备</span></span><br><span class="line">$ losetup <span class="operator">-a</span> <span class="comment"># /dev/loop0</span></span><br><span class="line">$ tgtadm --lld iscsi --op new --mode logicalunit --tid <span class="number">1</span> --lun <span class="number">1</span> --backing-store /dev/loop0</span><br><span class="line"><span class="comment"># 直接用块文件作为backstorage添加第二个块</span></span><br><span class="line">$ dd <span class="keyword">if</span>=/dev/zero of=/opt/tgtstorage/disk1.img bs=<span class="number">1</span>M count=<span class="number">5120</span></span><br><span class="line">$ tgtadm --lld iscsi --op new --mode logicalunit --tid <span class="number">1</span> --lun <span class="number">2</span> --backing-store /opt/tgtstorage/disk1.img</span><br><span class="line"><span class="comment"># 绑定客户端ip</span></span><br><span class="line">$ tgtadm --lld iscsi --mode target --op <span class="built_in">bind</span> --tid <span class="number">1</span> --initiator-address=<span class="number">192.168</span>.<span class="number">182.157</span></span><br><span class="line">$ tgtadm --lld iscsi --mode target --op <span class="built_in">bind</span> --tid <span class="number">1</span> --initiator-address=<span class="number">192.168</span>.<span class="number">182.158</span></span><br><span class="line">$ tgt-admin --dump |grep -v default-driver &gt; /etc/tgt/conf.d/my-targets.conf <span class="comment"># 通过tgt-admin保存为配置文件，注意与tgtadm的区别！</span></span><br><span class="line">$ tgtadm --lld iscsi --mode target --op show</span><br><span class="line">$ tgt-admin --show <span class="comment"># 和上一个命令一样，tgt-admin是tgtadm的perl封装</span></span><br></pre></td></tr></table></figure>
-<p>在服务端禁用某个客户端：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tgtadm --lld iscsi --mode target --op unbind --tid <span class="number">1</span> --initiator-address=<span class="number">192.168</span>.<span class="number">182.158</span> <span class="comment"># unbind，使不可发现</span></span><br></pre></td></tr></table></figure>
-<h2 id="在客户端使用target">在客户端使用target</h2><p>iscsi存储使用的主要流程：</p>
-<ol>
-<li>发现target</li>
-<li>login到target</li>
-<li>使用存储管理工具使用块设备</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ iscsiadm --mode discovery --type sendtargets --portal <span class="number">192.168</span>.<span class="number">182.156</span></span><br><span class="line">$ ls -lh /var/lib/iscsi/nodes/ <span class="comment"># 可以查看到对应的target和卷资料</span></span><br><span class="line">$ iscsiadm -m node <span class="comment"># 查看当前机器上所有target</span></span><br><span class="line">$ iscsiadm -m node -T iqn.<span class="number">2015</span>-<span class="number">05</span>-<span class="number">04</span>.org.tecstack.storage.tg1 --login <span class="comment"># 登陆target</span></span><br><span class="line">$ fdisk <span class="operator">-l</span> <span class="comment"># 登陆后就可以看到块设备</span></span><br><span class="line">$ iscsiadm -m node -T iqn.<span class="number">2015</span>-<span class="number">05</span>-<span class="number">04</span>.org.tecstack.storage.tg1 --logout <span class="comment">#登出target</span></span><br><span class="line">$ fdisk <span class="operator">-l</span> <span class="comment"># 登出后设备移除</span></span><br><span class="line">$ iscsiadm -m node -o delete -T iqn.<span class="number">2015</span>-<span class="number">05</span>-<span class="number">04</span>.org.tecstack.storage.tg1 <span class="comment"># 删除target</span></span><br><span class="line">$ ls -lh /var/lib/iscsi/nodes/</span><br><span class="line">$ iscsiadm -m node -T iqn.<span class="number">2015</span>-<span class="number">05</span>-<span class="number">04</span>.org.tecstack.storage.tg1 -p <span class="number">192.168</span>.<span class="number">182.156</span> -- op update -n node.startup -v automatic <span class="comment"># 自动login</span></span><br></pre></td></tr></table></figure>
-<p>当login到target之后，就可以使用，比如通过LVM：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ fdisk <span class="operator">-l</span> <span class="comment"># 增加了一个/dev/sdb块设备</span></span><br><span class="line">$ pvcreate /dev/sdb</span><br><span class="line">$ pvdisplay</span><br><span class="line">$ vgcreate myiscsi /dev/sdb</span><br><span class="line">$ vgdisplay</span><br><span class="line">$ lvcreate <span class="operator">-l</span> <span class="number">1024</span> -n vdisk0 myiscsi</span><br><span class="line">$ lvdisplay</span><br><span class="line">$ ls -lh /dev/myiscsi/vdisk0 <span class="comment"># 生成的块设备位置</span></span><br><span class="line">$ mkfs.ext4 /dev/myiscsi/vdisk0</span><br><span class="line">$ mkdir -p /opt/myiscsidata</span><br><span class="line">$ mount /dev/myiscsi/vdisk0 /opt/myiscsidata/</span><br><span class="line">$ df -h</span><br></pre></td></tr></table></figure>
-<p>运行过程中为target添加后端存储，客户端需要logout后重新login才能看到。但是如果重新login后块设备名会变化，比如变成<code>/dev/sdc</code>。可以通过文件系统的UUID来识别设备并挂载：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tune2fs <span class="operator">-l</span> /dev/sdc</span><br></pre></td></tr></table></figure>
-<h3 id="GFS2测试">GFS2测试</h3><h4 id="创建和挂载iscsi块存储">创建和挂载iscsi块存储</h4><p>在target端创建LUN</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ dd <span class="keyword">if</span>=/dev/zero of=/opt/tgtstorage/disk_gfs.img bs=<span class="number">1</span>M count=<span class="number">5120</span></span><br><span class="line">$ tgtadm --lld iscsi --op new --mode logicalunit --tid <span class="number">1</span> --lun <span class="number">3</span> --backing-store /opt/tgtstorage/disk_gfs.img</span><br><span class="line">$ tgtadm --lld iscsi --mode target --op <span class="built_in">bind</span> --tid <span class="number">1</span> --initiator-address=<span class="number">192.168</span>.<span class="number">182.157</span></span><br><span class="line">$ tgtadm --lld iscsi --mode target --op <span class="built_in">bind</span> --tid <span class="number">1</span> --initiator-address=<span class="number">192.168</span>.<span class="number">182.158</span></span><br><span class="line">$ tgt-admin --show</span><br></pre></td></tr></table></figure>
-<p>在client1和client2上挂载块设备：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ iscsiadm --mode discovery --type sendtargets --portal <span class="number">192.168</span>.<span class="number">182.156</span></span><br><span class="line">$ iscsiadm -m node</span><br><span class="line">$ iscsiadm -m node -T iqn.<span class="number">2015</span>-<span class="number">05</span>-<span class="number">04</span>.org.tecstack.storage.tg1 --login</span><br><span class="line">$ fdisk <span class="operator">-l</span></span><br></pre></td></tr></table></figure>
-<h4 id="使用luci配置集群：">使用luci配置集群：</h4><p>在target端配置：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ yum -y install luci</span><br><span class="line">$ service luci start</span><br></pre></td></tr></table></figure>
-<p>在client1和client2上配置：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ yum install -y ricci</span><br><span class="line">$ service ricci start</span><br><span class="line">$ passwd ricci <span class="comment"># 123456，节点密码</span></span><br></pre></td></tr></table></figure>
-<p>通过访问target的https（默认端口8084，账号同Linux本地root账号），创建集群，新增节点，选择下载包，勾选启用共享文件系统。管理工具会自动帮助安装：<code>cman rgmanager lvm2-cluster sg3_utils gfs2-utils</code>，并启动相关服务。</p>
-<h4 id="在一台集群节点上创建LVM逻辑卷，格式化为GFS文件系统">在一台集群节点上创建LVM逻辑卷，格式化为GFS文件系统</h4><p>识别scsi和块设备的对应关系：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls <span class="operator">-l</span> /dev/disk/by-path/*tecstack*</span><br><span class="line">$ scsi_id -gu /dev/sdb</span><br></pre></td></tr></table></figure>
-<p>在client1上执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ pvcreate /dev/sdb</span><br><span class="line">$ vgcreate gfstest /dev/sdb</span><br><span class="line">$ lvcreate <span class="operator">-l</span> <span class="number">1024</span> -n gfsdisk0 gfstest</span><br><span class="line">$ mkfs.gfs2 -j2 -p lock_dlm -t gfstest:gfs2 /dev/gfstest/gfsdisk0</span><br></pre></td></tr></table></figure>
-<h4 id="在两台集群节点上同时挂载GFS文件系统">在两台集群节点上同时挂载GFS文件系统</h4><p>在client1和client2上执行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir /mnt/gfstest</span><br><span class="line">$ mount /dev/gfstest/gfsdisk0 /mnt/gfstest</span><br></pre></td></tr></table></figure>
-<p>参考：</p>
-<ol>
-<li><a href="http://blog.delouw.ch/2013/07/07/creating-and-managing-iscsi-targets/" title="creating and managing iscsi targets" target="_blank" rel="external">creating and managing iscsi targets</a></li>
-<li><a href="http://stgt.sourceforge.net/manpages/tgtadm.8.html" title="tgtadm official man page" target="_blank" rel="external">tgtadm man page</a></li>
-<li><a href="http://linux.vbird.org/linux_server/0460iscsi.php" title="iscsi使用案例" target="_blank" rel="external">iscsi使用案例</a></li>
-<li><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/5/html/Global_File_System/s1-config-tasks.html" title="GFS配置" target="_blank" rel="external">GFS配置</a></li>
-</ol>
-]]></content>
-    <summary type="html">
-    <![CDATA[<h2 id="安装部署">安装部署</h2><table>
-<thead>
-<tr>
-<th>IP</th>
-<th>角色</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>192.168.182.156</td>
-<td>tgtd</td>
-</tr>]]>
-    </summary>
-    
-      <category term="iscsi" scheme="http://promisejohn.github.io/tags/iscsi/"/>
-    
-      <category term="linux" scheme="http://promisejohn.github.io/tags/linux/"/>
-    
-      <category term="tgtd" scheme="http://promisejohn.github.io/tags/tgtd/"/>
-    
-      <category term="Tech" scheme="http://promisejohn.github.io/categories/Tech/"/>
-    
-  </entry>
   
   <entry>
     <title><![CDATA[NodeJS开发环境配置]]></title>
@@ -212,10 +110,10 @@
   
   <entry>
     <title><![CDATA[HelloHadoop]]></title>
-    <link href="http://promisejohn.github.io/2015/05/30/HelloHadoop/"/>
-    <id>http://promisejohn.github.io/2015/05/30/HelloHadoop/</id>
-    <published>2015-05-30T09:58:33.000Z</published>
-    <updated>2015-06-13T07:06:01.239Z</updated>
+    <link href="http://promisejohn.github.io/2015/06/04/HelloHadoop/"/>
+    <id>http://promisejohn.github.io/2015/06/04/HelloHadoop/</id>
+    <published>2015-06-04T02:54:16.000Z</published>
+    <updated>2015-06-14T13:56:14.266Z</updated>
     <content type="html"><![CDATA[<h1 id="Hadoop系列">Hadoop系列</h1><p>大数据依旧在热炒，hadoop虽然不是唯一的代表，却也是各家必谈之资本，玩玩大数据。</p>
 <h2 id="通过ambari部署hadoop集群">通过ambari部署hadoop集群</h2><p>在cloudlab119-123上部署集群，其中119作为ambari server控制端。</p>
 <p>安装部署：</p>
@@ -313,11 +211,113 @@
     
       <category term="hadoop" scheme="http://promisejohn.github.io/tags/hadoop/"/>
     
+      <category term="hbase" scheme="http://promisejohn.github.io/tags/hbase/"/>
+    
       <category term="hdfs" scheme="http://promisejohn.github.io/tags/hdfs/"/>
     
-      <category term="hue" scheme="http://promisejohn.github.io/tags/hue/"/>
+      <category term="hive" scheme="http://promisejohn.github.io/tags/hive/"/>
     
-      <category term="java" scheme="http://promisejohn.github.io/tags/java/"/>
+      <category term="Tech" scheme="http://promisejohn.github.io/categories/Tech/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[使用Linux的tgtd提供iscsi服务]]></title>
+    <link href="http://promisejohn.github.io/2015/06/04/iSCSIwithTgtd/"/>
+    <id>http://promisejohn.github.io/2015/06/04/iSCSIwithTgtd/</id>
+    <published>2015-06-04T02:54:10.000Z</published>
+    <updated>2015-06-14T13:57:14.086Z</updated>
+    <content type="html"><![CDATA[<h2 id="安装部署">安装部署</h2><table>
+<thead>
+<tr>
+<th>IP</th>
+<th>角色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>192.168.182.156</td>
+<td>tgtd</td>
+</tr>
+<tr>
+<td>192.168.182.157</td>
+<td>client1</td>
+</tr>
+<tr>
+<td>192.168.182.158</td>
+<td>client2</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ yum install -y scsi-target-utils</span><br><span class="line">$ chkconfig tgtd on</span><br><span class="line">$ service tgtd start</span><br></pre></td></tr></table></figure>
+<p>配置方法2种：</p>
+<ol>
+<li>tgtadm，在线修改</li>
+<li>conf配置文件</li>
+</ol>
+<h2 id="在服务端增加一个Target">在服务端增加一个Target</h2><p>主要流程：</p>
+<ol>
+<li>建立target</li>
+<li>为target增加backstorage</li>
+<li>配置客户端访问target的控制策略</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ tgtadm --lld iscsi --op new --mode target --tid <span class="number">1</span> --targetname iqn.<span class="number">2015</span>-<span class="number">05</span>-<span class="number">04</span>.org.tecstack.storage.tg1 <span class="comment"># add target</span></span><br><span class="line"><span class="comment"># 用losetup映射块设备作为backstorage</span></span><br><span class="line">$ mkdir /opt/tgtstorage</span><br><span class="line">$ dd <span class="keyword">if</span>=/dev/zero of=/opt/tgtstorage/disk0.img bs=<span class="number">1</span>M count=<span class="number">5120</span></span><br><span class="line">$ losetup <span class="operator">-f</span> /opt/tgtstorage/disk0.img <span class="comment"># 映射为设备</span></span><br><span class="line">$ losetup <span class="operator">-a</span> <span class="comment"># /dev/loop0</span></span><br><span class="line">$ tgtadm --lld iscsi --op new --mode logicalunit --tid <span class="number">1</span> --lun <span class="number">1</span> --backing-store /dev/loop0</span><br><span class="line"><span class="comment"># 直接用块文件作为backstorage添加第二个块</span></span><br><span class="line">$ dd <span class="keyword">if</span>=/dev/zero of=/opt/tgtstorage/disk1.img bs=<span class="number">1</span>M count=<span class="number">5120</span></span><br><span class="line">$ tgtadm --lld iscsi --op new --mode logicalunit --tid <span class="number">1</span> --lun <span class="number">2</span> --backing-store /opt/tgtstorage/disk1.img</span><br><span class="line"><span class="comment"># 绑定客户端ip</span></span><br><span class="line">$ tgtadm --lld iscsi --mode target --op <span class="built_in">bind</span> --tid <span class="number">1</span> --initiator-address=<span class="number">192.168</span>.<span class="number">182.157</span></span><br><span class="line">$ tgtadm --lld iscsi --mode target --op <span class="built_in">bind</span> --tid <span class="number">1</span> --initiator-address=<span class="number">192.168</span>.<span class="number">182.158</span></span><br><span class="line">$ tgt-admin --dump |grep -v default-driver &gt; /etc/tgt/conf.d/my-targets.conf <span class="comment"># 通过tgt-admin保存为配置文件，注意与tgtadm的区别！</span></span><br><span class="line">$ tgtadm --lld iscsi --mode target --op show</span><br><span class="line">$ tgt-admin --show <span class="comment"># 和上一个命令一样，tgt-admin是tgtadm的perl封装</span></span><br></pre></td></tr></table></figure>
+<p>在服务端禁用某个客户端：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tgtadm --lld iscsi --mode target --op unbind --tid <span class="number">1</span> --initiator-address=<span class="number">192.168</span>.<span class="number">182.158</span> <span class="comment"># unbind，使不可发现</span></span><br></pre></td></tr></table></figure>
+<h2 id="在客户端使用target">在客户端使用target</h2><p>iscsi存储使用的主要流程：</p>
+<ol>
+<li>发现target</li>
+<li>login到target</li>
+<li>使用存储管理工具使用块设备</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ iscsiadm --mode discovery --type sendtargets --portal <span class="number">192.168</span>.<span class="number">182.156</span></span><br><span class="line">$ ls -lh /var/lib/iscsi/nodes/ <span class="comment"># 可以查看到对应的target和卷资料</span></span><br><span class="line">$ iscsiadm -m node <span class="comment"># 查看当前机器上所有target</span></span><br><span class="line">$ iscsiadm -m node -T iqn.<span class="number">2015</span>-<span class="number">05</span>-<span class="number">04</span>.org.tecstack.storage.tg1 --login <span class="comment"># 登陆target</span></span><br><span class="line">$ fdisk <span class="operator">-l</span> <span class="comment"># 登陆后就可以看到块设备</span></span><br><span class="line">$ iscsiadm -m node -T iqn.<span class="number">2015</span>-<span class="number">05</span>-<span class="number">04</span>.org.tecstack.storage.tg1 --logout <span class="comment">#登出target</span></span><br><span class="line">$ fdisk <span class="operator">-l</span> <span class="comment"># 登出后设备移除</span></span><br><span class="line">$ iscsiadm -m node -o delete -T iqn.<span class="number">2015</span>-<span class="number">05</span>-<span class="number">04</span>.org.tecstack.storage.tg1 <span class="comment"># 删除target</span></span><br><span class="line">$ ls -lh /var/lib/iscsi/nodes/</span><br><span class="line">$ iscsiadm -m node -T iqn.<span class="number">2015</span>-<span class="number">05</span>-<span class="number">04</span>.org.tecstack.storage.tg1 -p <span class="number">192.168</span>.<span class="number">182.156</span> -- op update -n node.startup -v automatic <span class="comment"># 自动login</span></span><br></pre></td></tr></table></figure>
+<p>当login到target之后，就可以使用，比如通过LVM：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ fdisk <span class="operator">-l</span> <span class="comment"># 增加了一个/dev/sdb块设备</span></span><br><span class="line">$ pvcreate /dev/sdb</span><br><span class="line">$ pvdisplay</span><br><span class="line">$ vgcreate myiscsi /dev/sdb</span><br><span class="line">$ vgdisplay</span><br><span class="line">$ lvcreate <span class="operator">-l</span> <span class="number">1024</span> -n vdisk0 myiscsi</span><br><span class="line">$ lvdisplay</span><br><span class="line">$ ls -lh /dev/myiscsi/vdisk0 <span class="comment"># 生成的块设备位置</span></span><br><span class="line">$ mkfs.ext4 /dev/myiscsi/vdisk0</span><br><span class="line">$ mkdir -p /opt/myiscsidata</span><br><span class="line">$ mount /dev/myiscsi/vdisk0 /opt/myiscsidata/</span><br><span class="line">$ df -h</span><br></pre></td></tr></table></figure>
+<p>运行过程中为target添加后端存储，客户端需要logout后重新login才能看到。但是如果重新login后块设备名会变化，比如变成<code>/dev/sdc</code>。可以通过文件系统的UUID来识别设备并挂载：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tune2fs <span class="operator">-l</span> /dev/sdc</span><br></pre></td></tr></table></figure>
+<h3 id="GFS2测试">GFS2测试</h3><h4 id="创建和挂载iscsi块存储">创建和挂载iscsi块存储</h4><p>在target端创建LUN</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ dd <span class="keyword">if</span>=/dev/zero of=/opt/tgtstorage/disk_gfs.img bs=<span class="number">1</span>M count=<span class="number">5120</span></span><br><span class="line">$ tgtadm --lld iscsi --op new --mode logicalunit --tid <span class="number">1</span> --lun <span class="number">3</span> --backing-store /opt/tgtstorage/disk_gfs.img</span><br><span class="line">$ tgtadm --lld iscsi --mode target --op <span class="built_in">bind</span> --tid <span class="number">1</span> --initiator-address=<span class="number">192.168</span>.<span class="number">182.157</span></span><br><span class="line">$ tgtadm --lld iscsi --mode target --op <span class="built_in">bind</span> --tid <span class="number">1</span> --initiator-address=<span class="number">192.168</span>.<span class="number">182.158</span></span><br><span class="line">$ tgt-admin --show</span><br></pre></td></tr></table></figure>
+<p>在client1和client2上挂载块设备：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ iscsiadm --mode discovery --type sendtargets --portal <span class="number">192.168</span>.<span class="number">182.156</span></span><br><span class="line">$ iscsiadm -m node</span><br><span class="line">$ iscsiadm -m node -T iqn.<span class="number">2015</span>-<span class="number">05</span>-<span class="number">04</span>.org.tecstack.storage.tg1 --login</span><br><span class="line">$ fdisk <span class="operator">-l</span></span><br></pre></td></tr></table></figure>
+<h4 id="使用luci配置集群：">使用luci配置集群：</h4><p>在target端配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ yum -y install luci</span><br><span class="line">$ service luci start</span><br></pre></td></tr></table></figure>
+<p>在client1和client2上配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ yum install -y ricci</span><br><span class="line">$ service ricci start</span><br><span class="line">$ passwd ricci <span class="comment"># 123456，节点密码</span></span><br></pre></td></tr></table></figure>
+<p>通过访问target的https（默认端口8084，账号同Linux本地root账号），创建集群，新增节点，选择下载包，勾选启用共享文件系统。管理工具会自动帮助安装：<code>cman rgmanager lvm2-cluster sg3_utils gfs2-utils</code>，并启动相关服务。</p>
+<h4 id="在一台集群节点上创建LVM逻辑卷，格式化为GFS文件系统">在一台集群节点上创建LVM逻辑卷，格式化为GFS文件系统</h4><p>识别scsi和块设备的对应关系：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls <span class="operator">-l</span> /dev/disk/by-path/*tecstack*</span><br><span class="line">$ scsi_id -gu /dev/sdb</span><br></pre></td></tr></table></figure>
+<p>在client1上执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ pvcreate /dev/sdb</span><br><span class="line">$ vgcreate gfstest /dev/sdb</span><br><span class="line">$ lvcreate <span class="operator">-l</span> <span class="number">1024</span> -n gfsdisk0 gfstest</span><br><span class="line">$ mkfs.gfs2 -j2 -p lock_dlm -t gfstest:gfs2 /dev/gfstest/gfsdisk0</span><br></pre></td></tr></table></figure>
+<h4 id="在两台集群节点上同时挂载GFS文件系统">在两台集群节点上同时挂载GFS文件系统</h4><p>在client1和client2上执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir /mnt/gfstest</span><br><span class="line">$ mount /dev/gfstest/gfsdisk0 /mnt/gfstest</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ol>
+<li><a href="http://blog.delouw.ch/2013/07/07/creating-and-managing-iscsi-targets/" title="creating and managing iscsi targets" target="_blank" rel="external">creating and managing iscsi targets</a></li>
+<li><a href="http://stgt.sourceforge.net/manpages/tgtadm.8.html" title="tgtadm official man page" target="_blank" rel="external">tgtadm man page</a></li>
+<li><a href="http://linux.vbird.org/linux_server/0460iscsi.php" title="iscsi使用案例" target="_blank" rel="external">iscsi使用案例</a></li>
+<li><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/5/html/Global_File_System/s1-config-tasks.html" title="GFS配置" target="_blank" rel="external">GFS配置</a></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h2 id="安装部署">安装部署</h2><table>
+<thead>
+<tr>
+<th>IP</th>
+<th>角色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>192.168.182.156</td>
+<td>tgtd</td>
+</tr>]]>
+    </summary>
+    
+      <category term="iscsi" scheme="http://promisejohn.github.io/tags/iscsi/"/>
+    
+      <category term="linux" scheme="http://promisejohn.github.io/tags/linux/"/>
+    
+      <category term="tgtd" scheme="http://promisejohn.github.io/tags/tgtd/"/>
     
       <category term="Tech" scheme="http://promisejohn.github.io/categories/Tech/"/>
     
@@ -1187,15 +1187,14 @@
     <link href="http://promisejohn.github.io/2015/04/15/PythonDevEnvSetting/"/>
     <id>http://promisejohn.github.io/2015/04/15/PythonDevEnvSetting/</id>
     <published>2015-04-15T08:03:04.000Z</published>
-    <updated>2015-06-13T07:06:01.243Z</updated>
-    <content type="html"><![CDATA[<h3 id="Python开发环境搭建">Python开发环境搭建</h3><p>用豆瓣的源给pip和easy_install加速，~/.bashrc：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias easy_install=&#39;easy_install -i http://pypi.douban.com/simple&#39;</span><br></pre></td></tr></table></figure>
+    <updated>2015-06-14T13:57:29.366Z</updated>
+    <content type="html"><![CDATA[<h1 id="Python开发环境搭建">Python开发环境搭建</h1><h2 id="用阿里Yun的源给pip和easy_install加速">用阿里Yun的源给pip和easy_install加速</h2><p>~/.bashrc：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias easy_install=&#39;easy_install -i http://mirrors.aliyun.com/pypi/simple/&#39;</span><br></pre></td></tr></table></figure>
 <p>安装pip：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ easy_install pip</span><br></pre></td></tr></table></figure>
 <p>~/.pip/pip.conf：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[global]&#10;index-url = http://pypi.douban.com/simple</span><br></pre></td></tr></table></figure>
-<p>安装pyenv</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone git://github.com/yyuu/pyenv.git ~/.pyenv&#10;$ echo &#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ echo &#39;export PATH=&#34;$PYENV_ROOT/bin:$PATH&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ echo &#39;eval &#34;$(pyenv init -)&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ exec $SHELL -l&#10;$ export PYTHON_BUILD_MIRROR_URL=&#34;http://pyenv.qiniudn.com/pythons/&#34; #&#21152;&#36895;, Official: http://yyuu.github.io/pythons/</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[global]&#10;index-url = http://mirrors.aliyun.com/pypi/simple/&#10;[install]&#10;trusted-host=mirrors.aliyun.com</span><br></pre></td></tr></table></figure>
+<h2 id="多版本管理pyenv,_virtualenv">多版本管理pyenv, virtualenv</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone git://github.com/yyuu/pyenv.git ~/.pyenv&#10;$ echo &#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ echo &#39;export PATH=&#34;$PYENV_ROOT/bin:$PATH&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ echo &#39;eval &#34;$(pyenv init -)&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ exec $SHELL -l&#10;$ export PYTHON_BUILD_MIRROR_URL=&#34;http://pyenv.qiniudn.com/pythons/&#34; #&#21152;&#36895;, Official: http://yyuu.github.io/pythons/</span><br></pre></td></tr></table></figure>
 <p>安装pyenv-virtualenv plugin：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv&#10;$ echo &#39;eval &#34;$(pyenv virtualenv-init -)&#34;&#39; &#62;&#62; ~/.bash_profile&#10;$ exec &#34;$SHELL&#34;</span><br></pre></td></tr></table></figure>
 <p>安装centOS系统开发环境工具：</p>
@@ -1212,16 +1211,22 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv uninstall my-virtual-env</span><br></pre></td></tr></table></figure>
 <p>相关变量：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PYENV_VIRTUALENV_CACHE_PATH&#10;VIRTUALENV_VERSION&#10;EZ_SETUP/GET_PIP # use ez_setup.py and get_pip.py from the specified location.&#10;EZ_SETUP_URL/GET_PIP_URL # download ez_setup.py and get_pip.py from the specified URL.&#10;SETUPTOOLS_VERSION/PIP_VERSION # install the specified version of setuptools and pip.</span><br></pre></td></tr></table></figure>
-<p>参考：</p>
-<ol>
+<h2 id="建立自己的PyPi服务器">建立自己的PyPi服务器</h2><p>目前可以用Artifactory, Sonatype Nexus等作为Java的私有仓库和Mirros，虽然Artifactory Pro版也支持PyPi，甚至yum、npm等其他仓库，但目前看要$1000+，期望后续Sonatype Nexus有免费的套餐～<br>稍微麻烦点可以自己架设一个devpi：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ pip install devpi-server</span><br><span class="line">$ devpi-server --version <span class="comment"># 查看版本</span></span><br><span class="line">$ devpi-server --start</span><br><span class="line">$ pip install -i http://localhost:<span class="number">3141</span>/root/pypi/ simplejson <span class="comment">#简单测试</span></span><br><span class="line">$ devpi-server --status</span><br><span class="line">$ devpi-server --stop</span><br><span class="line">$ devpi-server --log</span><br></pre></td></tr></table></figure>
+<p>正式部署及其他方案可以参考下面。</p>
+<h2 id="参考：">参考：</h2><ol>
 <li><a href="http://seisman.info/python-pyenv.html" title="Python多版本共存之pyenv" target="_blank" rel="external">Python多版本共存之pyenv</a></li>
 <li><a href="http://www.cnblogs.com/npumenglei/p/3719412.html" title="用pyenv 和 virtualenv 搭建单机多版本python 虚拟开发环境" target="_blank" rel="external">用pyenv 和 virtualenv 搭建单机多版本python 虚拟开发环境</a></li>
 <li><a href="https://github.com/yyuu/pyenv-virtualenv" title="pyenv-virtualenv Official site" target="_blank" rel="external">pyenv-virtualenv Official site</a></li>
+<li><a href="http://doc.devpi.net/latest/quickstart-pypimirror.html" title="Quickstart: running a pypi mirror on your laptop" target="_blank" rel="external">Quickstart: running a pypi mirror on your laptop</a></li>
+<li><a href="http://doc.devpi.net/latest/quickstart-server.html" title="Quickstart: permanent install on server/laptop" target="_blank" rel="external">Quickstart: permanent install on server/laptop</a></li>
+<li><a href="http://doc.devpi.net/latest/quickstart-releaseprocess.html" title="Quickstart: uploading, testing, pushing releases" target="_blank" rel="external">Quickstart: uploading, testing, pushing releases</a></li>
+<li><a href="https://github.com/teamfruit/defend_against_fruit/wiki/Survey-of-Existing-PyPI-Implementations" title="Survey of Existing PyPI Implementations" target="_blank" rel="external">Survey of Existing PyPI Implementations</a></li>
 </ol>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h3 id="Python开发环境搭建">Python开发环境搭建</h3><p>用豆瓣的源给pip和easy_install加速，~/.bashrc：</p>
-<figure class="highlight plain"><table><tr><td class="gutt]]>
+    <![CDATA[<h1 id="Python开发环境搭建">Python开发环境搭建</h1><h2 id="用阿里Yun的源给pip和easy_install加速">用阿里Yun的源给pip和easy_install加速</h2><p>~/.bashrc：</p>
+<figure class=]]>
     </summary>
     
       <category term="dev" scheme="http://promisejohn.github.io/tags/dev/"/>
