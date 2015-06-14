@@ -78,6 +78,198 @@
 
    
     
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/16/SaltStackDev/" title="SaltStack开发环境搭建" itemprop="url">SaltStack开发环境搭建</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://promisejohn.github.io/about" title="promise john" target="_blank" itemprop="author">promise john</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-16T03:08:18.000Z" itemprop="datePublished"> 发表于 2015-04-16</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="安装及准备">安装及准备</h3><p>切换到python独立环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv virtualenv salt-<span class="number">2.7</span>.<span class="number">8</span></span><br></pre></td></tr></table></figure>
+<p>获取代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/saltstack/salt</span><br><span class="line">$ git fetch --tags</span><br></pre></td></tr></table></figure>
+<p>安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ env SWIG_FEATURES=<span class="string">"-cpperraswarn -includeall -D__`uname -m`__ -I/usr/include/openssl"</span> pip install M2Crypto</span><br><span class="line">$ pip install pyzmq PyYAML pycrypto msgpack-python jinja2 psutil</span><br><span class="line">$ pip install <span class="operator">-e</span> ./salt</span><br></pre></td></tr></table></figure>
+<p>配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p $(dirname `pyenv which python`)/../etc/salt&#10;$ cp ./salt/conf/master ./salt/conf/minion $(dirname `pyenv which python`)/../etc/salt</span><br></pre></td></tr></table></figure>
+<p>master配置文件：</p>
+<ol>
+<li>user: root</li>
+<li>root_dir: $(dirname <code>pyenv which python</code>)/..</li>
+<li>pidfile: $(dirname <code>pyenv which python</code>)/../salt-master.pid</li>
+<li>publish_port: 14505</li>
+<li>ret_port: 14506</li>
+</ol>
+<p>minion配置文件：</p>
+<ol>
+<li>user: root</li>
+<li>root_dir: $(dirname <code>pyenv which python</code>)/..</li>
+<li>pidfile: $(dirname <code>pyenv which python</code>)/../salt-minion.pid</li>
+<li>master: localhost</li>
+<li>id: saltdev</li>
+<li>master_port: 14505</li>
+</ol>
+<p>运行启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> $(dirname `pyenv <span class="built_in">which</span> python`)/../</span><br><span class="line">$ salt-master -c ./etc/salt <span class="operator">-d</span></span><br><span class="line">$ salt-minion -c ./etc/salt <span class="operator">-d</span></span><br><span class="line">$ salt-key -c ./etc/salt -L</span><br><span class="line">$ salt-key -c ./etc/salt -A</span><br><span class="line">$ salt -c ./etc/salt <span class="string">'*'</span> test.ping</span><br></pre></td></tr></table></figure>
+<p>其他：</p>
+<ol>
+<li>通过<code>-l debug</code>开启debug模式，去掉<code>-d</code>直接输出到console。</li>
+<li>socket path在linux上最多107个字符，可以通过缩短sock_dir和root_dir字符。</li>
+<li><code>ulimit -n</code>检查File descriptor limites，至少2047：<code>ulimit -n 2048</code></li>
+</ol>
+<h3 id="文档生成">文档生成</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ pip install Sphinx==<span class="number">1.3</span>b2</span><br><span class="line">$ <span class="built_in">cd</span> doc; make html</span><br><span class="line">$ <span class="built_in">cd</span> _build/html; python -m SimpleHTTPServer</span><br></pre></td></tr></table></figure>
+<h3 id="Tests">Tests</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./setup.py <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<h4 id="参考：">参考：</h4><ol>
+<li><a href="http://docs.saltstack.com/en/latest/topics/development/hacking.html" title="saltstack官方文档" target="_blank" rel="external">saltstack官方文档</a></li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Tech/">Tech</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/dev/">dev</a><a href="/tags/saltstack/">saltstack</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/16/SaltStackDev/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/16/SaltStackDev/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/15/PythonDevEnvSetting/" title="Python开发环境搭建" itemprop="url">Python开发环境搭建</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://promisejohn.github.io/about" title="promise john" target="_blank" itemprop="author">promise john</a>
+		
+  <p class="article-time">
+    <time datetime="2015-04-15T08:03:04.000Z" itemprop="datePublished"> 发表于 2015-04-15</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="Python开发环境搭建">Python开发环境搭建</h3><p>用豆瓣的源给pip和easy_install加速，~/.bashrc：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias easy_install=&#39;easy_install -i http://pypi.douban.com/simple&#39;</span><br></pre></td></tr></table></figure>
+<p>安装pip：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ easy_install pip</span><br></pre></td></tr></table></figure>
+<p>~/.pip/pip.conf：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[global]&#10;index-url = http://pypi.douban.com/simple</span><br></pre></td></tr></table></figure>
+<p>安装pyenv</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone git://github.com/yyuu/pyenv.git ~/.pyenv&#10;$ echo &#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ echo &#39;export PATH=&#34;$PYENV_ROOT/bin:$PATH&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ echo &#39;eval &#34;$(pyenv init -)&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ exec $SHELL -l&#10;$ export PYTHON_BUILD_MIRROR_URL=&#34;http://pyenv.qiniudn.com/pythons/&#34; #&#21152;&#36895;, Official: http://yyuu.github.io/pythons/</span><br></pre></td></tr></table></figure>
+<p>安装pyenv-virtualenv plugin：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv&#10;$ echo &#39;eval &#34;$(pyenv virtualenv-init -)&#34;&#39; &#62;&#62; ~/.bash_profile&#10;$ exec &#34;$SHELL&#34;</span><br></pre></td></tr></table></figure>
+<p>安装centOS系统开发环境工具：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum groupinstall -y &#34;Development Tools&#34;&#10;$ yum install -y readline readline-devel readline-static openssl openssl-devel openssl-static sqlite-devel bzip2-devel bzip2-libs</span><br></pre></td></tr></table></figure>
+<p>安装隔离的python环境：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv install --list&#10;$ pyenv install 2.7.8&#10;$ pyenv rehash</span><br></pre></td></tr></table></figure>
+<p>查看切换版本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv versions&#10;$ pyenv global 2.7.8 #OR Use: pyenv local 2.7.8</span><br></pre></td></tr></table></figure>
+<p>新建环境，检查环境列表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv virtualenv 2.7.8 my-2.7.8 &#65283;OR from current version: pyenv virtualenv venv34&#10;$ pyenv virtualenvs</span><br></pre></td></tr></table></figure>
+<p>Activate环境：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv activate &#60;name&#62;&#10;pyenv deactivate</span><br></pre></td></tr></table></figure>
+<p>卸载环境，与卸载某个python版本相同：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv uninstall my-virtual-env</span><br></pre></td></tr></table></figure>
+<p>相关变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PYENV_VIRTUALENV_CACHE_PATH&#10;VIRTUALENV_VERSION&#10;EZ_SETUP/GET_PIP # use ez_setup.py and get_pip.py from the specified location.&#10;EZ_SETUP_URL/GET_PIP_URL # download ez_setup.py and get_pip.py from the specified URL.&#10;SETUPTOOLS_VERSION/PIP_VERSION # install the specified version of setuptools and pip.</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ol>
+<li><a href="http://seisman.info/python-pyenv.html" title="Python多版本共存之pyenv" target="_blank" rel="external">Python多版本共存之pyenv</a></li>
+<li><a href="http://www.cnblogs.com/npumenglei/p/3719412.html" title="用pyenv 和 virtualenv 搭建单机多版本python 虚拟开发环境" target="_blank" rel="external">用pyenv 和 virtualenv 搭建单机多版本python 虚拟开发环境</a></li>
+<li><a href="https://github.com/yyuu/pyenv-virtualenv" title="pyenv-virtualenv Official site" target="_blank" rel="external">pyenv-virtualenv Official site</a></li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Tech/">Tech</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/dev/">dev</a><a href="/tags/python/">python</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/04/15/PythonDevEnvSetting/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/15/PythonDevEnvSetting/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
     <article class="post-expand blog" itemprop="articleBody"> 
         <header class="article-info clearfix">
   <h1 itemprop="name">
@@ -173,7 +365,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Tech/" title="Tech">Tech<sup>11</sup></a></li>
+			<li><a href="/categories/Tech/" title="Tech">Tech<sup>13</sup></a></li>
 		  
 		
 		  
@@ -190,7 +382,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/dev/" title="dev">dev<sup>3</sup></a></li>
+				<li><a href="/tags/dev/" title="dev">dev<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linux/" title="linux">linux<sup>2</sup></a></li>
 			
 		
 			
@@ -206,19 +402,27 @@
 			
 		
 			
-				<li><a href="/tags/glance/" title="glance">glance<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/hadoop/" title="hadoop">hadoop<sup>1</sup></a></li>
+				<li><a href="/tags/neutron/" title="neutron">neutron<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/ruby/" title="ruby">ruby<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ceilometer/" title="ceilometer">ceilometer<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/saltstack/" title="saltstack">saltstack<sup>1</sup></a></li>
 			
 		
 			
@@ -230,7 +434,7 @@
 			
 		
 			
-				<li><a href="/tags/neutron/" title="neutron">neutron<sup>1</sup></a></li>
+				<li><a href="/tags/iscsi/" title="iscsi">iscsi<sup>1</sup></a></li>
 			
 		
 			
@@ -238,11 +442,7 @@
 			
 		
 			
-				<li><a href="/tags/saltstack/" title="saltstack">saltstack<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ceilometer/" title="ceilometer">ceilometer<sup>1</sup></a></li>
+				<li><a href="/tags/glance/" title="glance">glance<sup>1</sup></a></li>
 			
 		
 			
@@ -254,19 +454,11 @@
 			
 		
 			
+				<li><a href="/tags/hadoop/" title="hadoop">hadoop<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/hdfs/" title="hdfs">hdfs<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ambari/" title="ambari">ambari<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/hue/" title="hue">hue<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -276,7 +468,7 @@
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">6</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">6</span></li></ul>
   </div>
 
 

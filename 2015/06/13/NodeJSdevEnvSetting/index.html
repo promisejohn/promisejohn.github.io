@@ -4,26 +4,26 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Ruby开发环境搭建 | Promise John</title>
+    <title>HelloNodejs | Promise John</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="promise john">
     
 
     
-    <meta name="description" content="Ruby开发环境搭建多版本管理RVM：
-123456789$ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3$ curl -sSL https://get.rvm.io | bash -s stable$ source /etc/profile.d/rvm.sh$ s">
+    <meta name="description" content="NodeJS开发环境配置安装nvm、node和npmnvm是nodejs的多版本管理利器，node是nodejs的解释器，npm是nodejs的包管理工具。
+123456# ubuntu安装之后会自动添加配置到~/.profile，可以直接cut到自己喜欢的比如~/.bashrc$ wget -qO- https://raw.githubusercontent.com/creationix/nvm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ruby开发环境搭建">
-<meta property="og:url" content="http://promisejohn.github.io/2015/04/17/RubyDevEnvSetting/index.html">
+<meta property="og:title" content="HelloNodejs">
+<meta property="og:url" content="http://promisejohn.github.io/2015/06/13/NodeJSdevEnvSetting/index.html">
 <meta property="og:site_name" content="Promise John">
-<meta property="og:description" content="Ruby开发环境搭建多版本管理RVM：
-123456789$ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3$ curl -sSL https://get.rvm.io | bash -s stable$ source /etc/profile.d/rvm.sh$ s">
-<meta property="og:updated_time" content="2015-06-13T07:06:01.243Z">
+<meta property="og:description" content="NodeJS开发环境配置安装nvm、node和npmnvm是nodejs的多版本管理利器，node是nodejs的解释器，npm是nodejs的包管理工具。
+123456# ubuntu安装之后会自动添加配置到~/.profile，可以直接cut到自己喜欢的比如~/.bashrc$ wget -qO- https://raw.githubusercontent.com/creationix/nvm">
+<meta property="og:updated_time" content="2015-06-14T07:46:13.162Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ruby开发环境搭建">
-<meta name="twitter:description" content="Ruby开发环境搭建多版本管理RVM：
-123456789$ gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3$ curl -sSL https://get.rvm.io | bash -s stable$ source /etc/profile.d/rvm.sh$ s">
+<meta name="twitter:title" content="HelloNodejs">
+<meta name="twitter:description" content="NodeJS开发环境配置安装nvm、node和npmnvm是nodejs的多版本管理利器，node是nodejs的解释器，npm是nodejs的包管理工具。
+123456# ubuntu安装之后会自动添加配置到~/.profile，可以直接cut到自己喜欢的比如~/.bashrc$ wget -qO- https://raw.githubusercontent.com/creationix/nvm">
 <meta name="twitter:creator" content="@promisejohn19">
 
     
@@ -84,14 +84,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/04/17/RubyDevEnvSetting/" title="Ruby开发环境搭建" itemprop="url">Ruby开发环境搭建</a>
+      <a href="/2015/06/13/NodeJSdevEnvSetting/" title="HelloNodejs" itemprop="url">HelloNodejs</a>
   </h1>
   <p class="article-author">By
        
 		<a href="http://promisejohn.github.io/about" title="promise john" target="_blank" itemprop="author">promise john</a>
 		
   <p class="article-time">
-    <time datetime="2015-04-17T02:48:49.000Z" itemprop="datePublished"> 发表于 2015-04-17</time>
+    <time datetime="2015-06-13T07:09:27.000Z" itemprop="datePublished"> 发表于 2015-06-13</time>
     
   </p>
 </header>
@@ -100,22 +100,44 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ruby开发环境搭建"><span class="toc-number">1.</span> <span class="toc-text">Ruby开发环境搭建</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NodeJS开发环境配置"><span class="toc-number">1.</span> <span class="toc-text">NodeJS开发环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装nvm、node和npm"><span class="toc-number">1.1.</span> <span class="toc-text">安装nvm、node和npm</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Build工具：grunt/gulp,_bower,_yeoman"><span class="toc-number">1.2.</span> <span class="toc-text">Build工具：grunt/gulp, bower, yeoman</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装上述工具到本地："><span class="toc-number">1.2.1.</span> <span class="toc-text">安装上述工具到本地：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成一个HelloWorld"><span class="toc-number">1.2.2.</span> <span class="toc-text">生成一个HelloWorld</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编辑器：Atom"><span class="toc-number">1.3.</span> <span class="toc-text">编辑器：Atom</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">1.4.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h3 id="Ruby开发环境搭建">Ruby开发环境搭建</h3><p>多版本管理<code>RVM</code>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ gpg --keyserver hkp://keys.gnupg.net --recv-keys <span class="number">409</span>B6B1796C275462A1703113804BB82D39DC0E3</span><br><span class="line">$ curl <span class="operator">-s</span>SL https://get.rvm.io | bash <span class="operator">-s</span> stable</span><br><span class="line">$ <span class="built_in">source</span> /etc/profile.d/rvm.sh</span><br><span class="line">$ sed -i <span class="string">'s!cache.ruby-lang.org/pub/ruby!ruby.taobao.org/mirrors/ruby!'</span> <span class="variable">$rvm_path</span>/config/db <span class="comment"># 使用taobao源下载ruby</span></span><br><span class="line">$ rvm list known</span><br><span class="line">$ rvm install <span class="number">2.1</span>.<span class="number">4</span></span><br><span class="line">$ rvm docs generate-ri <span class="comment"># 生成ruby文档</span></span><br><span class="line">$ rvm use <span class="number">2.1</span>.<span class="number">4</span> --default <span class="comment"># 设定默认ruby版本</span></span><br><span class="line">$ rvm list <span class="comment"># 查询已安装版本</span></span><br></pre></td></tr></table></figure>
-<p>用<code>gemset</code>建立独立环境：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ rvm use <span class="number">2.1</span>.<span class="number">4</span></span><br><span class="line">$ rvm gemset create rails42</span><br><span class="line">$ rvm use <span class="number">2.1</span>.<span class="number">4</span>@rails42</span><br><span class="line">$ rvm gemset list</span><br></pre></td></tr></table></figure>
-<p><code>Gem</code>管理ruby包：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ gem sources --remove https://rubygems.org/</span><br><span class="line">$ gem sources <span class="operator">-a</span> https://ruby.taobao.org/</span><br><span class="line">$ gem sources <span class="operator">-l</span></span><br><span class="line">$ gem search rails <span class="comment"># search，install, etc</span></span><br></pre></td></tr></table></figure>
-<p>参考：</p>
-<ol>
-<li><a href="https://rvm.io/" title="RVM official site" target="_blank" rel="external">RVM official site</a></li>
-<li><a href="https://ruby-china.org/wiki/rvm-guide" title="RVM Guide from ruby-china.org" target="_blank" rel="external">RVM Guide from ruby-china.org</a></li>
-<li><a href="http://guides.rubygems.org/rubygems-basics/" title="Gem Official Guide" target="_blank" rel="external">Gem Official Guide</a></li>
-<li><a href="http://ruby.taobao.org/" title="Ruby@Taobao.org" target="_blank" rel="external">Ruby@Taobao.org</a></li>
+		<h1 id="NodeJS开发环境配置">NodeJS开发环境配置</h1><h2 id="安装nvm、node和npm">安装nvm、node和npm</h2><p>nvm是nodejs的多版本管理利器，node是nodejs的解释器，npm是nodejs的包管理工具。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ubuntu安装之后会自动添加配置到~/.profile，可以直接cut到自己喜欢的比如~/.bashrc</span></span><br><span class="line">$ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.<span class="number">25.4</span>/install.sh | bash</span><br><span class="line">$ nvm install <span class="number">0.12</span>.<span class="number">4</span></span><br><span class="line">$ nvm use <span class="number">0.12</span>.<span class="number">4</span></span><br><span class="line">$ nvm <span class="built_in">alias</span> default <span class="number">0.12</span>.<span class="number">4</span></span><br><span class="line">$ node --version</span><br></pre></td></tr></table></figure>
+<p>由于网速问题，国内可以使用<a href="https://npm.taobao.org/" target="_blank" rel="external">taobao的npm镜像</a>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br><span class="line">$ cnpm install [package name]</span><br></pre></td></tr></table></figure>
+<h2 id="Build工具：grunt/gulp,_bower,_yeoman">Build工具：grunt/gulp, bower, yeoman</h2><p>自动编译、依赖管理、自动化测试、打包发布、项目模板工具、文档自动生成…… ，这些基本上属于每个项目（不论语言差异）构建的标配，javascript目前也配齐了，于是乎开发效率直线提升:)</p>
+<ul>
+<li>grunt是javascript的自动化构建工具，类似于Java的gradle/maven/ant，Python的tox，C/C++的make和scons等。</li>
+<li>gulp也是构建工具，它采用类似jQuery的流式配置简化了任务的编写。</li>
+<li>bower是一个依赖管理的工具，可以自动化安装bootstrap、angulajs、jquery等包，解决他们之间的依赖关系。</li>
+<li>yeoman是一个生成项目框架scaffolding工具，遵循Convention over Configuration，用过RoR或者Django的应该都知道快速开发形式.d可以配合generator-webapp、generator-angular等模板快速生成项目结构。</li>
+</ul>
+<h3 id="安装上述工具到本地：">安装上述工具到本地：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm install -g yo bower grunt-cli gulp</span><br><span class="line"><span class="comment"># 安装yo项目模板</span></span><br><span class="line">$ cnpm install -g generator-angular</span><br></pre></td></tr></table></figure>
+<h3 id="生成一个HelloWorld">生成一个HelloWorld</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p ~/dev/nodejs/helloworld &amp;&amp; <span class="built_in">cd</span> <span class="variable">$_</span></span><br><span class="line">$ yo angular</span><br><span class="line">$ grunt serve</span><br><span class="line">$ grunt <span class="built_in">test</span></span><br><span class="line">$ grunt</span><br></pre></td></tr></table></figure>
+<p>这样就把一个前段项目的框架生成完毕了，可以进入开发阶段。</p>
+<h2 id="编辑器：Atom">编辑器：Atom</h2><p>使用chrome和nodejs开发的Atom，几个月前看还是离sublimetext挺远，现在看几乎快要完全超越！——<strong>ubuntu下的中文算是个麻烦事，不用定以后还凑合</strong>。</p>
+<ul>
+<li>安装可以直接从<a href="https://atom.io/" target="_blank" rel="external">官网</a>开始。</li>
+<li>开源字体从<a href="http://wenq.org/" target="_blank" rel="external">文泉驿</a>开始。</li>
+</ul>
+<p>参考配置：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">@font-family: "DejaVu Sans Mono", "WenQuanYi Zen Hei";</span><br><span class="line"></span><br><span class="line">.tree-view, .title, .current-path, .tooltip &#123;</span><br><span class="line">  font-family: @font-family;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.terminal &#123;</span><br><span class="line">  font-family: @font-family !important;</span><br><span class="line">  div &#123;</span><br><span class="line">    white-space: nowrap;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// style the background and foreground colors on the atom-text-editor-element</span><br><span class="line">// itself</span><br><span class="line">atom-text-editor &#123;</span><br><span class="line">    font-family: @font-family;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// To style other content in the text editor's shadow DOM, use the ::shadow</span><br><span class="line">// expression</span><br><span class="line">atom-text-editor::shadow .cursor &#123;</span><br><span class="line">    font-family: @font-family;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.markdown-preview &#123;</span><br><span class="line">    font-family: @font-family;</span><br><span class="line">    atom-text-editor &#123;</span><br><span class="line">        font-family: @font-family;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Atom也有大量的插件可以使用，比如把hexo集成进来，可以少开个term了：）</p>
+<ul>
+<li>VIM开启了编辑器的多模式状态，让敲键盘更尽兴；</li>
+<li>SublimeText方便了编辑器的DIY，性能也很好；</li>
+<li>Atom让Web开发更彻底，它本身就是个基于浏览器内核的工具；此外，它来自于Github:)</li>
+</ul>
+<h2 id="参考">参考</h2><ol>
+<li><a href="https://atom.io/" title="Atom Offical site" target="_blank" rel="external">Atom Offical</a></li>
+<li><a href="http://wenq.org/" title="文泉驿官网" target="_blank" rel="external">文泉驿官网</a></li>
+<li><a href="https://npm.taobao.org/" title="Taobao NPM" target="_blank" rel="external">Taobao NPM</a></li>
+<li><a href="http://gruntjs.com/" title="Grunt Offical" target="_blank" rel="external">Grunt Offical</a></li>
+<li><a href="http://bower.io/" title="Bower Offical" target="_blank" rel="external">Bower Offical</a></li>
+<li><a href="http://yeoman.io/" title="Yeoman Offical" target="_blank" rel="external">Yeoman Offical</a></li>
 </ol>
   
 	</div>
@@ -130,7 +152,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/dev/">dev</a><a href="/tags/ruby/">ruby</a>
+  <span></span> <a href="/tags/dev/">dev</a><a href="/tags/nodejs/">nodejs</a>
   </div>
 
 </div>
@@ -139,7 +161,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://promisejohn.github.io/2015/04/17/RubyDevEnvSetting/" data-title="Ruby开发环境搭建 | Promise John" data-tsina="1978495541" class="share clearfix">
+	  <div data-url="http://promisejohn.github.io/2015/06/13/NodeJSdevEnvSetting/" data-title="HelloNodejs | Promise John" data-tsina="1978495541" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -153,18 +175,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/05/07/HelloOpenstack/" title="Openstack安装部署">
+ <a href="/2015/06/14/iSCSIwithTgtd/" title="iSCSIwithTgtd">
   <strong>上一篇：</strong><br/>
   <span>
-  Openstack安装部署</span>
+  iSCSIwithTgtd</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/04/17/HelloVagrant/"  title="Hello Vagrant">
+<a href="/2015/06/13/HelloHexo/"  title="Hello Hexo">
  <strong>下一篇：</strong><br/> 
- <span>Hello Vagrant
+ <span>Hello Hexo
 </span>
 </a>
 </div>
@@ -173,7 +195,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/04/17/RubyDevEnvSetting/" data-title="Ruby开发环境搭建" data-url="http://promisejohn.github.io/2015/04/17/RubyDevEnvSetting/"></div>
+	<div class="ds-thread" data-thread-key="2015/06/13/NodeJSdevEnvSetting/" data-title="HelloNodejs" data-url="http://promisejohn.github.io/2015/06/13/NodeJSdevEnvSetting/"></div>
 </section>
 
 
@@ -183,7 +205,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Ruby开发环境搭建"><span class="toc-number">1.</span> <span class="toc-text">Ruby开发环境搭建</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NodeJS开发环境配置"><span class="toc-number">1.</span> <span class="toc-text">NodeJS开发环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装nvm、node和npm"><span class="toc-number">1.1.</span> <span class="toc-text">安装nvm、node和npm</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Build工具：grunt/gulp,_bower,_yeoman"><span class="toc-number">1.2.</span> <span class="toc-text">Build工具：grunt/gulp, bower, yeoman</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装上述工具到本地："><span class="toc-number">1.2.1.</span> <span class="toc-text">安装上述工具到本地：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成一个HelloWorld"><span class="toc-number">1.2.2.</span> <span class="toc-text">生成一个HelloWorld</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编辑器：Atom"><span class="toc-number">1.3.</span> <span class="toc-text">编辑器：Atom</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考"><span class="toc-number">1.4.</span> <span class="toc-text">参考</span></a></li></ol></li></ol>
  
   </div>
 

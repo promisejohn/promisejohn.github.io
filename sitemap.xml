@@ -2,17 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://promisejohn.github.io/2015/04/16/SaltStackDev/</loc>
-    <lastmod>2015-06-13T07:06:01.243Z</lastmod>
+    <loc>http://promisejohn.github.io/2015/06/13/NodeJSdevEnvSetting/</loc>
+    <lastmod>2015-06-14T07:46:13.162Z</lastmod>
   </url>
   
   <url>
-    <loc>http://promisejohn.github.io/about/index.html</loc>
+    <loc>http://promisejohn.github.io/2015/06/14/iSCSIwithTgtd/</loc>
+    <lastmod>2015-06-14T07:21:17.410Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://promisejohn.github.io/2015/04/17/RubyDevEnvSetting/</loc>
     <lastmod>2015-06-13T07:06:01.243Z</lastmod>
   </url>
   
   <url>
     <loc>http://promisejohn.github.io/2015/04/15/PythonDevEnvSetting/</loc>
+    <lastmod>2015-06-13T07:06:01.243Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://promisejohn.github.io/about/index.html</loc>
     <lastmod>2015-06-13T07:06:01.243Z</lastmod>
   </url>
   
@@ -32,12 +42,12 @@
   </url>
   
   <url>
-    <loc>http://promisejohn.github.io/categories/index.html</loc>
+    <loc>http://promisejohn.github.io/2015/04/16/SaltStackDev/</loc>
     <lastmod>2015-06-13T07:06:01.243Z</lastmod>
   </url>
   
   <url>
-    <loc>http://promisejohn.github.io/2015/04/17/RubyDevEnvSetting/</loc>
+    <loc>http://promisejohn.github.io/categories/index.html</loc>
     <lastmod>2015-06-13T07:06:01.243Z</lastmod>
   </url>
   
@@ -62,12 +72,12 @@
   </url>
   
   <url>
-    <loc>http://promisejohn.github.io/2015/06/13/HelloHexo/</loc>
+    <loc>http://promisejohn.github.io/2015/05/30/HelloHadoop/</loc>
     <lastmod>2015-06-13T07:06:01.239Z</lastmod>
   </url>
   
   <url>
-    <loc>http://promisejohn.github.io/2015/05/30/HelloHadoop/</loc>
+    <loc>http://promisejohn.github.io/2015/06/13/HelloHexo/</loc>
     <lastmod>2015-06-13T07:06:01.239Z</lastmod>
   </url>
   

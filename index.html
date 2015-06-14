@@ -82,6 +82,235 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/06/14/iSCSIwithTgtd/" title="iSCSIwithTgtd" itemprop="url">iSCSIwithTgtd</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://promisejohn.github.io/about" title="promise john" target="_blank" itemprop="author">promise john</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-14T07:20:05.000Z" itemprop="datePublished"> 发表于 2015-06-14</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h2 id="安装部署">安装部署</h2><table>
+<thead>
+<tr>
+<th>IP</th>
+<th>角色</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>192.168.182.156</td>
+<td>tgtd</td>
+</tr>
+<tr>
+<td>192.168.182.157</td>
+<td>client1</td>
+</tr>
+<tr>
+<td>192.168.182.158</td>
+<td>client2</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ yum install -y scsi-target-utils</span><br><span class="line">$ chkconfig tgtd on</span><br><span class="line">$ service tgtd start</span><br></pre></td></tr></table></figure>
+<p>配置方法2种：</p>
+<ol>
+<li>tgtadm，在线修改</li>
+<li>conf配置文件</li>
+</ol>
+<h2 id="在服务端增加一个Target">在服务端增加一个Target</h2><p>主要流程：</p>
+<ol>
+<li>建立target</li>
+<li>为target增加backstorage</li>
+<li>配置客户端访问target的控制策略</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ tgtadm --lld iscsi --op new --mode target --tid <span class="number">1</span> --targetname iqn.<span class="number">2015</span>-<span class="number">05</span>-<span class="number">04</span>.org.tecstack.storage.tg1 <span class="comment"># add target</span></span><br><span class="line"><span class="comment"># 用losetup映射块设备作为backstorage</span></span><br><span class="line">$ mkdir /opt/tgtstorage</span><br><span class="line">$ dd <span class="keyword">if</span>=/dev/zero of=/opt/tgtstorage/disk0.img bs=<span class="number">1</span>M count=<span class="number">5120</span></span><br><span class="line">$ losetup <span class="operator">-f</span> /opt/tgtstorage/disk0.img <span class="comment"># 映射为设备</span></span><br><span class="line">$ losetup <span class="operator">-a</span> <span class="comment"># /dev/loop0</span></span><br><span class="line">$ tgtadm --lld iscsi --op new --mode logicalunit --tid <span class="number">1</span> --lun <span class="number">1</span> --backing-store /dev/loop0</span><br><span class="line"><span class="comment"># 直接用块文件作为backstorage添加第二个块</span></span><br><span class="line">$ dd <span class="keyword">if</span>=/dev/zero of=/opt/tgtstorage/disk1.img bs=<span class="number">1</span>M count=<span class="number">5120</span></span><br><span class="line">$ tgtadm --lld iscsi --op new --mode logicalunit --tid <span class="number">1</span> --lun <span class="number">2</span> --backing-store /opt/tgtstorage/disk1.img</span><br><span class="line"><span class="comment"># 绑定客户端ip</span></span><br><span class="line">$ tgtadm --lld iscsi --mode target --op <span class="built_in">bind</span> --tid <span class="number">1</span> --initiator-address=<span class="number">192.168</span>.<span class="number">182.157</span></span><br><span class="line">$ tgtadm --lld iscsi --mode target --op <span class="built_in">bind</span> --tid <span class="number">1</span> --initiator-address=<span class="number">192.168</span>.<span class="number">182.158</span></span><br><span class="line">$ tgt-admin --dump |grep -v default-driver &gt; /etc/tgt/conf.d/my-targets.conf <span class="comment"># 通过tgt-admin保存为配置文件，注意与tgtadm的区别！</span></span><br><span class="line">$ tgtadm --lld iscsi --mode target --op show</span><br><span class="line">$ tgt-admin --show <span class="comment"># 和上一个命令一样，tgt-admin是tgtadm的perl封装</span></span><br></pre></td></tr></table></figure>
+<p>在服务端禁用某个客户端：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tgtadm --lld iscsi --mode target --op unbind --tid <span class="number">1</span> --initiator-address=<span class="number">192.168</span>.<span class="number">182.158</span> <span class="comment"># unbind，使不可发现</span></span><br></pre></td></tr></table></figure>
+<h2 id="在客户端使用target">在客户端使用target</h2><p>iscsi存储使用的主要流程：</p>
+<ol>
+<li>发现target</li>
+<li>login到target</li>
+<li>使用存储管理工具使用块设备</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ iscsiadm --mode discovery --type sendtargets --portal <span class="number">192.168</span>.<span class="number">182.156</span></span><br><span class="line">$ ls -lh /var/lib/iscsi/nodes/ <span class="comment"># 可以查看到对应的target和卷资料</span></span><br><span class="line">$ iscsiadm -m node <span class="comment"># 查看当前机器上所有target</span></span><br><span class="line">$ iscsiadm -m node -T iqn.<span class="number">2015</span>-<span class="number">05</span>-<span class="number">04</span>.org.tecstack.storage.tg1 --login <span class="comment"># 登陆target</span></span><br><span class="line">$ fdisk <span class="operator">-l</span> <span class="comment"># 登陆后就可以看到块设备</span></span><br><span class="line">$ iscsiadm -m node -T iqn.<span class="number">2015</span>-<span class="number">05</span>-<span class="number">04</span>.org.tecstack.storage.tg1 --logout <span class="comment">#登出target</span></span><br><span class="line">$ fdisk <span class="operator">-l</span> <span class="comment"># 登出后设备移除</span></span><br><span class="line">$ iscsiadm -m node -o delete -T iqn.<span class="number">2015</span>-<span class="number">05</span>-<span class="number">04</span>.org.tecstack.storage.tg1 <span class="comment"># 删除target</span></span><br><span class="line">$ ls -lh /var/lib/iscsi/nodes/</span><br><span class="line">$ iscsiadm -m node -T iqn.<span class="number">2015</span>-<span class="number">05</span>-<span class="number">04</span>.org.tecstack.storage.tg1 -p <span class="number">192.168</span>.<span class="number">182.156</span> -- op update -n node.startup -v automatic <span class="comment"># 自动login</span></span><br></pre></td></tr></table></figure>
+<p>当login到target之后，就可以使用，比如通过LVM：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ fdisk <span class="operator">-l</span> <span class="comment"># 增加了一个/dev/sdb块设备</span></span><br><span class="line">$ pvcreate /dev/sdb</span><br><span class="line">$ pvdisplay</span><br><span class="line">$ vgcreate myiscsi /dev/sdb</span><br><span class="line">$ vgdisplay</span><br><span class="line">$ lvcreate <span class="operator">-l</span> <span class="number">1024</span> -n vdisk0 myiscsi</span><br><span class="line">$ lvdisplay</span><br><span class="line">$ ls -lh /dev/myiscsi/vdisk0 <span class="comment"># 生成的块设备位置</span></span><br><span class="line">$ mkfs.ext4 /dev/myiscsi/vdisk0</span><br><span class="line">$ mkdir -p /opt/myiscsidata</span><br><span class="line">$ mount /dev/myiscsi/vdisk0 /opt/myiscsidata/</span><br><span class="line">$ df -h</span><br></pre></td></tr></table></figure>
+<p>运行过程中为target添加后端存储，客户端需要logout后重新login才能看到。但是如果重新login后块设备名会变化，比如变成<code>/dev/sdc</code>。可以通过文件系统的UUID来识别设备并挂载：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ tune2fs <span class="operator">-l</span> /dev/sdc</span><br></pre></td></tr></table></figure>
+<h3 id="GFS2测试">GFS2测试</h3><h4 id="创建和挂载iscsi块存储">创建和挂载iscsi块存储</h4><p>在target端创建LUN</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ dd <span class="keyword">if</span>=/dev/zero of=/opt/tgtstorage/disk_gfs.img bs=<span class="number">1</span>M count=<span class="number">5120</span></span><br><span class="line">$ tgtadm --lld iscsi --op new --mode logicalunit --tid <span class="number">1</span> --lun <span class="number">3</span> --backing-store /opt/tgtstorage/disk_gfs.img</span><br><span class="line">$ tgtadm --lld iscsi --mode target --op <span class="built_in">bind</span> --tid <span class="number">1</span> --initiator-address=<span class="number">192.168</span>.<span class="number">182.157</span></span><br><span class="line">$ tgtadm --lld iscsi --mode target --op <span class="built_in">bind</span> --tid <span class="number">1</span> --initiator-address=<span class="number">192.168</span>.<span class="number">182.158</span></span><br><span class="line">$ tgt-admin --show</span><br></pre></td></tr></table></figure>
+<p>在client1和client2上挂载块设备：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ iscsiadm --mode discovery --type sendtargets --portal <span class="number">192.168</span>.<span class="number">182.156</span></span><br><span class="line">$ iscsiadm -m node</span><br><span class="line">$ iscsiadm -m node -T iqn.<span class="number">2015</span>-<span class="number">05</span>-<span class="number">04</span>.org.tecstack.storage.tg1 --login</span><br><span class="line">$ fdisk <span class="operator">-l</span></span><br></pre></td></tr></table></figure>
+<h4 id="使用luci配置集群：">使用luci配置集群：</h4><p>在target端配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ yum -y install luci</span><br><span class="line">$ service luci start</span><br></pre></td></tr></table></figure>
+<p>在client1和client2上配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ yum install -y ricci</span><br><span class="line">$ service ricci start</span><br><span class="line">$ passwd ricci <span class="comment"># 123456，节点密码</span></span><br></pre></td></tr></table></figure>
+<p>通过访问target的https（默认端口8084，账号同Linux本地root账号），创建集群，新增节点，选择下载包，勾选启用共享文件系统。管理工具会自动帮助安装：<code>cman rgmanager lvm2-cluster sg3_utils gfs2-utils</code>，并启动相关服务。</p>
+<h4 id="在一台集群节点上创建LVM逻辑卷，格式化为GFS文件系统">在一台集群节点上创建LVM逻辑卷，格式化为GFS文件系统</h4><p>识别scsi和块设备的对应关系：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ls <span class="operator">-l</span> /dev/disk/by-path/*tecstack*</span><br><span class="line">$ scsi_id -gu /dev/sdb</span><br></pre></td></tr></table></figure>
+<p>在client1上执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ pvcreate /dev/sdb</span><br><span class="line">$ vgcreate gfstest /dev/sdb</span><br><span class="line">$ lvcreate <span class="operator">-l</span> <span class="number">1024</span> -n gfsdisk0 gfstest</span><br><span class="line">$ mkfs.gfs2 -j2 -p lock_dlm -t gfstest:gfs2 /dev/gfstest/gfsdisk0</span><br></pre></td></tr></table></figure>
+<h4 id="在两台集群节点上同时挂载GFS文件系统">在两台集群节点上同时挂载GFS文件系统</h4><p>在client1和client2上执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir /mnt/gfstest</span><br><span class="line">$ mount /dev/gfstest/gfsdisk0 /mnt/gfstest</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<ol>
+<li><a href="http://blog.delouw.ch/2013/07/07/creating-and-managing-iscsi-targets/" title="creating and managing iscsi targets" target="_blank" rel="external">creating and managing iscsi targets</a></li>
+<li><a href="http://stgt.sourceforge.net/manpages/tgtadm.8.html" title="tgtadm official man page" target="_blank" rel="external">tgtadm man page</a></li>
+<li><a href="http://linux.vbird.org/linux_server/0460iscsi.php" title="iscsi使用案例" target="_blank" rel="external">iscsi使用案例</a></li>
+<li><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/5/html/Global_File_System/s1-config-tasks.html" title="GFS配置" target="_blank" rel="external">GFS配置</a></li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Tech/">Tech</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/iscsi/">iscsi</a><a href="/tags/linux/">linux</a><a href="/tags/tgtd/">tgtd</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/06/14/iSCSIwithTgtd/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/06/14/iSCSIwithTgtd/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/06/13/NodeJSdevEnvSetting/" title="HelloNodejs" itemprop="url">HelloNodejs</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://promisejohn.github.io/about" title="promise john" target="_blank" itemprop="author">promise john</a>
+		
+  <p class="article-time">
+    <time datetime="2015-06-13T07:09:27.000Z" itemprop="datePublished"> 发表于 2015-06-13</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h1 id="NodeJS开发环境配置">NodeJS开发环境配置</h1><h2 id="安装nvm、node和npm">安装nvm、node和npm</h2><p>nvm是nodejs的多版本管理利器，node是nodejs的解释器，npm是nodejs的包管理工具。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ubuntu安装之后会自动添加配置到~/.profile，可以直接cut到自己喜欢的比如~/.bashrc</span></span><br><span class="line">$ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.<span class="number">25.4</span>/install.sh | bash</span><br><span class="line">$ nvm install <span class="number">0.12</span>.<span class="number">4</span></span><br><span class="line">$ nvm use <span class="number">0.12</span>.<span class="number">4</span></span><br><span class="line">$ nvm <span class="built_in">alias</span> default <span class="number">0.12</span>.<span class="number">4</span></span><br><span class="line">$ node --version</span><br></pre></td></tr></table></figure>
+<p>由于网速问题，国内可以使用<a href="https://npm.taobao.org/" target="_blank" rel="external">taobao的npm镜像</a>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g cnpm --registry=https://registry.npm.taobao.org</span><br><span class="line">$ cnpm install [package name]</span><br></pre></td></tr></table></figure>
+<h2 id="Build工具：grunt/gulp,_bower,_yeoman">Build工具：grunt/gulp, bower, yeoman</h2><p>自动编译、依赖管理、自动化测试、打包发布、项目模板工具、文档自动生成…… ，这些基本上属于每个项目（不论语言差异）构建的标配，javascript目前也配齐了，于是乎开发效率直线提升:)</p>
+<ul>
+<li>grunt是javascript的自动化构建工具，类似于Java的gradle/maven/ant，Python的tox，C/C++的make和scons等。</li>
+<li>gulp也是构建工具，它采用类似jQuery的流式配置简化了任务的编写。</li>
+<li>bower是一个依赖管理的工具，可以自动化安装bootstrap、angulajs、jquery等包，解决他们之间的依赖关系。</li>
+<li>yeoman是一个生成项目框架scaffolding工具，遵循Convention over Configuration，用过RoR或者Django的应该都知道快速开发形式.d可以配合generator-webapp、generator-angular等模板快速生成项目结构。</li>
+</ul>
+<h3 id="安装上述工具到本地：">安装上述工具到本地：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm install -g yo bower grunt-cli gulp</span><br><span class="line"><span class="comment"># 安装yo项目模板</span></span><br><span class="line">$ cnpm install -g generator-angular</span><br></pre></td></tr></table></figure>
+<h3 id="生成一个HelloWorld">生成一个HelloWorld</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p ~/dev/nodejs/helloworld &amp;&amp; <span class="built_in">cd</span> <span class="variable">$_</span></span><br><span class="line">$ yo angular</span><br><span class="line">$ grunt serve</span><br><span class="line">$ grunt <span class="built_in">test</span></span><br><span class="line">$ grunt</span><br></pre></td></tr></table></figure>
+<p>这样就把一个前段项目的框架生成完毕了，可以进入开发阶段。</p>
+<h2 id="编辑器：Atom">编辑器：Atom</h2><p>使用chrome和nodejs开发的Atom，几个月前看还是离sublimetext挺远，现在看几乎快要完全超越！——<strong>ubuntu下的中文算是个麻烦事，不用定以后还凑合</strong>。</p>
+<ul>
+<li>安装可以直接从<a href="https://atom.io/" target="_blank" rel="external">官网</a>开始。</li>
+<li>开源字体从<a href="http://wenq.org/" target="_blank" rel="external">文泉驿</a>开始。</li>
+</ul>
+<p>参考配置：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">@font-family: "DejaVu Sans Mono", "WenQuanYi Zen Hei";</span><br><span class="line"></span><br><span class="line">.tree-view, .title, .current-path, .tooltip &#123;</span><br><span class="line">  font-family: @font-family;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.terminal &#123;</span><br><span class="line">  font-family: @font-family !important;</span><br><span class="line">  div &#123;</span><br><span class="line">    white-space: nowrap;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// style the background and foreground colors on the atom-text-editor-element</span><br><span class="line">// itself</span><br><span class="line">atom-text-editor &#123;</span><br><span class="line">    font-family: @font-family;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// To style other content in the text editor's shadow DOM, use the ::shadow</span><br><span class="line">// expression</span><br><span class="line">atom-text-editor::shadow .cursor &#123;</span><br><span class="line">    font-family: @font-family;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.markdown-preview &#123;</span><br><span class="line">    font-family: @font-family;</span><br><span class="line">    atom-text-editor &#123;</span><br><span class="line">        font-family: @font-family;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Atom也有大量的插件可以使用，比如把hexo集成进来，可以少开个term了：）</p>
+<ul>
+<li>VIM开启了编辑器的多模式状态，让敲键盘更尽兴；</li>
+<li>SublimeText方便了编辑器的DIY，性能也很好；</li>
+<li>Atom让Web开发更彻底，它本身就是个基于浏览器内核的工具；此外，它来自于Github:)</li>
+</ul>
+<h2 id="参考">参考</h2><ol>
+<li><a href="https://atom.io/" title="Atom Offical site" target="_blank" rel="external">Atom Offical</a></li>
+<li><a href="http://wenq.org/" title="文泉驿官网" target="_blank" rel="external">文泉驿官网</a></li>
+<li><a href="https://npm.taobao.org/" title="Taobao NPM" target="_blank" rel="external">Taobao NPM</a></li>
+<li><a href="http://gruntjs.com/" title="Grunt Offical" target="_blank" rel="external">Grunt Offical</a></li>
+<li><a href="http://bower.io/" title="Bower Offical" target="_blank" rel="external">Bower Offical</a></li>
+<li><a href="http://yeoman.io/" title="Yeoman Offical" target="_blank" rel="external">Yeoman Offical</a></li>
+</ol>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Tech/">Tech</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/dev/">dev</a><a href="/tags/nodejs/">nodejs</a>
+  </div>
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+	  	<span></span>
+		<a href="/2015/06/13/NodeJSdevEnvSetting/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/06/13/NodeJSdevEnvSetting/" data-count-type="comments">&nbsp;</a>
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/06/13/HelloHexo/" title="Hello Hexo" itemprop="url">Hello Hexo</a>
   </h1>
   <p class="article-author">By
@@ -914,198 +1143,6 @@
 
 
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/16/SaltStackDev/" title="SaltStack开发环境搭建" itemprop="url">SaltStack开发环境搭建</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://promisejohn.github.io/about" title="promise john" target="_blank" itemprop="author">promise john</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-16T03:08:18.000Z" itemprop="datePublished"> 发表于 2015-04-16</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="安装及准备">安装及准备</h3><p>切换到python独立环境</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv virtualenv salt-<span class="number">2.7</span>.<span class="number">8</span></span><br></pre></td></tr></table></figure>
-<p>获取代码：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/saltstack/salt</span><br><span class="line">$ git fetch --tags</span><br></pre></td></tr></table></figure>
-<p>安装：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ env SWIG_FEATURES=<span class="string">"-cpperraswarn -includeall -D__`uname -m`__ -I/usr/include/openssl"</span> pip install M2Crypto</span><br><span class="line">$ pip install pyzmq PyYAML pycrypto msgpack-python jinja2 psutil</span><br><span class="line">$ pip install <span class="operator">-e</span> ./salt</span><br></pre></td></tr></table></figure>
-<p>配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p $(dirname `pyenv which python`)/../etc/salt&#10;$ cp ./salt/conf/master ./salt/conf/minion $(dirname `pyenv which python`)/../etc/salt</span><br></pre></td></tr></table></figure>
-<p>master配置文件：</p>
-<ol>
-<li>user: root</li>
-<li>root_dir: $(dirname <code>pyenv which python</code>)/..</li>
-<li>pidfile: $(dirname <code>pyenv which python</code>)/../salt-master.pid</li>
-<li>publish_port: 14505</li>
-<li>ret_port: 14506</li>
-</ol>
-<p>minion配置文件：</p>
-<ol>
-<li>user: root</li>
-<li>root_dir: $(dirname <code>pyenv which python</code>)/..</li>
-<li>pidfile: $(dirname <code>pyenv which python</code>)/../salt-minion.pid</li>
-<li>master: localhost</li>
-<li>id: saltdev</li>
-<li>master_port: 14505</li>
-</ol>
-<p>运行启动：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> $(dirname `pyenv <span class="built_in">which</span> python`)/../</span><br><span class="line">$ salt-master -c ./etc/salt <span class="operator">-d</span></span><br><span class="line">$ salt-minion -c ./etc/salt <span class="operator">-d</span></span><br><span class="line">$ salt-key -c ./etc/salt -L</span><br><span class="line">$ salt-key -c ./etc/salt -A</span><br><span class="line">$ salt -c ./etc/salt <span class="string">'*'</span> test.ping</span><br></pre></td></tr></table></figure>
-<p>其他：</p>
-<ol>
-<li>通过<code>-l debug</code>开启debug模式，去掉<code>-d</code>直接输出到console。</li>
-<li>socket path在linux上最多107个字符，可以通过缩短sock_dir和root_dir字符。</li>
-<li><code>ulimit -n</code>检查File descriptor limites，至少2047：<code>ulimit -n 2048</code></li>
-</ol>
-<h3 id="文档生成">文档生成</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ pip install Sphinx==<span class="number">1.3</span>b2</span><br><span class="line">$ <span class="built_in">cd</span> doc; make html</span><br><span class="line">$ <span class="built_in">cd</span> _build/html; python -m SimpleHTTPServer</span><br></pre></td></tr></table></figure>
-<h3 id="Tests">Tests</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./setup.py <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
-<h4 id="参考：">参考：</h4><ol>
-<li><a href="http://docs.saltstack.com/en/latest/topics/development/hacking.html" title="saltstack官方文档" target="_blank" rel="external">saltstack官方文档</a></li>
-</ol>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Tech/">Tech</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/dev/">dev</a><a href="/tags/saltstack/">saltstack</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/16/SaltStackDev/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/16/SaltStackDev/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/04/15/PythonDevEnvSetting/" title="Python开发环境搭建" itemprop="url">Python开发环境搭建</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="http://promisejohn.github.io/about" title="promise john" target="_blank" itemprop="author">promise john</a>
-		
-  <p class="article-time">
-    <time datetime="2015-04-15T08:03:04.000Z" itemprop="datePublished"> 发表于 2015-04-15</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="Python开发环境搭建">Python开发环境搭建</h3><p>用豆瓣的源给pip和easy_install加速，~/.bashrc：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias easy_install=&#39;easy_install -i http://pypi.douban.com/simple&#39;</span><br></pre></td></tr></table></figure>
-<p>安装pip：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ easy_install pip</span><br></pre></td></tr></table></figure>
-<p>~/.pip/pip.conf：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[global]&#10;index-url = http://pypi.douban.com/simple</span><br></pre></td></tr></table></figure>
-<p>安装pyenv</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone git://github.com/yyuu/pyenv.git ~/.pyenv&#10;$ echo &#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ echo &#39;export PATH=&#34;$PYENV_ROOT/bin:$PATH&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ echo &#39;eval &#34;$(pyenv init -)&#34;&#39; &#62;&#62; ~/.bashrc&#10;$ exec $SHELL -l&#10;$ export PYTHON_BUILD_MIRROR_URL=&#34;http://pyenv.qiniudn.com/pythons/&#34; #&#21152;&#36895;, Official: http://yyuu.github.io/pythons/</span><br></pre></td></tr></table></figure>
-<p>安装pyenv-virtualenv plugin：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv&#10;$ echo &#39;eval &#34;$(pyenv virtualenv-init -)&#34;&#39; &#62;&#62; ~/.bash_profile&#10;$ exec &#34;$SHELL&#34;</span><br></pre></td></tr></table></figure>
-<p>安装centOS系统开发环境工具：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yum groupinstall -y &#34;Development Tools&#34;&#10;$ yum install -y readline readline-devel readline-static openssl openssl-devel openssl-static sqlite-devel bzip2-devel bzip2-libs</span><br></pre></td></tr></table></figure>
-<p>安装隔离的python环境：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv install --list&#10;$ pyenv install 2.7.8&#10;$ pyenv rehash</span><br></pre></td></tr></table></figure>
-<p>查看切换版本：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv versions&#10;$ pyenv global 2.7.8 #OR Use: pyenv local 2.7.8</span><br></pre></td></tr></table></figure>
-<p>新建环境，检查环境列表：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pyenv virtualenv 2.7.8 my-2.7.8 &#65283;OR from current version: pyenv virtualenv venv34&#10;$ pyenv virtualenvs</span><br></pre></td></tr></table></figure>
-<p>Activate环境：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv activate &#60;name&#62;&#10;pyenv deactivate</span><br></pre></td></tr></table></figure>
-<p>卸载环境，与卸载某个python版本相同：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyenv uninstall my-virtual-env</span><br></pre></td></tr></table></figure>
-<p>相关变量：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PYENV_VIRTUALENV_CACHE_PATH&#10;VIRTUALENV_VERSION&#10;EZ_SETUP/GET_PIP # use ez_setup.py and get_pip.py from the specified location.&#10;EZ_SETUP_URL/GET_PIP_URL # download ez_setup.py and get_pip.py from the specified URL.&#10;SETUPTOOLS_VERSION/PIP_VERSION # install the specified version of setuptools and pip.</span><br></pre></td></tr></table></figure>
-<p>参考：</p>
-<ol>
-<li><a href="http://seisman.info/python-pyenv.html" title="Python多版本共存之pyenv" target="_blank" rel="external">Python多版本共存之pyenv</a></li>
-<li><a href="http://www.cnblogs.com/npumenglei/p/3719412.html" title="用pyenv 和 virtualenv 搭建单机多版本python 虚拟开发环境" target="_blank" rel="external">用pyenv 和 virtualenv 搭建单机多版本python 虚拟开发环境</a></li>
-<li><a href="https://github.com/yyuu/pyenv-virtualenv" title="pyenv-virtualenv Official site" target="_blank" rel="external">pyenv-virtualenv Official site</a></li>
-</ol>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Tech/">Tech</a>
-</div>
-
-
-  <div class="article-tags">
-  
-  <span></span> <a href="/tags/dev/">dev</a><a href="/tags/python/">python</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-	  	<span></span>
-		<a href="/2015/04/15/PythonDevEnvSetting/#comments" class="ds-thread-count comments-count-link" data-thread-key="2015/04/15/PythonDevEnvSetting/" data-count-type="comments">&nbsp;</a>
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
 
   <nav id="page-nav" class="clearfix">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next<span></span></a>
@@ -1124,7 +1161,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Tech/" title="Tech">Tech<sup>11</sup></a></li>
+			<li><a href="/categories/Tech/" title="Tech">Tech<sup>13</sup></a></li>
 		  
 		
 		  
@@ -1141,7 +1178,11 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/dev/" title="dev">dev<sup>3</sup></a></li>
+				<li><a href="/tags/dev/" title="dev">dev<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/linux/" title="linux">linux<sup>2</sup></a></li>
 			
 		
 			
@@ -1157,19 +1198,27 @@
 			
 		
 			
-				<li><a href="/tags/glance/" title="glance">glance<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/linux/" title="linux">linux<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/hadoop/" title="hadoop">hadoop<sup>1</sup></a></li>
+				<li><a href="/tags/neutron/" title="neutron">neutron<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/ruby/" title="ruby">ruby<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/python/" title="python">python<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ceilometer/" title="ceilometer">ceilometer<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/saltstack/" title="saltstack">saltstack<sup>1</sup></a></li>
 			
 		
 			
@@ -1181,7 +1230,7 @@
 			
 		
 			
-				<li><a href="/tags/neutron/" title="neutron">neutron<sup>1</sup></a></li>
+				<li><a href="/tags/iscsi/" title="iscsi">iscsi<sup>1</sup></a></li>
 			
 		
 			
@@ -1189,11 +1238,7 @@
 			
 		
 			
-				<li><a href="/tags/saltstack/" title="saltstack">saltstack<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ceilometer/" title="ceilometer">ceilometer<sup>1</sup></a></li>
+				<li><a href="/tags/glance/" title="glance">glance<sup>1</sup></a></li>
 			
 		
 			
@@ -1205,19 +1250,11 @@
 			
 		
 			
+				<li><a href="/tags/hadoop/" title="hadoop">hadoop<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/hdfs/" title="hdfs">hdfs<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/java/" title="java">java<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ambari/" title="ambari">ambari<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/hue/" title="hue">hue<sup>1</sup></a></li>
 			
 		
 		</ul>
@@ -1227,7 +1264,7 @@
   
   <div class="archiveslist">
     <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">6</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">6</span></li></ul>
   </div>
 
 
