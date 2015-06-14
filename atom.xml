@@ -5,7 +5,7 @@
   <subtitle><![CDATA[My Blog]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://promisejohn.github.io//"/>
-  <updated>2015-06-14T07:21:17.410Z</updated>
+  <updated>2015-06-14T07:48:29.722Z</updated>
   <id>http://promisejohn.github.io//</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[iSCSIwithTgtd]]></title>
+    <title><![CDATA[使用Linux的tgtd提供iscsi服务]]></title>
     <link href="http://promisejohn.github.io/2015/06/14/iSCSIwithTgtd/"/>
     <id>http://promisejohn.github.io/2015/06/14/iSCSIwithTgtd/</id>
     <published>2015-06-14T07:20:05.000Z</published>
-    <updated>2015-06-14T07:21:17.410Z</updated>
+    <updated>2015-06-14T07:48:29.722Z</updated>
     <content type="html"><![CDATA[<h2 id="安装部署">安装部署</h2><table>
 <thead>
 <tr>
@@ -118,11 +118,11 @@
   </entry>
   
   <entry>
-    <title><![CDATA[HelloNodejs]]></title>
+    <title><![CDATA[NodeJS开发环境配置]]></title>
     <link href="http://promisejohn.github.io/2015/06/13/NodeJSdevEnvSetting/"/>
     <id>http://promisejohn.github.io/2015/06/13/NodeJSdevEnvSetting/</id>
     <published>2015-06-13T07:09:27.000Z</published>
-    <updated>2015-06-14T07:46:13.162Z</updated>
+    <updated>2015-06-14T07:47:52.026Z</updated>
     <content type="html"><![CDATA[<h1 id="NodeJS开发环境配置">NodeJS开发环境配置</h1><h2 id="安装nvm、node和npm">安装nvm、node和npm</h2><p>nvm是nodejs的多版本管理利器，node是nodejs的解释器，npm是nodejs的包管理工具。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ubuntu安装之后会自动添加配置到~/.profile，可以直接cut到自己喜欢的比如~/.bashrc</span></span><br><span class="line">$ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.<span class="number">25.4</span>/install.sh | bash</span><br><span class="line">$ nvm install <span class="number">0.12</span>.<span class="number">4</span></span><br><span class="line">$ nvm use <span class="number">0.12</span>.<span class="number">4</span></span><br><span class="line">$ nvm <span class="built_in">alias</span> default <span class="number">0.12</span>.<span class="number">4</span></span><br><span class="line">$ node --version</span><br></pre></td></tr></table></figure>
 <p>由于网速问题，国内可以使用<a href="https://npm.taobao.org/" target="_blank" rel="external">taobao的npm镜像</a>：</p>
