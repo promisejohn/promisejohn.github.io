@@ -122,7 +122,7 @@
     <link href="http://promisejohn.github.io/2015/06/13/NodeJSdevEnvSetting/"/>
     <id>http://promisejohn.github.io/2015/06/13/NodeJSdevEnvSetting/</id>
     <published>2015-06-13T07:09:27.000Z</published>
-    <updated>2015-06-14T07:47:52.026Z</updated>
+    <updated>2015-06-14T07:49:56.278Z</updated>
     <content type="html"><![CDATA[<h1 id="NodeJS开发环境配置">NodeJS开发环境配置</h1><h2 id="安装nvm、node和npm">安装nvm、node和npm</h2><p>nvm是nodejs的多版本管理利器，node是nodejs的解释器，npm是nodejs的包管理工具。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ubuntu安装之后会自动添加配置到~/.profile，可以直接cut到自己喜欢的比如~/.bashrc</span></span><br><span class="line">$ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.<span class="number">25.4</span>/install.sh | bash</span><br><span class="line">$ nvm install <span class="number">0.12</span>.<span class="number">4</span></span><br><span class="line">$ nvm use <span class="number">0.12</span>.<span class="number">4</span></span><br><span class="line">$ nvm <span class="built_in">alias</span> default <span class="number">0.12</span>.<span class="number">4</span></span><br><span class="line">$ node --version</span><br></pre></td></tr></table></figure>
 <p>由于网速问题，国内可以使用<a href="https://npm.taobao.org/" target="_blank" rel="external">taobao的npm镜像</a>：</p>
@@ -137,7 +137,7 @@
 <h3 id="安装上述工具到本地：">安装上述工具到本地：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cnpm install -g yo bower grunt-cli gulp</span><br><span class="line"><span class="comment"># 安装yo项目模板</span></span><br><span class="line">$ cnpm install -g generator-angular</span><br></pre></td></tr></table></figure>
 <h3 id="生成一个HelloWorld">生成一个HelloWorld</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir -p ~/dev/nodejs/helloworld &amp;&amp; <span class="built_in">cd</span> <span class="variable">$_</span></span><br><span class="line">$ yo angular</span><br><span class="line">$ grunt serve</span><br><span class="line">$ grunt <span class="built_in">test</span></span><br><span class="line">$ grunt</span><br></pre></td></tr></table></figure>
 <p>这样就把一个前段项目的框架生成完毕了，可以进入开发阶段。</p>
-<h2 id="编辑器：Atom">编辑器：Atom</h2><p>使用chrome和nodejs开发的Atom，几个月前看还是离sublimetext挺远，现在看几乎快要完全超越！——<strong>ubuntu下的中文算是个麻烦事，不用定以后还凑合</strong>。</p>
+<h2 id="编辑器：Atom">编辑器：Atom</h2><p>使用chrome和nodejs开发的Atom，几个月前看还是离sublimetext挺远，现在看几乎快要完全超越！——<strong>ubuntu下的中文算是个麻烦事，自定义以后还凑合</strong>。</p>
 <ul>
 <li>安装可以直接从<a href="https://atom.io/" target="_blank" rel="external">官网</a>开始。</li>
 <li>开源字体从<a href="http://wenq.org/" target="_blank" rel="external">文泉驿</a>开始。</li>
